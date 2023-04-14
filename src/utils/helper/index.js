@@ -1,5 +1,3 @@
 import createApi from "./createApi";
 
-export {
-    createApi
-}
+export { createApi };
