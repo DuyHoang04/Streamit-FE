@@ -1,7 +1,4 @@
-import * as authTypes from './authTypes'
-import * as itemTypes from './userTypes'
+import * as authTypes from "./authTypes";
+import * as itemTypes from "./userTypes";
 
-export {
-    authTypes,
-    itemTypes
-}
+export { authTypes, itemTypes };

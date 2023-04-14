@@ -1,15 +1,15 @@
-import React from 'react'
-import '../login/loginStyle.css'
-import { Button, Checkbox, Form, Input } from 'antd';
+import React from "react";
+import "../login/loginStyle.css";
+import { Button, Checkbox, Form, Input } from "antd";
 const loginPage = () => {
   const onFinish = (values) => {
-    console.log('Success:', values);
+    console.log("Success:", values);
   };
   const onFinishFailed = (errorInfo) => {
-    console.log('Failed:', errorInfo);
+    console.log("Failed:", errorInfo);
   };
   return (
-    <div className='form'>
+    <div className="form">
       <Form
         name="basic"
         labelCol={{
@@ -29,13 +29,13 @@ const loginPage = () => {
         autoComplete="off"
       >
         <Form.Item
-        className='input'
+          className="input"
           label="Username"
           name="username"
           rules={[
             {
               required: true,
-              message: 'Please input your username!',
+              message: "Please input your username!",
             },
           ]}
         >
@@ -48,7 +48,7 @@ const loginPage = () => {
           rules={[
             {
               required: true,
-              message: 'Please input your password!',
+              message: "Please input your password!",
             },
           ]}
         >
@@ -78,8 +78,6 @@ const loginPage = () => {
         </Form.Item>
       </Form>
     </div>
-
-  )
-
-}
-export default loginPage
+  );
+};
+export default loginPage;
