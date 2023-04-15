@@ -1,14 +1,22 @@
 import { createSlice } from '@reduxjs/toolkit'
 
 const initialState = {
+  isFetching: false,
   value: "",
 }
 
 export const userReducer = createSlice({
   name: 'counter',
   initialState,
-  reducers: {
-    
+  getLoginRequest(state, action) {
+    state.isFetching = true
+  },
+  getLoginSuccess(state, action) {
+    state.isFetching = false,
+      state.value = action.payload
+  },
+  getLoginFailure: {
+
   },
 })
 

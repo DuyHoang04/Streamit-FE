@@ -1,5 +1,5 @@
 import { createAction } from "@reduxjs/toolkit";
-import { actionTypes } from "../constants";
+import { actionTypes } from "../utils/actionTypes/index";
 
 export const authActions = {
   loginRequest: createAction(actionTypes.authTypes.LOGIN_REQUEST),
@@ -15,3 +15,5 @@ export const itemActions = {
   fetchListSuccess: createAction(actionTypes.itemTypes.FETCH_ITEMS_SUCCESS),
   fetchListFailure: createAction(actionTypes.itemTypes.FETCH_ITEMS_FAILURE),
 };
+
+

@@ -1,6 +1,7 @@
 import React from 'react'
 import '../login/loginStyle.css'
 import { Button, Checkbox, Form, Input } from 'antd';
+
 const loginPage = () => {
   const onFinish = (values) => {
     console.log('Success:', values);

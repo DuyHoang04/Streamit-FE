@@ -19,6 +19,5 @@ export default function createApi({ url, method }) {
       .then((res) => res.data)
       .catch((error) => console.error(error));
   };
-
   return request;
 }
