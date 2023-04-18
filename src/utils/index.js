@@ -1,9 +1,12 @@
 import * as actionTypes from "./actionTypes";
 import routes from "./routeconfig";
-const config = {
-    routes,
+
+export const config = {
+  routes,
 };
 
-export default config;
-export { actionTypes };
+export const getPriorityRole = (admin) => {
+  return admin ? "Admin" : "User";
+};
 
+export { actionTypes };

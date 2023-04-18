@@ -1,0 +1,31 @@
+.sidebar-container {
+  display: flex;
+  height: 100%;
+  .ant-menu {
+    height: 100%;
+    background-color: #1a191f;
+    color: var(--white);
+  }
+
+  .ant-menu-item,
+  .ant-menu-submenu {
+    margin-top: 30px;
+    background-color: transparent;
+    &:hover {
+      .ant-menu-title-content,
+      .ant-menu-item-icon {
+        color: var(--primary-color);
+      }
+    }
+
+    &.ant-menu-item-selected {
+      background-color: transparent;
+      color: var(--primary-color);
+    }
+  }
+  .ant-menu-submenu {
+    .ant-menu-item {
+      margin-top: 0;
+    }
+  }
+}
