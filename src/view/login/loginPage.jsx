@@ -1,8 +1,12 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "../login/loginStyle.css";
 import { Button, Checkbox, Form, Input } from "antd";
-
+import { useDispatch, useSelector } from "react-redux"
+import { authActions } from '../../action/index'
 const loginPage = () => {
+  const dispatch = useDispatch()
+  const state = useSelector(state => state.userReducer.value)
+  const [login, useLogin] = useState("")
   const onFinish = (values) => {
     console.log("Success:", values);
   };

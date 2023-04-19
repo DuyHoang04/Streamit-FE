@@ -1,19 +1,19 @@
 import { createAction } from "@reduxjs/toolkit";
-import { actionTypes } from "../utils/actionTypes/index";
+import { authTypes, userTypes } from "../utils/actionTypes/index";
 
 export const authActions = {
-  loginRequest: createAction(actionTypes.authTypes.LOGIN_REQUEST),
-  loginSuccess: createAction(actionTypes.authTypes.LOGIN_SUCCESS),
-  loginFailure: createAction(actionTypes.authTypes.LOGIN_FAILURE),
-  logoutRequest: createAction(actionTypes.authTypes.LOGOUT_REQUEST),
-  logoutSuccess: createAction(actionTypes.authTypes.LOGOUT_SUCCESS),
-  logoutFailure: createAction(actionTypes.authTypes.LOGOUT_FAILURE),
+  loginRequest: createAction(authTypes.LOGIN_REQUEST),
+  loginSuccess: createAction(authTypes.LOGIN_SUCCESS),
+  loginFailure: createAction(authTypes.LOGIN_FAILURE),
+  logoutRequest: createAction(authTypes.LOGOUT_REQUEST),
+  logoutSuccess: createAction(authTypes.LOGOUT_SUCCESS),
+  logoutFailure: createAction(authTypes.LOGOUT_FAILURE),
 };
 
 export const itemActions = {
-  fetchListRequest: createAction(actionTypes.itemTypes.FETCH_ITEMS_REQUEST),
-  fetchListSuccess: createAction(actionTypes.itemTypes.FETCH_ITEMS_SUCCESS),
-  fetchListFailure: createAction(actionTypes.itemTypes.FETCH_ITEMS_FAILURE),
+  fetchListRequest: createAction(userTypes),
+  fetchListSuccess: createAction(userTypes),
+  fetchListFailure: createAction(userTypes),
 };
 
 
