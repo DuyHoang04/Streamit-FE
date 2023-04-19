@@ -1,0 +1,18 @@
+.default__layout-container {
+  display: flex;
+  height: 100vh;
+  overflow: hidden;
+  background-color: #1a191f;
+  .sidebar {
+    border-right: 1px solid #333;
+    width: 20%;
+    height: 100%;
+    flex-shrink: 0;
+  }
+  .page__content {
+    flex: 1;
+    height: 100%;
+    padding: 15px 28px 0px;
+    max-width: 80%;
+  }
+}

@@ -1,0 +1,33 @@
+.label-input {
+  color: #4b5563;
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 20px;
+}
+
+.custom-input {
+  background-color: #080a1a;
+  color: white;
+  padding: 1rem;
+  font-size: 17px;
+  background-color: #080a1a;
+  border-radius: 4px;
+  color: #ffffff;
+  display: inline-block;
+  font-size: 17px;
+  line-height: 20px;
+  margin: 8px 0px 0px;
+  border: 1px solid #333;
+  transition: all 0.4s;
+}
+
+.custom-input:hover {
+}
+
+.custom-input.custom-input-large {
+  width: 100%;
+}
+
+.custom-input.custom-input-outline:focus {
+  outline: 1px solid crimson;
+}

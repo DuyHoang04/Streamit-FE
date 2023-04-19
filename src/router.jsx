@@ -1,42 +1,71 @@
-import React from 'react'
+import React, { Fragment } from "react";
 import {
-    createBrowserRouter,
-    createRoutesFromElements,
-    Route,
-    Routes,
+  createBrowserRouter,
+  createRoutesFromElements,
+  Route,
+  Routes,
 } from "react-router-dom";
-import config from './utils/index'
-import * as pages from "./view/index"
+import { config } from "./utils/index";
+import * as pages from "./view/index";
+import { AppstoreOutlined } from "@ant-design/icons";
+import PageLayout from "./layout";
+import ProtectedComponent from "./layout/protected-components/protected-component";
 
 const publicRoutes = [
-    {
-        path: config.routes.login,
-        element: <pages.loginPage />,
-    },
-    {
-        path: config.routes.home,
-        element: <pages.HomePage />
-    },
-    {
-        path: config.routes.errorpage,
-        element: <pages.ErrorPage />
-    }
-]
-const privateRoutes = [
+  {
+    path: config.routes.login,
+    element: <pages.loginPage />,
+  },
+  {
+    path: config.routes.home,
+    element: <pages.HomePage />,
+  },
+  {
+    path: config.routes.errorpage,
+    element: <pages.ErrorPage />,
+  },
 
+  // ADMIN
+  {
+    path: config.routes.dashboard,
+    element: <pages.DashboardPage />,
+    label: "Dashboard",
+    needShowSideMenu: true,
+    pageIcon: <AppstoreOutlined />,
+  },
+  {
+    path: config.routes.movies,
+    element: <pages.DashboardPage />,
+    label: "Movies",
+    needShowSideMenu: true,
+    pageIcon: <AppstoreOutlined />,
+  },
+  {
+    path: config.routes.movies_genres,
+    element: <pages.DashboardPage />,
+    label: "Genres",
+    needShowSideMenu: true,
+    pageIcon: <AppstoreOutlined />,
+  },
 ];
+const privateRoutes = [];
 
-const router = createBrowserRouter(
-    createRoutesFromElements( 
-            <Route>
-                {
-                    publicRoutes.map((route, idx) => {
-                        return <Route key={idx} path={route.path} element={route.element} />
-                    })
-                }
-            </Route>
-   
-    )
-);
-export default router
+const Router = () => {
+  return (
+    <Routes>
+      {publicRoutes.map((route, idx) => {
+        const Layout = route.needShowSideMenu ? PageLayout : Fragment;
+        return (
+          <Route
+            key={idx}
+            path={route.path}
+            element={<Layout>{route.element}</Layout>}
+          />
+        );
+      })}
+    </Routes>
+  );
+};
+
+export default Router;
 export { publicRoutes, privateRoutes };
