@@ -1,0 +1,13 @@
+.button__outline{   
+    height: 40px;
+    width: 120px;
+    border-radius: 6px;
+    border: 2px solid #f9ab00;
+    margin-left: auto;
+    font-size: 14px;
+    color: #fff;
+    text-transform: uppercase;
+}
+/* .button__outline{
+    
+} */
