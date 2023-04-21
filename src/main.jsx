@@ -14,11 +14,11 @@ ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
     <Provider store={store}>
       <Router>
-        <ProtectedComponent>
+       
           <GlobalStyles>
             <App />
           </GlobalStyles>
-        </ProtectedComponent>
+       
       </Router>
     </Provider>
   </React.StrictMode>

@@ -1,14 +1,17 @@
 import { takeEvery } from "redux-saga/effects";
 import * as types from '../utils/actionTypes/index'
-import {authApi} from '../api/index'
+import { authApi } from '../api/index'
+import { authActions } from '../action/index'
 
 function* handleGetLogin(action) {
-  console.log(action, "221")
-    try {
-        const res = yield authApi.Login()
-    } catch (error) {
-        
-    }
+  try {
+    const res = yield authApi.Login(action.payload)
+    console.log(res, "222")
+    yield authActions.loginSuccess()
+
+  } catch (error) {
+    yield authActions.loginFailure(error)
+  }
 }
 
 
