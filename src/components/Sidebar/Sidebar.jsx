@@ -55,6 +55,7 @@ const Sidebar = () => {
 
   return (
     <div className="sidebar-container">
+    <img src="../../src/assets/logo.png" style={{ width: "200px" }} alt="" />
       <Menu
         defaultSelectedKeys={[defaultActiveMenu]}
         mode="inline"
