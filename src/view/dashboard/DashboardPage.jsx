@@ -6,6 +6,7 @@ import {
   UserOutlined,
 } from "@ant-design/icons";
 import { Table } from "antd";
+import TitlePageAdmin from "../../common/title-page-admin/title-page-admin";
 
 const DashboardPage = () => {
   const data = [
@@ -177,9 +178,7 @@ const DashboardPage = () => {
   ];
   return (
     <div className="dashboard-container">
-      <div className="dashboard-title">
-        <h1>DashBoard</h1>
-      </div>
+      <TitlePageAdmin title="DashBoard" />
       <div className="dashboard-content">
         <div className="dashboard-stats">
           {data.map((item, index) => (
