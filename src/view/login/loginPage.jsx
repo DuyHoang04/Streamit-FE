@@ -16,6 +16,7 @@ const loginPage = () => {
     dispatch(authActions.loginRequest({email, password}))
   }
   return (
+    <div className="login_background">
     <div className="login_page">
       <div className="logo">
         <img src="../../src/assets/logo.png" style={{ width: "200px" }} alt="" />
@@ -70,6 +71,7 @@ const loginPage = () => {
           </div>
         </Form.Item>
       </Form>
+    </div>
     </div>
   );
 };
