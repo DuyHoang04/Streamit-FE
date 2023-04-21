@@ -1,13 +1,13 @@
-/* body {
+.login_background {
   background: url("../../assets/section.jpg");
+  height: 100vh;
   background-repeat: no-repeat;
   background-position: center;
   background-size: cover;
   display: flex;
   justify-content: center;
   align-items: center;
-} */
-
+}
 .logo {
   margin: 40px 0;
 }
