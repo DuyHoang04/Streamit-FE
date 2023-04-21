@@ -1,4 +1,4 @@
-body {
+/* body {
   background: url("../../assets/section.jpg");
   background-repeat: no-repeat;
   background-position: center;
@@ -6,8 +6,7 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-
-}
+} */
 .logo {
   margin: 40px 0;
 }
