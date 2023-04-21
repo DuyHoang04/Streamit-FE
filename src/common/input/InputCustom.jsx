@@ -2,6 +2,7 @@ import React from "react";
 import { Input } from "antd";
 import classNames from "classnames";
 import "./inputCustom.css";
+import { forwardRef } from "react";
 
 const InputCustom = ({
   label = "",
@@ -12,7 +13,9 @@ const InputCustom = ({
   outline,
   placeholder = "",
   disabled,
-}) => {
+},
+  ref
+) => {
   const inputClasses = classNames("custom-input", {
     "custom-input-outline": outline,
     "custom-input-large": large,
@@ -22,6 +25,7 @@ const InputCustom = ({
     <div>
       <label className="label-input">{label}</label>
       <Input
+        ref={ref}
         type={type}
         value={value}
         onChange={onChange}
@@ -32,4 +36,4 @@ const InputCustom = ({
   );
 };
 
-export default InputCustom;
+export default forwardRef(InputCustom);

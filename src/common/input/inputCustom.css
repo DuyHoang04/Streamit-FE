@@ -21,7 +21,11 @@
   transition: all 0.4s;
 }
 
-.custom-input:hover {
+/* .custom-input:hover {
+
+} */
+.custom-input::placeholder {
+  color: #ffffff;
 }
 
 .custom-input.custom-input-large {

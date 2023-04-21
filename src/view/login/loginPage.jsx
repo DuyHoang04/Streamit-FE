@@ -1,81 +1,73 @@
-import React from "react";
+import React, { useRef } from "react";
 import "../login/loginStyle.css";
-import { Button, Checkbox, Form, Input } from "antd";
-
+import { Button, Checkbox, Form, Image } from "antd";
+import { useDispatch, useSelector } from "react-redux"
+import { authActions } from '../../action/index'
+import InputCustom from "../../common/input/InputCustom";
 const loginPage = () => {
-  const onFinish = (values) => {
-    console.log("Success:", values);
-  };
-  const onFinishFailed = (errorInfo) => {
-    console.log("Failed:", errorInfo);
-  };
+  const dispatch = useDispatch()
+  const state = useSelector(state => state.userReducer.value)
+  const emailRef = useRef();
+  const passwordRef = useRef();
+  const handleClick = () => {  
+    const email = emailRef?.current.input.value
+    const password = passwordRef?.current.input.value
+    console.log(email, password, "22222")
+    dispatch(authActions.loginRequest({email, password}))
+  }
   return (
-    <div className="form">
-      <Form
-        name="basic"
-        labelCol={{
-          span: 8,
-        }}
-        wrapperCol={{
-          span: 16,
-        }}
-        style={{
-          maxWidth: 600,
-        }}
-        initialValues={{
-          remember: true,
-        }}
-        // onFinish={onFinish}
-        // onFinishFailed={onFinishFailed}
-        autoComplete="off"
-      >
+    <div className="login_page">
+      <div className="logo">
+        <img src="../../src/assets/logo.png" style={{ width: "200px" }} alt="" />
+      </div>
+      <Form className="login-form">
         <Form.Item
-          className="input"
-          label="Username"
-          name="username"
+          name="gmail"
           rules={[
             {
               required: true,
-              message: "Please input your username!",
+              message: 'Please input your gmail!',
             },
-          ]}
-        >
-          <Input />
-        </Form.Item>
+          ]}>
 
+          <InputCustom
+            type="gmail"
+            ref={emailRef}
+            placeholder="gmail"
+          />
+        </Form.Item>
         <Form.Item
-          label="Password"
           name="password"
           rules={[
             {
               required: true,
-              message: "Please input your password!",
+              message: 'Please input your password!',
             },
-          ]}
-        >
-          <Input.Password />
-        </Form.Item>
+          ]}>
+          <InputCustom
+            ref={passwordRef}
+            type="password"
+            placeholder="password"
+          />
 
-        <Form.Item
-          name="remember"
-          valuePropName="checked"
-          wrapperCol={{
-            offset: 8,
-            span: 16,
-          }}
-        >
-          <Checkbox>Remember me</Checkbox>
         </Form.Item>
+        <Form.Item className="login_footer">
+          <Checkbox style={{ color: "white" }}>Remember me</Checkbox>
+          <a className="login-form-forgot" href="" style={{ color: "white" }}>
 
-        <Form.Item
-          wrapperCol={{
-            offset: 8,
-            span: 16,
-          }}
-        >
-          <Button type="primary" htmlType="submit">
-            Submit
+            Forgot password
+          </a>
+          <Button
+            onClick={handleClick}
+            type="primary"
+            htmlType="submit"
+            className="login-form-button"
+          >
+            Log in
           </Button>
+          <div className="register_btn">
+            <a style={{ color: "white" }} href="">register now!</a>
+          </div>
         </Form.Item>
       </Form>
     </div>
