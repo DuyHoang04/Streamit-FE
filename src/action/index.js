@@ -8,6 +8,9 @@ export const authActions = {
   logoutRequest: createAction(authTypes.LOGOUT_REQUEST),
   logoutSuccess: createAction(authTypes.LOGOUT_SUCCESS),
   logoutFailure: createAction(authTypes.LOGOUT_FAILURE),
+  registerRequest: createAction(authTypes.REGISTER_REQUEST),
+  registerSuccess: createAction(authTypes.REGISTER_SUCCESS),
+  registerFailure: createAction(authTypes.REGISTER_FAILURE),
 };
 
 export const itemActions = {

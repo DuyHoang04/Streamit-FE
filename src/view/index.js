@@ -6,6 +6,7 @@ import AdminGenresPage from "./admin-genres/admin-genres";
 import AdminMoviesPage from "./admin-movies/admin-movies-page";
 import AdminUserPage from "./admin-user/admin-user-page";
 import AdminAddMoviePage from "./admin-add-movie/admin-add-movie";
+import registerPage from "./registerPage/registerPage";
 
 export {
   HomePage,
@@ -16,4 +17,5 @@ export {
   AdminUserPage,
   AdminMoviesPage,
   AdminAddMoviePage,
+  registerPage
 };

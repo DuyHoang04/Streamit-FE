@@ -17,6 +17,10 @@ const publicRoutes = [
     element: <pages.loginPage />,
   },
   {
+    path: config.routes.register,
+    element: <pages.registerPage />,
+  },
+  {
     path: config.routes.home,
     element: <pages.HomePage />,
   },
