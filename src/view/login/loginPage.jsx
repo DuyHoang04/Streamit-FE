@@ -10,9 +10,8 @@ const loginPage = () => {
   const emailRef = useRef();
   const passwordRef = useRef();
   const handleClick = () => {  
-    const email = emailRef?.current.input.value
-    const password = passwordRef?.current.input.value
-    console.log(email, password, "22222")
+    const email = emailRef.current.input.value
+    const password = passwordRef.current.input.value
     dispatch(authActions.loginRequest({email, password}))
   }
   return (
@@ -54,7 +53,7 @@ const loginPage = () => {
         </Form.Item>
         <Form.Item className="login_footer">
           <Checkbox style={{ color: "white" }}>Remember me</Checkbox>
-          <a className="login-form-forgot" href="" style={{ color: "white" }}>
+          <a className="login-form-forgot" href="register" style={{ color: "white" }}>
 
             Forgot password
           </a>
@@ -64,10 +63,10 @@ const loginPage = () => {
             htmlType="submit"
             className="login-form-button"
           >
-            Log in
+            Sign in
           </Button>
           <div className="register_btn">
-            <a style={{ color: "white" }} href="">register now!</a>
+            <a style={{ color: "white" }} href="/register">register now!</a>
           </div>
         </Form.Item>
       </Form>
