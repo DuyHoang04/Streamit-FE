@@ -1,40 +1,33 @@
-
 import React from "react";
-import {Button} from "antd";
+import { Button } from "antd";
 import classNames from "classnames";
-import './buttonCustom.css'
+import "./buttonCustom.scss";
 
 const ButtonCustom = ({
   children = "",
   type = "",
   onClick,
-  small,
   large,
   outline,
   disabled,
   primary,
   rounded,
-  className
+  className,
+  icon,
 }) => {
   const buttonClasses = classNames("button__default", {
     [className]: className,
     button__default: primary,
     button__outline: outline,
-    button__small: small,
     button__large: large,
     button__disabled: disabled,
-    button__rounded: rounded
+    button__rounded: rounded,
   });
 
   return (
-    <button
-      type={type}
-      onClick={onClick}
-      className={buttonClasses}
-      disabled={disabled}
-    >
-    {children}
-    </button>
+    <Button icon={icon} className={buttonClasses} disabled={disabled}>
+      {children}
+    </Button>
   );
 };
 

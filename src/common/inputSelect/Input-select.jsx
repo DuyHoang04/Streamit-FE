@@ -4,7 +4,7 @@ import makeAnimated from "react-select/animated";
 import "./input-select.scss";
 const animatedComponents = makeAnimated();
 
-const InputSelect = ({ data, onChange }) => {
+const InputSelect = ({ data, onChange, label, setData }) => {
   const [newArray, setNewArray] = useState([]);
   const [options, setOptions] = useState([
     { value: "apple", label: "Apple" },
@@ -21,6 +21,7 @@ const InputSelect = ({ data, onChange }) => {
       borderRadius: "5px",
       fontSize: "16px",
       border: 0,
+      height: "50px",
       boxShadow: "none",
     }),
     option: (baseStyles, { isDisabled, isFocused, isSelected }) => ({
@@ -51,22 +52,21 @@ const InputSelect = ({ data, onChange }) => {
 
   const handleChange = (selectedOptions) => {
     const selectedValuesArray = selectedOptions.map((option) => option.value);
-    setNewArray(selectedValuesArray);
+    onChange(selectedOptions);
   };
 
-  console.log(newArray);
-
   return (
-    <Select
-      closeMenuOnSelect={false}
-      components={animatedComponents}
-      isMulti
-      options={options}
-      onChange={(selectedOptions) => {
-        handleChange(selectedOptions);
-      }}
-      styles={customStyles}
-    />
+    <>
+      <div className="label-select">{label}</div>
+      <Select
+        closeMenuOnSelect={false}
+        components={animatedComponents}
+        isMulti
+        options={options}
+        onChange={(selectedOptions) => onChange(selectedOptions)}
+        styles={customStyles}
+      />
+    </>
   );
 };
 

@@ -1,0 +1,22 @@
+.button__default {
+  background-color: var(--primary-color);
+  font-weight: 600;
+  display: flex;
+  justify-content: center;
+  padding: 2rem 3rem;
+  align-items: center;
+  color: var(--white);
+  gap: 1rem;
+  border: none;
+  &.button__large {
+    width: 100%;
+    font-size: 2rem;
+    padding: 3rem 3rem;
+    line-height: 1.75rem;
+  }
+  &:where(.css-dev-only-do-not-override-1vtf12y).ant-btn-default:not(
+      :disabled
+    ):hover {
+    color: var(--white);
+  }
+}

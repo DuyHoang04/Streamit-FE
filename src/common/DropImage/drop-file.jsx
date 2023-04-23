@@ -3,7 +3,7 @@ import Dropzone from "react-dropzone";
 import "./drop-file.scss";
 import { CloudUploadOutlined } from "@ant-design/icons";
 
-const DropFile = ({ label, title }) => {
+const DropFile = ({ label, title, setFile }) => {
   const [mediaUrl, setMediaUrl] = useState(null);
   const [mediaType, setMediaType] = useState(null);
   const dropzoneRef = useRef();
@@ -12,6 +12,7 @@ const DropFile = ({ label, title }) => {
     const file = acceptedFiles[0];
     const mediaUrl = URL.createObjectURL(file);
     setMediaUrl(mediaUrl);
+    setFile(mediaUrl);
 
     if (file.type.includes("image")) {
       setMediaType("image");

@@ -1,9 +1,5 @@
 import * as authTypes from "./authTypes";
 import * as userTypes from "./userTypes";
+import * as genresTypes from "./genresTypes";
 
-
-
-export  {
-    authTypes,
-    userTypes
-}
+export { authTypes, userTypes, genresTypes };
