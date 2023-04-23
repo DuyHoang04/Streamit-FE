@@ -2,14 +2,16 @@ import { put, takeEvery } from "redux-saga/effects";
 import * as types from "../utils/actionTypes/index";
 import { authApi } from "../api/index";
 import { authActions } from "../action/index";
-
-function* handleGetLogin(action) {
+import { redirect } from "react-router-dom";
+function* handleGetLogin({ payload }) {
   try {
-    const res = yield authApi.Login(action.payload);
-    console.log(res, "222");
+    const res = yield authApi.Login({ payload });
+
     yield authActions.loginSuccess({
-      res,
+      token: res.data,
+      success: res.success,
     });
+    navigate("/admin/dashboard")
   } catch (error) {
     yield authActions.loginFailure(error);
   }
@@ -18,12 +20,12 @@ function* handleGetLogin(action) {
 function* handleRegister({ payload }) {
   try {
     const res = yield authApi.Register({ payload });
-    console.log(res, "222244");
     yield put(
       authActions.registerSuccess({
-        res,
-      })
-    );
+        success: res.success,
+        message: res.message
+      }))
+
   } catch (error) {
     yield put(authActions.registerFailure(error));
   }

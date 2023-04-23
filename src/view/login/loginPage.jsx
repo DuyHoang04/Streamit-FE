@@ -6,7 +6,8 @@ import { authActions } from '../../action/index'
 import InputCustom from "../../common/input/InputCustom";
 const loginPage = () => {
   const dispatch = useDispatch()
-  const state = useSelector(state => state.userReducer.value)
+  const state = useSelector(state => state.userReducer.accesstoken)
+  console.log(state, "222")
   const emailRef = useRef();
   const passwordRef = useRef();
   const handleClick = () => {  
