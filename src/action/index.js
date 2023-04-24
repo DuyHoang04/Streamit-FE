@@ -1,5 +1,10 @@
 import { createAction } from "@reduxjs/toolkit";
-import { authTypes, userTypes, genresTypes } from "../utils/actionTypes/index";
+import {
+  authTypes,
+  userTypes,
+  genresTypes,
+  movieTypes,
+} from "../utils/actionTypes/index";
 
 export const authActions = {
   loginRequest: createAction(authTypes.LOGIN_REQUEST),
@@ -29,4 +34,22 @@ export const genresActions = {
   updateGenresRequest: createAction(genresTypes.UPDATE_GENRES_REQUEST),
   updateGenresSuccess: createAction(genresTypes.UPDATE_GENRES_SUCCESS),
   updateGenresFailure: createAction(genresTypes.UPDATE_GENRES_FAILURE),
+};
+
+export const movieActions = {
+  getAllMovieRequest: createAction(movieTypes.GET_ALL_MOVIE_REQUEST),
+  getAllMovieSuccess: createAction(movieTypes.GET_ALL_MOVIE_FAILURE),
+  getAllMovieFailure: createAction(movieTypes.GET_ALL_MOVIE_FAILURE),
+  addMovieRequest: createAction(movieTypes.ADD_MOVIE_REQUEST),
+  addMovieSuccess: createAction(movieTypes.ADD_MOVIE_SUCCESS),
+  addMovieFailure: createAction(movieTypes.ADD_MOVIE_FAILURE),
+  updateMovieRequest: createAction(movieTypes.UPDATE_MOVIE_REQUEST),
+  updateMovieSuccess: createAction(movieTypes.UPDATE_MOVIE_SUCCESS),
+  updateMovieFailure: createAction(movieTypes.UPDATE_MOVIE_FAILURE),
+  getDetailMovieRequest: createAction(movieTypes.GET_DETAIL_MOVIE_REQUEST),
+  getDetailMovieSuccess: createAction(movieTypes.GET_DETAIL_MOVIE_SUCCESS),
+  getDetailMovieFailure: createAction(movieTypes.GET_ALL_MOVIE_FAILURE),
+  deleteMovieRequest: createAction(movieTypes.DELETE_MOVIE_REQUEST),
+  deleteMovieSuccess: createAction(movieTypes.DELETE_MOVIE_SUCCESS),
+  deleteMovieFailure: createAction(movieTypes.DELETE_MOVIE_FAILURE),
 };

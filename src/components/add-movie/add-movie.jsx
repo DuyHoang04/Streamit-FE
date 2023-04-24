@@ -6,9 +6,12 @@ import InputCustom from "../../common/input/InputCustom";
 import TitlePageAdmin from "../../common/title-page-admin/title-page-admin";
 import ButtonCustom from "../../common/button/buttonCustom";
 import useGenres from "../../hook/useGenres";
+import { validateData } from "../../utils";
+import { toast } from "react-hot-toast";
+import axios from "axios";
 
 const AddMovie = () => {
-  const { getAllGenresRequest } = useGenres();
+  const { getAllGenresRequest, genresList } = useGenres();
   const [bannerImage, setBannerImage] = useState(null);
   const [image, setImage] = useState(null);
   const [video, setVideo] = useState(null);
@@ -29,6 +32,46 @@ const AddMovie = () => {
   const handleChangeGenres = (selectedOptions) => {
     const selectedValuesArray = selectedOptions.map((option) => option.value);
     setGenres(selectedValuesArray);
+  };
+
+  const dataInputSelect = genresList?.map((item) => {
+    return { value: item._id, label: item.name };
+  });
+
+  const handleAddMovie = async (e) => {
+    e.preventDefault();
+    const dataMovie = {
+      name: nameRef.current.input.value,
+      description: descriptionRef.current.resizableTextArea.textArea.value,
+      bannerImage,
+      image,
+      genres,
+      language: languageRef.current.input.value,
+      year: yearRef.current.input.value,
+      time: hoursRef.current.input.value,
+      video,
+    };
+    console.log(genres);
+    if (!validateData(dataMovie)) {
+      toast.error("không được để trống");
+    } else {
+      const formDataMovie = Object.entries(dataMovie).reduce(
+        (formData, [key, value]) => {
+          if (Array.isArray(value)) {
+            formData.append(key, JSON.stringify(value));
+          } else {
+            formData.append(key, value);
+          }
+          return formData;
+        },
+        new FormData()
+      );
+
+      await axios.post(
+        "http://localhost:8080/api/v1/movies/add",
+        formDataMovie
+      );
+    }
   };
 
   return (
@@ -66,7 +109,11 @@ const AddMovie = () => {
             label="Description"
             placeholder="Description"
           />
-          <InputSelect onChange={handleChangeGenres} label="Category" />
+          <InputSelect
+            data={dataInputSelect}
+            onChange={handleChangeGenres}
+            label="Category"
+          />
           <DropFile
             setFile={setVideo}
             label="Movie Video"
@@ -74,7 +121,11 @@ const AddMovie = () => {
           />
         </div>
         <div className="submit-btn">
-          <ButtonCustom icon={<UploadOutlined />} large>
+          <ButtonCustom
+            onClick={handleAddMovie}
+            icon={<UploadOutlined />}
+            large
+          >
             Submit
           </ButtonCustom>
         </div>

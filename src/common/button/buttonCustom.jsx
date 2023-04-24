@@ -25,7 +25,12 @@ const ButtonCustom = ({
   });
 
   return (
-    <Button icon={icon} className={buttonClasses} disabled={disabled}>
+    <Button
+      icon={icon}
+      className={buttonClasses}
+      disabled={disabled}
+      onClick={onClick}
+    >
       {children}
     </Button>
   );
