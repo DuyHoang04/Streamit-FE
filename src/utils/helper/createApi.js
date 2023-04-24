@@ -18,8 +18,6 @@ export default function createApi({ url, method }) {
       headers: headers,
     };
 
-    console.log(config, "CONFIG");
-
     return Axios(config)
       .then((res) => res.data)
       .catch((error) => console.error(error));

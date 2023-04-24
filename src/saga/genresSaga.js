@@ -5,8 +5,7 @@ import { genresActions } from "../action/index";
 
 function* handleGetAllGenres() {
   try {
-    console.log("Vo");
-    const { data } = yield genresApi.getAllGenres();
+    const { data } = yield genresApi.getAllGenres({});
     yield put(genresActions.getAllGenresSuccess(data));
   } catch (error) {
     yield put(genresActions.getAllGenresFailure(error));

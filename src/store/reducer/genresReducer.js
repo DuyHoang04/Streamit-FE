@@ -1,4 +1,4 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { genresTypes } from "../../utils/actionTypes";
 
 const initialState = {
   isFetching: false,
@@ -6,21 +6,28 @@ const initialState = {
   error: null,
 };
 
-export const genresReducer = createSlice({
-  name: "genres",
-  initialState,
-  getGenresRequest(state) {
-    state.isFetching = true;
-  },
-  getGenresSuccess(state, action) {
-    (state.isFetching = false), (state.categoryList = action.payload);
-  },
-  getGenresFailure(state, action) {
-    (state.isFetching = false), (state.error = action.payload);
-  },
-});
+const genresReducer = (state = initialState, action) => {
+  switch (action.type) {
+    case genresTypes.GET_ALL_GENRES_REQUEST:
+      return {
+        ...state,
+        isFetching: true,
+      };
+    case genresTypes.GET_ALL_GENRES_SUCCESS:
+      return {
+        ...state,
+        isFetching: false,
+        genresList: action.payload,
+      };
+    case genresTypes.GET_ALL_GENRES_FAILURE:
+      return {
+        ...state,
+        isFetching: true,
+        error: action.payload,
+      };
+    default:
+      return state;
+  }
+};
 
-// Action creators are generated for each case reducer function
-export const {} = genresReducer.actions;
-
-export default genresReducer.reducer;
+export default genresReducer;

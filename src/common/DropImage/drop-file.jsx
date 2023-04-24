@@ -12,7 +12,7 @@ const DropFile = ({ label, title, setFile }) => {
     const file = acceptedFiles[0];
     const mediaUrl = URL.createObjectURL(file);
     setMediaUrl(mediaUrl);
-    setFile(mediaUrl);
+    setFile(acceptedFiles[0]);
 
     if (file.type.includes("image")) {
       setMediaType("image");

@@ -35,6 +35,7 @@ const InputCustom = (
           onChange={onChange}
           placeholder={placeholder}
           className={inputClasses}
+          disabled={disabled}
         />
       ) : (
         <Input
@@ -44,6 +45,7 @@ const InputCustom = (
           onChange={onChange}
           placeholder={placeholder}
           className={inputClasses}
+          disabled={disabled}
         />
       )}
     </div>
