@@ -1,13 +1,11 @@
 import React, { useRef } from "react";
 import "../login/loginStyle.css";
 import { Button, Checkbox, Form, Image } from "antd";
-import { useDispatch, useSelector } from "react-redux"
+import { useDispatch } from "react-redux"
 import { authActions } from '../../action/index'
 import InputCustom from "../../common/input/InputCustom";
 const loginPage = () => {
   const dispatch = useDispatch()
-  const state = useSelector(state => state.userReducer.accesstoken)
-  console.log(state, "222")
   const emailRef = useRef();
   const passwordRef = useRef();
   const handleClick = () => {  

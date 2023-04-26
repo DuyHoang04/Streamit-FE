@@ -1,12 +1,11 @@
 import React, { useRef } from "react";
 import "../registerPage/registerPage.scss";
-import { Button, Checkbox, Form, Image } from "antd";
+import { Button, Checkbox, Form, notification, message } from "antd";
 import { useDispatch, useSelector } from "react-redux"
 import { authActions } from '../../action/index'
 import InputCustom from "../../common/input/InputCustom";
 const registerPage = () => {
     const dispatch = useDispatch()
-    const state = useSelector(state => state.userReducer.value)
     const userNameRef = useRef()
     const emailRef = useRef();
     const passwordRef = useRef();
@@ -16,6 +15,7 @@ const registerPage = () => {
         const password = passwordRef.current.input.value
         dispatch(authActions.registerRequest({ email, password, username }))
     }
+
     return (
         <div className="register_background">
             <div className="register_page">
