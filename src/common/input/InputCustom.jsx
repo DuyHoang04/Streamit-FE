@@ -36,6 +36,7 @@ const InputCustom = (
           placeholder={placeholder}
           className={inputClasses}
           disabled={disabled}
+          defaultValue={""}
         />
       ) : (
         <Input
@@ -46,6 +47,7 @@ const InputCustom = (
           placeholder={placeholder}
           className={inputClasses}
           disabled={disabled}
+          defaultValue={""}
         />
       )}
     </div>

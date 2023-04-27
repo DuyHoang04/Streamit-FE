@@ -9,8 +9,9 @@ import useGenres from "../../hook/useGenres";
 import { validateData } from "../../utils";
 import { toast } from "react-hot-toast";
 import useMovie from "../../hook/useMovie";
+import "./add-series.scss";
 
-const AddMovie = () => {
+const AddSeries = () => {
   const { getAllGenresRequest, genresList } = useGenres();
   const { addMovieRequest } = useMovie();
   const [bannerImage, setBannerImage] = useState(null);
@@ -149,4 +150,4 @@ const AddMovie = () => {
   );
 };
 
-export default AddMovie;
+export default AddSeries;

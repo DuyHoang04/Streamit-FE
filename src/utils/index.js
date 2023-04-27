@@ -1,3 +1,4 @@
+import { toast } from "react-hot-toast";
 import * as actionTypes from "./actionTypes";
 import routes from "./routeconfig";
 
@@ -19,4 +20,10 @@ export const validateData = (data) => {
   return true;
 };
 
-export { actionTypes };
+export const toastSuccess = (message) => {
+  return toast.success(message);
+};
+
+export const toastError = (message) => {
+  return toast.error(message);
+};
