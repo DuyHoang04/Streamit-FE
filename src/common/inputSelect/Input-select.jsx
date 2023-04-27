@@ -1,10 +1,10 @@
-import React, { useState } from "react";
+import React from "react";
 import Select from "react-select";
 import makeAnimated from "react-select/animated";
 import "./input-select.scss";
 const animatedComponents = makeAnimated();
 
-const InputSelect = ({ data, onChange, label }) => {
+const InputSelect = ({ data, onChange, label, value }) => {
   const customStyles = {
     control: (baseStyles, state) => ({
       ...baseStyles,
@@ -45,6 +45,7 @@ const InputSelect = ({ data, onChange, label }) => {
     <>
       <div className="label-select">{label}</div>
       <Select
+        value={value}
         closeMenuOnSelect={false}
         components={animatedComponents}
         isMulti
