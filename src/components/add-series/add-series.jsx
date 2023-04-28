@@ -1,29 +1,32 @@
 import React, { useEffect, useRef, useState } from "react";
-import { UploadOutlined } from "@ant-design/icons";
+import { UploadOutlined, RestOutlined, EditOutlined } from "@ant-design/icons";
+import { Modal } from "antd";
 import DropFile from "../../common/DropImage/drop-file";
 import InputSelect from "../../common/inputSelect/Input-select";
 import InputCustom from "../../common/input/InputCustom";
-import TitlePageAdmin from "../../common/title-page-admin/title-page-admin";
 import ButtonCustom from "../../common/button/buttonCustom";
 import useGenres from "../../hook/useGenres";
 import { validateData } from "../../utils";
-import { toast } from "react-hot-toast";
 import useMovie from "../../hook/useMovie";
 import "./add-series.scss";
+import axios from "axios";
 
 const AddSeries = () => {
   const { getAllGenresRequest, genresList } = useGenres();
   const { addMovieRequest } = useMovie();
   const [bannerImage, setBannerImage] = useState(null);
   const [image, setImage] = useState(null);
-  const [video, setVideo] = useState(null);
   const [genres, setGenres] = useState([]);
   const nameRef = useRef();
   const hoursRef = useRef();
   const languageRef = useRef();
   const yearRef = useRef();
   const descriptionRef = useRef();
-
+  const nameEpisodeRef = useRef();
+  const episodeNumberRef = useRef();
+  const [video, setVideo] = useState(null);
+  const [addEpisodeModal, setAddEpisodeModal] = useState(false);
+  const [episodes, setEpisodes] = useState([]);
   useEffect(() => {
     const fetchData = async () => {
       await getAllGenresRequest();
@@ -51,9 +54,25 @@ const AddSeries = () => {
     return { value: item._id, label: item.name };
   });
 
-  const handleAddMovie = async (e) => {
+  const handleAddEpisode = () => {
+    const dataEpisode = {
+      episodeName: nameEpisodeRef.current.input.value,
+      episodeNumber: episodeNumberRef.current.input.value,
+      video,
+    };
+    setEpisodes([...episodes, dataEpisode]);
+    setAddEpisodeModal(false);
+  };
+
+  const handleDeleteEpisode = (name) => {
+    console.log(name);
+    const newEpisode = episodes.filter((item) => item.episodeName !== name);
+    setEpisodes(newEpisode);
+  };
+
+  const handleAddSeries = (e) => {
     e.preventDefault();
-    const dataMovie = {
+    const dataSeries = {
       name: nameRef.current.input.value,
       description: descriptionRef.current.resizableTextArea.textArea.value,
       bannerImage,
@@ -62,30 +81,34 @@ const AddSeries = () => {
       language: languageRef.current.input.value,
       year: yearRef.current.input.value,
       time: hoursRef.current.input.value,
-      video,
+      episodes,
     };
-    console.log(genres);
-    if (!validateData(dataMovie)) {
-      toast.error("không được để trống");
-    } else {
-      const formDataMovie = Object.entries(dataMovie).reduce(
-        (formData, [key, value]) => {
-          if (Array.isArray(value)) {
-            formData.append(key, JSON.stringify(value));
-          } else {
-            formData.append(key, value);
-          }
-          return formData;
-        },
-        new FormData()
-      );
-      const req = {
-        payload: formDataMovie,
-      };
-      resetDataState();
-      // addMovieRequest(req);
+    if (validateData(dataSeries)) {
+      const formData = new FormData();
+      formData.append("name", dataSeries.name);
+      formData.append("description", dataSeries.description);
+      formData.append("bannerImage", dataSeries.bannerImage);
+      formData.append("image", dataSeries.image);
+      formData.append("language", dataSeries.language);
+      formData.append("year", dataSeries.year);
+      formData.append("time", dataSeries.time);
+      formData.append("genres", JSON.stringify(dataSeries.genres));
+      const episodes = dataSeries.episodes.map((item, index) => {
+        return {
+          episodeName: item.episodeName,
+          episodeNumber: item.episodeNumber,
+        };
+      });
+      formData.append("episodes", JSON.stringify(episodes));
+      dataSeries.episodes.forEach((episode) => {
+        formData.append("video", episode.video);
+      });
+
+      axios.post("http://localhost:8080/api/v1/series/add", formData);
     }
   };
+
+  console.log(episodes);
 
   return (
     <>
@@ -124,21 +147,38 @@ const AddSeries = () => {
             placeholder="Description"
           />
           <InputSelect
-            value={genres}
+            // value={genres}
             data={dataInputSelect}
             onChange={handleChangeGenres}
             label="Category"
           />
-          <DropFile
-            url={video}
-            setFile={setVideo}
-            label="Movie Video"
-            title="Drag your video here"
-          />
+
+          <div className="add-episode" onClick={() => setAddEpisodeModal(true)}>
+            Add Episode
+          </div>
+          <div className="episode-list-container">
+            {episodes.map((item) => (
+              <div className="episode-list-item" key={item.episodeName}>
+                <img src={URL.createObjectURL(item.video)} alt="" />
+                <h1 className="episode-name">{item.episodeName}</h1>
+                <div className="episode-icons">
+                  <div
+                    className="icon"
+                    onClick={(e) => handleDeleteEpisode(item.episodeName)}
+                  >
+                    <RestOutlined />
+                  </div>
+                  <div className="icon-edit">
+                    <EditOutlined />
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
         </div>
         <div className="submit-btn">
           <ButtonCustom
-            onClick={handleAddMovie}
+            onClick={handleAddSeries}
             icon={<UploadOutlined />}
             large
           >
@@ -146,6 +186,24 @@ const AddSeries = () => {
           </ButtonCustom>
         </div>
       </div>
+      <Modal
+        title="Add Episode"
+        okText="Add"
+        open={addEpisodeModal}
+        onCancel={() => setAddEpisodeModal(false)}
+        onOk={handleAddEpisode}
+        cancelButtonProps={{ style: { display: "none" } }}
+        className="custom-modal"
+      >
+        <InputCustom label="Name" ref={nameEpisodeRef} />
+        <InputCustom label="Episode" ref={episodeNumberRef} type="number" />
+        <DropFile
+          url={video}
+          setFile={setVideo}
+          label="Video without Title"
+          title="Drag your video here"
+        />
+      </Modal>
     </>
   );
 };

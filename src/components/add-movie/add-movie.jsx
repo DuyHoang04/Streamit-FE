@@ -35,10 +35,10 @@ const AddMovie = () => {
     hoursRef.current.input.value = "";
     languageRef.current.input.value = "";
     yearRef.current.input.value = "";
-    // setBannerImage(null);
-    // setImage(null);
+    setBannerImage(null);
+    setImage(null);
     descriptionRef.current.resizableTextArea.textArea.value = "";
-    // setVideo("");
+    setVideo("");
   };
 
   const handleChangeGenres = (selectedOptions) => {
@@ -63,7 +63,6 @@ const AddMovie = () => {
       time: hoursRef.current.input.value,
       video,
     };
-    console.log(genres);
     if (!validateData(dataMovie)) {
       toast.error("không được để trống");
     } else {
@@ -81,8 +80,8 @@ const AddMovie = () => {
       const req = {
         payload: formDataMovie,
       };
+      addMovieRequest(req);
       resetDataState();
-      // addMovieRequest(req);
     }
   };
 

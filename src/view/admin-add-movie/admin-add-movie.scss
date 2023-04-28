@@ -23,4 +23,8 @@
   span {
     color: var(--white);
   }
+  .ant-radio-checked .ant-radio-inner {
+    background-color: var(--primary-color);
+    border-color: var(--primary-color);
+  }
 }

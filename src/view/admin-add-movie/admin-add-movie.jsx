@@ -16,7 +16,11 @@ const AdminAddMoviePage = () => {
     <>
       <TitlePageAdmin title={`Add ${selectedOption}`} />
 
-      <Radio.Group onChange={handleOptionChange} value={selectedOption}>
+      <Radio.Group
+        className="option-movie"
+        onChange={handleOptionChange}
+        value={selectedOption}
+      >
         <Radio value="movie">Movie</Radio>
         <Radio value="series">Series</Radio>
       </Radio.Group>
