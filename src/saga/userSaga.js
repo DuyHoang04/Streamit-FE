@@ -1,36 +1,51 @@
-import { put, takeEvery } from "redux-saga/effects";
+import { put, takeLatest } from "redux-saga/effects";
 import * as types from "../utils/actionTypes/index";
 import { authApi } from "../api/index";
-import { authActions } from "../action/index";
-
-function* handleGetLogin(action) {
+import * as loginActions from '../store/reducer/loginReducer'
+import * as registerActions from '../store/reducer/registerReducer'
+import { redirect } from "react-router-dom";
+import { notification } from "antd";
+function* handleGetLogin({ payload }) {
   try {
-    const res = yield authApi.Login(action.payload);
-    console.log(res, "222");
-    yield authActions.loginSuccess({
-      res,
-    });
+    const res = yield authApi.Login({ payload });
+    console.log(res, "555")
+    if (res.data.success) {
+      yield put(loginActions.getLoginSuccess({
+        accessToken: res.data.accessToken,
+        accountRole: res.data.isAdmin
+      }))
+    }
+    redirect = "/admin/dashboard"
   } catch (error) {
-    yield authActions.loginFailure(error);
+    yield put(loginActions.getLoginFailure(
+      notification.error({
+        message: 'Sai tài khoản hoặc mật khẩu',
+        placement: 'topRight'
+      })))
   }
 }
 
 function* handleRegister({ payload }) {
   try {
-    const res = yield authApi.Register({ payload });
-    console.log(res, "222244");
-    yield put(
-      authActions.registerSuccess({
-        res,
-      })
-    );
+    const res = yield authApi.Register({ payload })
+    if (res.success) {
+      yield put(registerActions.getRegisterSuccess({
+        message: res.message
+      }))
+    }
+    redirect = "/login"
   } catch (error) {
-    yield put(authActions.registerFailure(error));
+    yield put(loginActions.getLoginFailure(
+      notification.error({
+        message: 'tài khoản đã được sử dụng',
+        placement: 'topRight'
+      })))
   }
+
 }
 
 const Saga = [
-  takeEvery(types.authTypes.LOGIN_REQUEST, handleGetLogin),
-  takeEvery(types.authTypes.REGISTER_REQUEST, handleRegister),
+  takeLatest(types.authTypes.LOGIN_REQUEST, handleGetLogin),
+  takeLatest(types.authTypes.REGISTER_REQUEST, handleRegister),
 ];
 export default Saga;
