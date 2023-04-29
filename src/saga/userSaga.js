@@ -1,36 +1,43 @@
-import { put, takeEvery } from "redux-saga/effects";
+import { put, takeLatest } from "redux-saga/effects";
 import * as types from "../utils/actionTypes/index";
 import { authApi } from "../api/index";
-import { authActions } from "../action/index";
-
-function* handleGetLogin(action) {
+import * as loginActions from '../store/reducer/loginReducer'
+import * as registerActions from '../store/reducer/registerReducer'
+import { toastSuccess, toastError } from "../utils";
+function* handleGetLogin({ payload }) {
+  const { navigate } = payload
   try {
-    const res = yield authApi.Login(action.payload);
-    console.log(res, "222");
-    yield authActions.loginSuccess({
-      res,
-    });
+    const res = yield authApi.Login({ payload });
+    yield put(loginActions.getLoginSuccess({
+      accessToken: res.data.accessToken,
+      accountRole: res.data.isAdmin
+    }))
+    navigate("/")
   } catch (error) {
-    yield authActions.loginFailure(error);
+    yield put(loginActions.getLoginFailure(toastError({
+      message: "Sai tài khoản hoặc mật khẩu"
+    })))
   }
 }
 
 function* handleRegister({ payload }) {
+  const { navigate } = payload
   try {
-    const res = yield authApi.Register({ payload });
-    console.log(res, "222244");
-    yield put(
-      authActions.registerSuccess({
-        res,
-      })
-    );
+    const res = yield authApi.Register({ payload })
+    yield put(registerActions.getRegisterSuccess(toastSuccess({
+      message: res.message
+    })))
+    navigate("/login")
   } catch (error) {
-    yield put(authActions.registerFailure(error));
+    yield put(registerActions.getRegisterFailure(toastError({
+      message: "Trùng tài khoản"
+    })))
   }
+
 }
 
 const Saga = [
-  takeEvery(types.authTypes.LOGIN_REQUEST, handleGetLogin),
-  takeEvery(types.authTypes.REGISTER_REQUEST, handleRegister),
+  takeLatest(types.authTypes.LOGIN_REQUEST, handleGetLogin),
+  takeLatest(types.authTypes.REGISTER_REQUEST, handleRegister),
 ];
 export default Saga;
