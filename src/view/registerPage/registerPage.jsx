@@ -4,16 +4,18 @@ import { Button, Checkbox, Form, notification, message } from "antd";
 import { useDispatch, useSelector } from "react-redux"
 import { authActions } from '../../action/index'
 import InputCustom from "../../common/input/InputCustom";
+import { useNavigate } from "react-router-dom";
 const registerPage = () => {
     const dispatch = useDispatch()
     const userNameRef = useRef()
     const emailRef = useRef();
     const passwordRef = useRef();
+    const navigate = useNavigate();
     const handleClick = () => {
         const username = userNameRef.current.input.value
         const email = emailRef.current.input.value
         const password = passwordRef.current.input.value
-        dispatch(authActions.registerRequest({ email, password, username }))
+        dispatch(authActions.registerRequest({ email, password, username , navigate}))
     }
 
     return (

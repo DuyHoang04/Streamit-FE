@@ -11,16 +11,8 @@ const registerReducer = createSlice({
     name: 'register',
     initialState,
     reducers: {
-        getRegisterRequest(state, action) {
-            state.isFetching = true
-        },
         getRegisterSuccess(state, action) {
-            console.log(action, "666")
             state.isFetching = false
-            state.noti = notification.success({
-                message: action.payload.message,
-                placement: "topRight"
-            })
         },
         getRegisterFailure(state, action) {
             state.isFetching = true,

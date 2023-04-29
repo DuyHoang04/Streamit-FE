@@ -4,14 +4,17 @@ import { Button, Checkbox, Form, Image } from "antd";
 import { useDispatch } from "react-redux"
 import { authActions } from '../../action/index'
 import InputCustom from "../../common/input/InputCustom";
+import { useNavigate } from "react-router-dom";
+
 const loginPage = () => {
   const dispatch = useDispatch()
   const emailRef = useRef();
   const passwordRef = useRef();
+  const navigate = useNavigate();
   const handleClick = () => {  
     const email = emailRef.current.input.value
     const password = passwordRef.current.input.value
-    dispatch(authActions.loginRequest({email, password}))
+    dispatch(authActions.loginRequest({email, password, navigate}))
   }
   return (
     <div className="login_background">
