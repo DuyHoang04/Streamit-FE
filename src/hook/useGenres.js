@@ -3,7 +3,7 @@ import { genresActions } from "../action/index";
 
 const useGenres = () => {
   const dispatch = useDispatch();
-  const genresList = useSelector((state) => state.genres.genresList);
+  const genresList = useSelector((state) => state?.genres?.genresList);
 
   const getAllGenresRequest = () => {
     dispatch(genresActions.getAllGenresRequest());

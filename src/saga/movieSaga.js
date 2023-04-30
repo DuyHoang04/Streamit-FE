@@ -1,7 +1,7 @@
 import { put, takeEvery } from "redux-saga/effects";
 import * as types from "../utils/actionTypes/index";
 import { movieApi } from "../api/index";
-import { movieActions } from "../action/index";
+import { movieActions, mediaActions } from "../action/index";
 import { toastError, toastSuccess } from "../utils";
 
 function* handleAddMovie({ payload }) {
@@ -15,7 +15,20 @@ function* handleAddMovie({ payload }) {
   }
 }
 
+function* handleUpdateMovie({ payload }) {
+  try {
+    const { message } = yield movieApi.updateMovie(payload);
+    yield put(movieActions.updateMovieSuccess());
+    yield put(mediaActions.getMovieAndSeriesRequest());
+    toastSuccess(message);
+  } catch (error) {
+    yield put(movieActions.updateMovieFailure(error));
+    toastError("Something went wrong");
+  }
+}
+
 const movieSaga = [
   takeEvery(types.movieTypes.ADD_MOVIE_REQUEST, handleAddMovie),
+  takeEvery(types.movieTypes.UPDATE_MOVIE_REQUEST, handleUpdateMovie),
 ];
 export default movieSaga;

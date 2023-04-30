@@ -81,7 +81,7 @@ const AddMovie = () => {
         payload: formDataMovie,
       };
       addMovieRequest(req);
-      resetDataState();
+      // resetDataState();
     }
   };
 
@@ -122,7 +122,7 @@ const AddMovie = () => {
             placeholder="Description"
           />
           <InputSelect
-            value={genres}
+            // value={genres}
             data={dataInputSelect}
             onChange={handleChangeGenres}
             label="Category"
