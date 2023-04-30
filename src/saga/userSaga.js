@@ -14,9 +14,8 @@ function* handleGetLogin({ payload }) {
     }))
     navigate("/")
   } catch (error) {
-    yield put(loginActions.getLoginFailure(toastError({
-      message: "Sai tài khoản hoặc mật khẩu"
-    })))
+    yield put(loginActions.getLoginFailure(error))
+    yield toastError("Sai tài khoản hoặc mật khẩu")
   }
 }
 
@@ -24,14 +23,12 @@ function* handleRegister({ payload }) {
   const { navigate } = payload
   try {
     const res = yield authApi.Register({ payload })
-    yield put(registerActions.getRegisterSuccess(toastSuccess({
-      message: res.message
-    })))
+    yield put(registerActions.getRegisterSuccess(res))
+    yield toastSuccess(res.message)
     navigate("/login")
   } catch (error) {
-    yield put(registerActions.getRegisterFailure(toastError({
-      message: "Trùng tài khoản"
-    })))
+    yield put(registerActions.getRegisterFailure(error))
+    yield toastError("Trùng tài khoản")
   }
 
 }
