@@ -2,6 +2,8 @@ import { createApi } from "../utils/helper";
 import authSchema from "./authSchema";
 import genresSchema from "./genresSchema";
 import movieSchema from "./movieSchema";
+import seriesSchema from "./seriesSchema";
+import mediaSchema from "./mediaSchema";
 
 export const authApi = {
   Login: createApi(authSchema.LOGIN),
@@ -18,4 +20,13 @@ export const genresApi = {
 
 export const movieApi = {
   addMovie: createApi(movieSchema.ADD_MOVIE),
+  updateMovie: createApi(movieSchema.UPDATE_MOVIE),
+};
+
+export const seriesApi = {
+  addSeries: createApi(seriesSchema.ADD_SERIES),
+};
+
+export const mediaApi = {
+  getMovieAndSeries: createApi(mediaSchema.GET_MOVIE_SERIES),
 };

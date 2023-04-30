@@ -5,6 +5,10 @@ const MOVIE_SCHEMA = {
     url: `${BASE_URL}/movies/add`,
     method: METHOD.POST,
   },
+  UPDATE_MOVIE: {
+    url: `${BASE_URL}/movies/update/:movieId`,
+    method: METHOD.PUT,
+  },
 };
 
 export default MOVIE_SCHEMA;

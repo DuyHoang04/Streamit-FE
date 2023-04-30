@@ -7,13 +7,12 @@ import InputCustom from "../../common/input/InputCustom";
 import ButtonCustom from "../../common/button/buttonCustom";
 import useGenres from "../../hook/useGenres";
 import { validateData } from "../../utils";
-import useMovie from "../../hook/useMovie";
+import useSeries from "../../hook/useSeries";
 import "./add-series.scss";
-import axios from "axios";
 
 const AddSeries = () => {
   const { getAllGenresRequest, genresList } = useGenres();
-  const { addMovieRequest } = useMovie();
+  const { addSeriesMovieRequest } = useSeries();
   const [bannerImage, setBannerImage] = useState(null);
   const [image, setImage] = useState(null);
   const [genres, setGenres] = useState([]);
@@ -65,7 +64,6 @@ const AddSeries = () => {
   };
 
   const handleDeleteEpisode = (name) => {
-    console.log(name);
     const newEpisode = episodes.filter((item) => item.episodeName !== name);
     setEpisodes(newEpisode);
   };
@@ -104,11 +102,13 @@ const AddSeries = () => {
         formData.append("video", episode.video);
       });
 
-      axios.post("http://localhost:8080/api/v1/series/add", formData);
+      const req = {
+        payload: formData,
+      };
+
+      addSeriesMovieRequest(req);
     }
   };
-
-  console.log(episodes);
 
   return (
     <>

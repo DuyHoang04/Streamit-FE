@@ -4,6 +4,8 @@ import {
   userTypes,
   genresTypes,
   movieTypes,
+  seriesTypes,
+  mediaTypes,
 } from "../utils/actionTypes/index";
 
 export const authActions = {
@@ -38,7 +40,7 @@ export const genresActions = {
 
 export const movieActions = {
   getAllMovieRequest: createAction(movieTypes.GET_ALL_MOVIE_REQUEST),
-  getAllMovieSuccess: createAction(movieTypes.GET_ALL_MOVIE_FAILURE),
+  getAllMovieSuccess: createAction(movieTypes.GET_ALL_MOVIE_SUCCESS),
   getAllMovieFailure: createAction(movieTypes.GET_ALL_MOVIE_FAILURE),
   addMovieRequest: createAction(movieTypes.ADD_MOVIE_REQUEST),
   addMovieSuccess: createAction(movieTypes.ADD_MOVIE_SUCCESS),
@@ -52,4 +54,34 @@ export const movieActions = {
   deleteMovieRequest: createAction(movieTypes.DELETE_MOVIE_REQUEST),
   deleteMovieSuccess: createAction(movieTypes.DELETE_MOVIE_SUCCESS),
   deleteMovieFailure: createAction(movieTypes.DELETE_MOVIE_FAILURE),
+};
+
+export const seriesActions = {
+  getAllSeriesRequest: createAction(seriesTypes.GET_ALL_SERIES_REQUEST),
+  getAllSeriesSuccess: createAction(seriesTypes.GET_ALL_SERIES_SUCCESS),
+  getAllSeriesFailure: createAction(seriesTypes.GET_ALL_SERIES_FAILURE),
+  addSeriesRequest: createAction(seriesTypes.ADD_SERIES_REQUEST),
+  addSeriesSuccess: createAction(seriesTypes.ADD_SERIES_SUCCESS),
+  addSeriesFailure: createAction(seriesTypes.ADD_SERIES_FAILURE),
+  updateSeriesRequest: createAction(seriesTypes.UPDATE_SERIES_REQUEST),
+  updateSeriesSuccess: createAction(seriesTypes.UPDATE_SERIES_SUCCESS),
+  updateSeriesFailure: createAction(seriesTypes.UPDATE_SERIES_FAILURE),
+  getDetailSeriesRequest: createAction(seriesTypes.GET_DETAIL_SERIES_REQUEST),
+  getDetailSeriesSuccess: createAction(seriesTypes.GET_DETAIL_SERIES_SUCCESS),
+  getDetailSeriesFailure: createAction(seriesTypes.GET_DETAIL_SERIES_FAILURE),
+  deleteSeriesRequest: createAction(seriesTypes.DELETE_SERIES_REQUEST),
+  deleteSeriesSuccess: createAction(seriesTypes.DELETE_SERIES_SUCCESS),
+  deleteSeriesFailure: createAction(seriesTypes.DELETE_SERIES_FAILURE),
+};
+
+export const mediaActions = {
+  getMovieAndSeriesRequest: createAction(
+    mediaTypes.GET_MOVIE_AND_SERIES_REQUEST
+  ),
+  getMovieAndSeriesSuccess: createAction(
+    mediaTypes.GET_MOVIE_AND_SERIES_SUCCESS
+  ),
+  getMovieAndSeriesFailure: createAction(
+    mediaTypes.GET_MOVIE_AND_SERIES_FAILURE
+  ),
 };
