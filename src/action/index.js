@@ -57,21 +57,46 @@ export const movieActions = {
 };
 
 export const seriesActions = {
+  // get
   getAllSeriesRequest: createAction(seriesTypes.GET_ALL_SERIES_REQUEST),
   getAllSeriesSuccess: createAction(seriesTypes.GET_ALL_SERIES_SUCCESS),
   getAllSeriesFailure: createAction(seriesTypes.GET_ALL_SERIES_FAILURE),
+  // add
   addSeriesRequest: createAction(seriesTypes.ADD_SERIES_REQUEST),
   addSeriesSuccess: createAction(seriesTypes.ADD_SERIES_SUCCESS),
   addSeriesFailure: createAction(seriesTypes.ADD_SERIES_FAILURE),
+  //update
   updateSeriesRequest: createAction(seriesTypes.UPDATE_SERIES_REQUEST),
   updateSeriesSuccess: createAction(seriesTypes.UPDATE_SERIES_SUCCESS),
   updateSeriesFailure: createAction(seriesTypes.UPDATE_SERIES_FAILURE),
+  // get detail
   getDetailSeriesRequest: createAction(seriesTypes.GET_DETAIL_SERIES_REQUEST),
   getDetailSeriesSuccess: createAction(seriesTypes.GET_DETAIL_SERIES_SUCCESS),
   getDetailSeriesFailure: createAction(seriesTypes.GET_DETAIL_SERIES_FAILURE),
+  //delete
   deleteSeriesRequest: createAction(seriesTypes.DELETE_SERIES_REQUEST),
   deleteSeriesSuccess: createAction(seriesTypes.DELETE_SERIES_SUCCESS),
   deleteSeriesFailure: createAction(seriesTypes.DELETE_SERIES_FAILURE),
+  //delete episode
+  deleteEpisodeSeriesRequest: createAction(
+    seriesTypes.DELETE_EPISODE_SERIES_REQUEST
+  ),
+  deleteEpisodeSeriesSuccess: createAction(
+    seriesTypes.DELETE_EPISODE_SERIES_SUCCESS
+  ),
+  deleteEpisodeSeriesFailure: createAction(
+    seriesTypes.DELETE_EPISODE_SERIES_FAILURE
+  ),
+  //update episode
+  updateEpisodeSeriesRequest: createAction(
+    seriesTypes.UPDATE_EPISODE_SERIES_REQUEST
+  ),
+  updateEpisodeSeriesSuccess: createAction(
+    seriesTypes.UPDATE_EPISODE_SERIES_SUCCESS
+  ),
+  updateEpisodeSeriesFailure: createAction(
+    seriesTypes.UPDATE_EPISODE_SERIES_FAILURE
+  ),
 };
 
 export const mediaActions = {
