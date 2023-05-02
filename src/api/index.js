@@ -25,6 +25,8 @@ export const movieApi = {
 
 export const seriesApi = {
   addSeries: createApi(seriesSchema.ADD_SERIES),
+  deleteEpisodeSeries: createApi(seriesSchema.DELETE_EPISODE),
+  updateEpisodeSeries: createApi(seriesSchema.UPDATE_EPISODE),
 };
 
 export const mediaApi = {

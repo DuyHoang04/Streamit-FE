@@ -13,20 +13,21 @@ import { BASE_URL } from "../../utils/apiConfig";
 import DropFile from "../../common/DropImage/drop-file";
 import InputSelect from "../../common/inputSelect/Input-select";
 import InputCustom from "../../common/input/InputCustom";
-import ButtonCustom from "../../common/button/buttonCustom";
 import useGenres from "../../hook/useGenres";
-import { validateData } from "../../utils";
-import { toast } from "react-hot-toast";
 import useMovie from "../../hook/useMovie";
-import axios from "axios";
+import useSeries from "../../hook/useSeries";
 
 const AdminMoviesPage = () => {
   const { getAllGenresRequest, genresList } = useGenres();
   const { updateMovieRequest } = useMovie();
+  const { updateEpisodeRequest, deleteEpisodeRequest } = useSeries();
   const { mediaList, getMovieAndSeries } = useMedia();
   const [updateMovieModal, setUpdateMovieModal] = useState(false);
   const [addEpisodeModal, setAddEpisodeModal] = useState(false);
+  const [updateEpisodeModal, setUpdateEpisodeModal] = useState(false);
+  const [deleteEpisodeModal, setDeleteEpisodeModal] = useState(false);
   const [movieId, setMovieId] = useState(null);
+  const [episodeId, setEpisodeId] = useState(null);
   const [bannerImage, setBannerImage] = useState(null);
   const [image, setImage] = useState(null);
   const [video, setVideo] = useState(null);
@@ -171,6 +172,54 @@ const AdminMoviesPage = () => {
     setUpdateMovieModal(false);
   };
 
+  const openUpdateEpisodeModal = (id) => {
+    setEpisodeId(id);
+    setUpdateEpisodeModal(true);
+  };
+  const openDeleteEpisodeModal = (id) => {
+    setEpisodeId(id);
+    setDeleteEpisodeModal(true);
+  };
+
+  const handleUpdateEpisode = async () => {
+    const formDataEpisode = new FormData();
+
+    formDataEpisode.append("episodeName", nameEpisodeRef.current.input.value);
+    formDataEpisode.append(
+      "episodeNumber",
+      episodeNumberRef.current.input.value
+    );
+    formDataEpisode.append("video", video);
+
+    const req = {
+      payload: formDataEpisode,
+      paths: {
+        seriesId: movieId,
+      },
+      queries: {
+        episodeId,
+      },
+    };
+
+    await updateEpisodeRequest(req);
+    await setUpdateEpisodeModal(false);
+    await setUpdateMovieModal(false);
+  };
+
+  const handleDeleteEpisode = async () => {
+    const req = {
+      paths: {
+        seriesId: movieId,
+      },
+      queries: {
+        episodeId,
+      },
+    };
+    await deleteEpisodeRequest(req);
+    await setDeleteEpisodeModal(false);
+    await setUpdateMovieModal(false);
+  };
+
   return (
     <>
       <div className="admin_movie">
@@ -259,17 +308,21 @@ const AdminMoviesPage = () => {
                       <div className="episode-icons">
                         <div
                           className="icon"
-                          onClick={(e) => handleDeleteEpisode(item.episodeName)}
+                          onClick={() => openDeleteEpisodeModal(item._id)}
                         >
                           <RestOutlined />
                         </div>
-                        <div className="icon-edit">
+                        <div
+                          className="icon-edit"
+                          onClick={() => openUpdateEpisodeModal(item._id)}
+                        >
                           <EditOutlined />
                         </div>
                       </div>
                     </div>
                   ))}
                 </div>
+                {/* ADD */}
                 <Modal
                   title="Add Episode"
                   okText="Add"
@@ -291,6 +344,42 @@ const AdminMoviesPage = () => {
                     label="Video without Title"
                     title="Drag your video here"
                   />
+                </Modal>
+                {/* UPDATE */}
+                <Modal
+                  title="Update Episode"
+                  okText="Update Episode"
+                  open={updateEpisodeModal}
+                  onCancel={() => setUpdateEpisodeModal(false)}
+                  onOk={handleUpdateEpisode}
+                  cancelButtonProps={{ style: { display: "none" } }}
+                  className="custom-modal"
+                >
+                  <InputCustom label="Name" ref={nameEpisodeRef} />
+                  <InputCustom
+                    label="Episode"
+                    ref={episodeNumberRef}
+                    type="number"
+                  />
+                  <DropFile
+                    url={video || ""}
+                    setFile={setVideo}
+                    label="Video without Title"
+                    title="Drag your video here"
+                  />
+                </Modal>
+                <Modal
+                  title="Warning"
+                  okText="Delete"
+                  open={deleteEpisodeModal}
+                  onCancel={() => setDeleteEpisodeModal(false)}
+                  onOk={handleDeleteEpisode}
+                  cancelButtonProps={{ style: { display: "none" } }}
+                  className="delete-modal"
+                >
+                  <h1 className="text-delete">
+                    Khi xóa sẽ không thể thu hồi nữa
+                  </h1>
                 </Modal>
               </>
             ) : (
