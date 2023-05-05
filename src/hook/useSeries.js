@@ -15,12 +15,20 @@ const useSeries = () => {
   const deleteEpisodeRequest = (req) => {
     dispatch(seriesActions.deleteEpisodeSeriesRequest(req));
   };
+  const deleteSeriesRequest = (req) => {
+    dispatch(seriesActions.deleteSeriesRequest(req));
+  };
+  const updateSeriesRequest = (req) => {
+    dispatch(seriesActions.updateSeriesRequest(req));
+  };
 
   return {
     seriesMovieList,
     addSeriesMovieRequest,
     updateEpisodeRequest,
     deleteEpisodeRequest,
+    deleteSeriesRequest,
+    updateSeriesRequest,
   };
 };
 
