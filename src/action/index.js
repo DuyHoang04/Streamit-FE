@@ -97,6 +97,9 @@ export const seriesActions = {
   updateEpisodeSeriesFailure: createAction(
     seriesTypes.UPDATE_EPISODE_SERIES_FAILURE
   ),
+  updateSeriesRequest: createAction(seriesTypes.UPDATE_SERIES_REQUEST),
+  updateSeriesSuccess: createAction(seriesTypes.UPDATE_SERIES_SUCCESS),
+  updateSeriesFailure: createAction(seriesTypes.UPDATE_SERIES_FAILURE),
 };
 
 export const mediaActions = {

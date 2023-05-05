@@ -13,11 +13,15 @@ const useMovie = () => {
   const updateMovieRequest = (req) => {
     dispatch(movieActions.updateMovieRequest(req));
   };
+  const deleteMovieRequest = (req) => {
+    dispatch(movieActions.deleteMovieRequest(req));
+  };
 
   return {
     movieList,
     addMovieRequest,
     updateMovieRequest,
+    deleteMovieRequest,
   };
 };
 

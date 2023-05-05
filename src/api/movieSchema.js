@@ -9,6 +9,10 @@ const MOVIE_SCHEMA = {
     url: `${BASE_URL}/movies/update/:movieId`,
     method: METHOD.PUT,
   },
+  DELETE_MOVIE: {
+    url: `${BASE_URL}/movies/delete/:movieId`,
+    method: METHOD.DELETE,
+  },
 };
 
 export default MOVIE_SCHEMA;

@@ -19,15 +19,23 @@ import useSeries from "../../hook/useSeries";
 
 const AdminMoviesPage = () => {
   const { getAllGenresRequest, genresList } = useGenres();
-  const { updateMovieRequest } = useMovie();
-  const { updateEpisodeRequest, deleteEpisodeRequest } = useSeries();
+  const { updateMovieRequest, deleteMovieRequest } = useMovie();
+  const {
+    updateEpisodeRequest,
+    deleteEpisodeRequest,
+    deleteSeriesRequest,
+    updateSeriesRequest,
+  } = useSeries();
   const { mediaList, getMovieAndSeries } = useMedia();
   const [updateMovieModal, setUpdateMovieModal] = useState(false);
   const [addEpisodeModal, setAddEpisodeModal] = useState(false);
   const [updateEpisodeModal, setUpdateEpisodeModal] = useState(false);
   const [deleteEpisodeModal, setDeleteEpisodeModal] = useState(false);
+  const [deleteMovieModal, setDeleteMovieModal] = useState(false);
   const [movieId, setMovieId] = useState(null);
   const [episodeId, setEpisodeId] = useState(null);
+  const [isSeries, setIsSeries] = useState(false);
+  const [episodes, setEpisodes] = useState([]);
   const [bannerImage, setBannerImage] = useState(null);
   const [image, setImage] = useState(null);
   const [video, setVideo] = useState(null);
@@ -121,7 +129,10 @@ const AdminMoviesPage = () => {
           >
             Edit <EditOutlined className="edit_icons" />
           </div>
-          <div onClick={() => {}} className="action__delete">
+          <div
+            onClick={() => openDeleteModal(item._id, item?.isSeries)}
+            className="action__delete"
+          >
             <DeleteOutlined className="delete_icons" />
           </div>
         </div>
@@ -154,7 +165,6 @@ const AdminMoviesPage = () => {
     const formDataMovie = Object.entries(dataMovie).reduce(
       (formData, [key, value]) => {
         if (Array.isArray(value)) {
-          console.log(value);
           formData.append(key, JSON.stringify(value));
         } else {
           formData.append(key, value);
@@ -215,9 +225,92 @@ const AdminMoviesPage = () => {
         episodeId,
       },
     };
+
     await deleteEpisodeRequest(req);
     await setDeleteEpisodeModal(false);
     await setUpdateMovieModal(false);
+  };
+
+  const openDeleteModal = (id, isSeries) => {
+    setMovieId(id);
+    setIsSeries(isSeries || false);
+    setDeleteMovieModal(true);
+  };
+
+  const handleDeleteMovieOrSeries = () => {
+    if (isSeries) {
+      deleteSeriesRequest({
+        paths: {
+          seriesId: movieId,
+        },
+      });
+    } else {
+      deleteMovieRequest({
+        paths: {
+          movieId,
+        },
+      });
+    }
+    setDeleteMovieModal(false);
+  };
+
+  const handleAddEpisode = () => {
+    const dataEpisode = {
+      episodeName: nameEpisodeRef.current.input.value,
+      episodeNumber: episodeNumberRef.current.input.value,
+      video: videoEpisode,
+    };
+    setEpisodes([...episodes, dataEpisode]);
+    setAddEpisodeModal(false);
+  };
+
+  const handleDeleteEpisodeWhenAdd = (name) => {
+    const newEpisode = episodes.filter((item) => item.episodeName !== name);
+    setEpisodes(newEpisode);
+  };
+
+  const handleUpdateSeries = (e) => {
+    e.preventDefault();
+    const defaultGenres = getSelectMovie().genres.map((item) => {
+      return item._id;
+    });
+
+    const formData = new FormData();
+    formData.append("name", nameRef.current.input.value);
+    formData.append(
+      "description",
+      descriptionRef.current.resizableTextArea.textArea.value
+    );
+    formData.append("bannerImage", bannerImage);
+    formData.append("image", image);
+    formData.append("language", languageRef.current.input.value);
+    formData.append("year", yearRef.current.input.value);
+    formData.append("time", hoursRef.current.input.value);
+    if (Array.isArray(genres) && genres.length > 0) {
+      formData.append("genres", JSON.stringify(genres));
+    } else {
+      formData.append("genres", JSON.stringify(defaultGenres));
+    }
+    const newEpisodes = episodes?.map((item) => {
+      return {
+        episodeName: item.episodeName,
+        episodeNumber: item.episodeNumber,
+      };
+    });
+    formData.append("episodes", JSON.stringify(newEpisodes));
+    episodes?.forEach((episode) => {
+      formData.append("video", episode.video);
+    });
+
+    const req = {
+      payload: formData,
+      paths: {
+        seriesId: movieId,
+      },
+    };
+
+    updateSeriesRequest(req);
+    setUpdateMovieModal(false);
   };
 
   return (
@@ -238,7 +331,9 @@ const AdminMoviesPage = () => {
         okText="Update"
         open={updateMovieModal}
         onCancel={() => setUpdateMovieModal(false)}
-        onOk={handleUpdateMovie}
+        onOk={
+          getSelectMovie()?.isSeries ? handleUpdateSeries : handleUpdateMovie
+        }
         cancelButtonProps={{ style: { display: "none" } }}
         className="modal_update"
         width={800} // Chỉnh width tại đây
@@ -303,7 +398,9 @@ const AdminMoviesPage = () => {
                 <div className="episode-list-container">
                   {getSelectMovie()?.episodes.map((item) => (
                     <div className="episode-list-item" key={item.episodeName}>
-                      <img src={`${BASE_URL}/${item.video}`} alt="" />
+                      <video controls>
+                        <source src={`${BASE_URL}/${item.video}`} />
+                      </video>
                       <h1 className="episode-name">{item.episodeName}</h1>
                       <div className="episode-icons">
                         <div
@@ -322,13 +419,40 @@ const AdminMoviesPage = () => {
                     </div>
                   ))}
                 </div>
+                {episodes.length > 0 && (
+                  <div className="title-episode-add">Add Movie</div>
+                )}
+                <div className="episode-add-container">
+                  {episodes.length > 0 &&
+                    episodes.map((item) => (
+                      <div className="episode-list-item" key={item.episodeName}>
+                        <video controls>
+                          <source src={item.video} />
+                        </video>
+                        <h1 className="episode-name">{item.episodeName}</h1>
+                        <div className="episode-icons">
+                          <div
+                            className="icon"
+                            onClick={(e) =>
+                              handleDeleteEpisodeWhenAdd(item.episodeName)
+                            }
+                          >
+                            <RestOutlined />
+                          </div>
+                          <div className="icon-edit">
+                            <EditOutlined />
+                          </div>
+                        </div>
+                      </div>
+                    ))}
+                </div>
                 {/* ADD */}
                 <Modal
                   title="Add Episode"
                   okText="Add"
                   open={addEpisodeModal}
                   onCancel={() => setAddEpisodeModal(false)}
-                  onOk={() => {}}
+                  onOk={handleAddEpisode}
                   cancelButtonProps={{ style: { display: "none" } }}
                   className="custom-modal"
                 >
@@ -383,15 +507,28 @@ const AdminMoviesPage = () => {
                 </Modal>
               </>
             ) : (
-              <DropFile
-                url={video}
-                setFile={setVideo}
-                label="Movie Video"
-                title="Drag your video here"
-              />
+              <>
+                <DropFile
+                  url={video}
+                  setFile={setVideo}
+                  label="Movie Video"
+                  title="Drag your video here"
+                />
+              </>
             )}
           </div>
         </div>
+      </Modal>
+      <Modal
+        title="Warning"
+        okText="Delete"
+        open={deleteMovieModal}
+        onCancel={() => setDeleteMovieModal(false)}
+        onOk={handleDeleteMovieOrSeries}
+        cancelButtonProps={{ style: { display: "none" } }}
+        className="delete-modal"
+      >
+        <h1 className="text-delete">Khi xóa sẽ không thể thu hồi nữa</h1>
       </Modal>
     </>
   );

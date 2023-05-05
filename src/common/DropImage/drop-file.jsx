@@ -8,6 +8,7 @@ import React, {
 import Dropzone from "react-dropzone";
 import "./drop-file.scss";
 import { CloudUploadOutlined } from "@ant-design/icons";
+import { mediaTypes } from "../../utils/actionTypes";
 
 const DropFile = ({ url, label, title, setFile }) => {
   const [mediaUrl, setMediaUrl] = useState(null);

@@ -11,6 +11,8 @@ const seriesReducer = (state = initialState, action) => {
     case seriesTypes.ADD_SERIES_REQUEST:
     case seriesTypes.DELETE_EPISODE_SERIES_REQUEST:
     case seriesTypes.UPDATE_EPISODE_SERIES_REQUEST:
+    case seriesTypes.DELETE_SERIES_REQUEST:
+    case seriesTypes.UPDATE_SERIES_REQUEST:
       return {
         ...state,
         isFetching: true,
@@ -18,6 +20,8 @@ const seriesReducer = (state = initialState, action) => {
     case seriesTypes.ADD_SERIES_SUCCESS:
     case seriesTypes.DELETE_EPISODE_SERIES_SUCCESS:
     case seriesTypes.UPDATE_EPISODE_SERIES_SUCCESS:
+    case seriesTypes.DELETE_SERIES_SUCCESS:
+    case seriesTypes.UPDATE_SERIES_SUCCESS:
       return {
         ...state,
         isFetching: false,
@@ -25,6 +29,8 @@ const seriesReducer = (state = initialState, action) => {
     case seriesTypes.ADD_SERIES_FAILURE:
     case seriesTypes.DELETE_EPISODE_SERIES_FAILURE:
     case seriesTypes.UPDATE_EPISODE_SERIES_FAILURE:
+    case seriesTypes.DELETE_SERIES_FAILURE:
+    case seriesTypes.UPDATE_SERIES_FAILURE:
       return {
         ...state,
         isFetching: true,

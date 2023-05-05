@@ -27,8 +27,21 @@ function* handleUpdateMovie({ payload }) {
   }
 }
 
+function* handleDeleteMovie({ payload }) {
+  try {
+    const { message } = yield movieApi.deleteMovie(payload);
+    yield put(movieActions.deleteMovieSuccess());
+    yield put(mediaActions.getMovieAndSeriesRequest());
+    toastSuccess(message);
+  } catch (error) {
+    yield put(movieActions.deleteMovieFailure(error));
+    toastError("Something went wrong");
+  }
+}
+
 const movieSaga = [
   takeEvery(types.movieTypes.ADD_MOVIE_REQUEST, handleAddMovie),
   takeEvery(types.movieTypes.UPDATE_MOVIE_REQUEST, handleUpdateMovie),
+  takeEvery(types.movieTypes.DELETE_MOVIE_REQUEST, handleDeleteMovie),
 ];
 export default movieSaga;

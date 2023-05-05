@@ -13,6 +13,14 @@ const SERIES_SCHEMA = {
     url: `${BASE_URL}/series/delete-episode/:seriesId`,
     method: METHOD.PUT,
   },
+  DELETE_SERIES: {
+    url: `${BASE_URL}/series/delete/:seriesId`,
+    method: METHOD.DELETE,
+  },
+  UPDATE_SERIES: {
+    url: `${BASE_URL}/series/update/:seriesId`,
+    method: METHOD.PUT,
+  },
 };
 
 export default SERIES_SCHEMA;

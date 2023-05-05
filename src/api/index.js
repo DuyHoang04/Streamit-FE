@@ -21,12 +21,15 @@ export const genresApi = {
 export const movieApi = {
   addMovie: createApi(movieSchema.ADD_MOVIE),
   updateMovie: createApi(movieSchema.UPDATE_MOVIE),
+  deleteMovie: createApi(movieSchema.DELETE_MOVIE),
 };
 
 export const seriesApi = {
   addSeries: createApi(seriesSchema.ADD_SERIES),
   deleteEpisodeSeries: createApi(seriesSchema.DELETE_EPISODE),
   updateEpisodeSeries: createApi(seriesSchema.UPDATE_EPISODE),
+  deleteSeries: createApi(seriesSchema.DELETE_SERIES),
+  updateSeries: createApi(seriesSchema.UPDATE_SERIES),
 };
 
 export const mediaApi = {

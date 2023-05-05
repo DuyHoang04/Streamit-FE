@@ -110,6 +110,8 @@ const AddSeries = () => {
     }
   };
 
+  console.log(episodes);
+
   return (
     <>
       <div className="add-movie-controller">
@@ -159,7 +161,7 @@ const AddSeries = () => {
           <div className="episode-list-container">
             {episodes.map((item) => (
               <div className="episode-list-item" key={item.episodeName}>
-                <img src={URL.createObjectURL(item.video)} alt="" />
+                <video src={URL.createObjectURL(item.video)} alt="" />
                 <h1 className="episode-name">{item.episodeName}</h1>
                 <div className="episode-icons">
                   <div

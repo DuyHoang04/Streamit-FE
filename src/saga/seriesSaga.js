@@ -39,6 +39,29 @@ function* handleUpdateEpisodeSeriesMovie({ payload }) {
   }
 }
 
+function* handleDeleteSeriesMovie({ payload }) {
+  try {
+    const { message } = yield seriesApi.deleteSeries(payload);
+    yield put(seriesActions.deleteSeriesSuccess());
+    yield put(mediaActions.getMovieAndSeriesRequest());
+    toastSuccess(message);
+  } catch (error) {
+    yield put(seriesActions.deleteSeriesFailure(error));
+    toastError("Something went wrong");
+  }
+}
+function* handleUpdateSeriesMovie({ payload }) {
+  try {
+    const { message } = yield seriesApi.updateSeries(payload);
+    yield put(seriesActions.updateSeriesSuccess());
+    yield put(mediaActions.getMovieAndSeriesRequest());
+    toastSuccess(message);
+  } catch (error) {
+    yield put(seriesActions.updateSeriesFailure(error));
+    toastError("Something went wrong");
+  }
+}
+
 const seriesSaga = [
   takeEvery(types.seriesTypes.ADD_SERIES_REQUEST, handleAddSeriesMovie),
   takeEvery(
@@ -49,5 +72,7 @@ const seriesSaga = [
     types.seriesTypes.UPDATE_EPISODE_SERIES_REQUEST,
     handleUpdateEpisodeSeriesMovie
   ),
+  takeEvery(types.seriesTypes.DELETE_SERIES_REQUEST, handleDeleteSeriesMovie),
+  takeEvery(types.seriesTypes.UPDATE_SERIES_REQUEST, handleUpdateSeriesMovie),
 ];
 export default seriesSaga;
