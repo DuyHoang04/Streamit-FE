@@ -10,8 +10,12 @@ const GENRES_SCHEMA = {
     method: METHOD.POST,
   },
   UPDATE_GENRES: {
-    url: `${BASE_URL}/genres/update/:id`,
+    url: `${BASE_URL}/genres/update/:genresId`,
     method: METHOD.PUT,
+  },
+  DELETE_GENRES: {
+    url: `${BASE_URL}/genres/delete/:genresId`,
+    method: METHOD.DELETE,
   },
 };
 

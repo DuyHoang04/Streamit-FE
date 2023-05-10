@@ -21,6 +21,9 @@ const useSeries = () => {
   const updateSeriesRequest = (req) => {
     dispatch(seriesActions.updateSeriesRequest(req));
   };
+  const getAllSeriesRequest = () => {
+    dispatch(seriesActions.getAllSeriesRequest());
+  };
 
   return {
     seriesMovieList,
@@ -29,6 +32,7 @@ const useSeries = () => {
     deleteEpisodeRequest,
     deleteSeriesRequest,
     updateSeriesRequest,
+    getAllSeriesRequest,
   };
 };
 

@@ -39,9 +39,20 @@ function* handleDeleteMovie({ payload }) {
   }
 }
 
+function* handleGetAllMovie() {
+  try {
+    const { data } = yield movieApi.getAllMovie({});
+    yield put(movieActions.getAllMovieSuccess(data));
+  } catch (error) {
+    yield put(movieActions.getAllMovieFailure(error));
+    toastError("Something went wrong");
+  }
+}
+
 const movieSaga = [
   takeEvery(types.movieTypes.ADD_MOVIE_REQUEST, handleAddMovie),
   takeEvery(types.movieTypes.UPDATE_MOVIE_REQUEST, handleUpdateMovie),
   takeEvery(types.movieTypes.DELETE_MOVIE_REQUEST, handleDeleteMovie),
+  takeEvery(types.movieTypes.GET_ALL_MOVIE_REQUEST, handleGetAllMovie),
 ];
 export default movieSaga;

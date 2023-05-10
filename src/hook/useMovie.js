@@ -9,6 +9,9 @@ const useMovie = () => {
   const addMovieRequest = (req) => {
     dispatch(movieActions.addMovieRequest(req));
   };
+  const getAllMovieRequest = () => {
+    dispatch(movieActions.getAllMovieRequest());
+  };
 
   const updateMovieRequest = (req) => {
     dispatch(movieActions.updateMovieRequest(req));
@@ -22,6 +25,7 @@ const useMovie = () => {
     addMovieRequest,
     updateMovieRequest,
     deleteMovieRequest,
+    getAllMovieRequest,
   };
 };
 

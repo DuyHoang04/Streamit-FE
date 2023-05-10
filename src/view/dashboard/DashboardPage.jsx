@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "./dashboard.scss";
 import {
   BarChartOutlined,
@@ -7,22 +7,37 @@ import {
 } from "@ant-design/icons";
 import { Table } from "antd";
 import TitlePageAdmin from "../../common/title-page-admin/title-page-admin";
+import useGenres from "../../hook/useGenres";
+import useSeries from "../../hook/useSeries";
+import useMovie from "../../hook/useMovie";
 
 const DashboardPage = () => {
+  const { genresList, getAllGenresRequest } = useGenres();
+  const { movieList, getAllMovieRequest } = useMovie();
+  const { seriesMovieList, getAllSeriesRequest } = useSeries();
+
+  useEffect(() => {
+    Promise.all([
+      getAllMovieRequest(),
+      getAllGenresRequest(),
+      getAllSeriesRequest(),
+    ]);
+  }, []);
+
   const data = [
     {
       title: "Movie",
-      count: 100,
+      count: movieList?.length,
       icon: <BarChartOutlined />,
     },
     {
-      title: "Movie",
-      count: 100,
+      title: "Series",
+      count: seriesMovieList?.length,
       icon: <BarChartOutlined />,
     },
     {
-      title: "Movie",
-      count: 100,
+      title: "Genres",
+      count: genresList?.length,
       icon: <BarChartOutlined />,
     },
   ];
