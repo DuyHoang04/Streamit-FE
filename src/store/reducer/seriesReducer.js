@@ -13,6 +13,7 @@ const seriesReducer = (state = initialState, action) => {
     case seriesTypes.UPDATE_EPISODE_SERIES_REQUEST:
     case seriesTypes.DELETE_SERIES_REQUEST:
     case seriesTypes.UPDATE_SERIES_REQUEST:
+    case seriesTypes.GET_ALL_SERIES_REQUEST:
       return {
         ...state,
         isFetching: true,
@@ -26,11 +27,18 @@ const seriesReducer = (state = initialState, action) => {
         ...state,
         isFetching: false,
       };
+    case seriesTypes.GET_ALL_SERIES_SUCCESS:
+      return {
+        ...state,
+        isFetching: false,
+        seriesList: action.payload,
+      };
     case seriesTypes.ADD_SERIES_FAILURE:
     case seriesTypes.DELETE_EPISODE_SERIES_FAILURE:
     case seriesTypes.UPDATE_EPISODE_SERIES_FAILURE:
     case seriesTypes.DELETE_SERIES_FAILURE:
     case seriesTypes.UPDATE_SERIES_FAILURE:
+    case seriesTypes.GET_ALL_SERIES_FAILURE:
       return {
         ...state,
         isFetching: true,

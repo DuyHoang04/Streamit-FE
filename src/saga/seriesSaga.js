@@ -61,6 +61,15 @@ function* handleUpdateSeriesMovie({ payload }) {
     toastError("Something went wrong");
   }
 }
+function* handleGetAllSeriesMovie() {
+  try {
+    const { data } = yield seriesApi.getAllSeries({});
+    yield put(seriesActions.getAllSeriesSuccess(data));
+  } catch (error) {
+    yield put(seriesActions.getAllSeriesFailure(error));
+    toastError("Something went wrong");
+  }
+}
 
 const seriesSaga = [
   takeEvery(types.seriesTypes.ADD_SERIES_REQUEST, handleAddSeriesMovie),
@@ -74,5 +83,6 @@ const seriesSaga = [
   ),
   takeEvery(types.seriesTypes.DELETE_SERIES_REQUEST, handleDeleteSeriesMovie),
   takeEvery(types.seriesTypes.UPDATE_SERIES_REQUEST, handleUpdateSeriesMovie),
+  takeEvery(types.seriesTypes.GET_ALL_SERIES_REQUEST, handleGetAllSeriesMovie),
 ];
 export default seriesSaga;

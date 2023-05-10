@@ -8,10 +8,22 @@ const useGenres = () => {
   const getAllGenresRequest = () => {
     dispatch(genresActions.getAllGenresRequest());
   };
+  const addGenresRequest = (req) => {
+    dispatch(genresActions.addGenresRequest(req));
+  };
+  const updateGenresRequest = (req) => {
+    dispatch(genresActions.updateGenresRequest(req));
+  };
+  const deleteGenresRequest = (req) => {
+    dispatch(genresActions.deleteGenresRequest(req));
+  };
 
   return {
     genresList,
     getAllGenresRequest,
+    addGenresRequest,
+    updateGenresRequest,
+    deleteGenresRequest,
   };
 };
 

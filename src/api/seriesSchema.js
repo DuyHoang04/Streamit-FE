@@ -21,6 +21,10 @@ const SERIES_SCHEMA = {
     url: `${BASE_URL}/series/update/:seriesId`,
     method: METHOD.PUT,
   },
+  GET_ALL_SERIES: {
+    url: `${BASE_URL}/series`,
+    method: METHOD.GET,
+  },
 };
 
 export default SERIES_SCHEMA;

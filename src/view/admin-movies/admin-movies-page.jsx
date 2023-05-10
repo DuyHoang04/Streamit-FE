@@ -119,6 +119,15 @@ const AdminMoviesPage = () => {
       render: (time) => <span className="time_movie">{time}hr</span>,
     },
     {
+      title: "Category",
+      width: 100,
+      dataIndex: "isSeries",
+      key: "isSeries",
+      render: (isSeries) => (
+        <span className="category_movie">{isSeries ? "Tv Show" : "Movie"}</span>
+      ),
+    },
+    {
       title: "Action",
       width: 150,
       render: (_, item) => (

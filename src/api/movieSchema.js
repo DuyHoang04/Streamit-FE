@@ -13,6 +13,10 @@ const MOVIE_SCHEMA = {
     url: `${BASE_URL}/movies/delete/:movieId`,
     method: METHOD.DELETE,
   },
+  GET_ALL_MOVIE: {
+    url: `${BASE_URL}/movies`,
+    method: METHOD.GET,
+  },
 };
 
 export default MOVIE_SCHEMA;
