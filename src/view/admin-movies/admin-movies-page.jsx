@@ -26,7 +26,7 @@ const AdminMoviesPage = () => {
     deleteSeriesRequest,
     updateSeriesRequest,
   } = useSeries();
-  const { mediaList, getMovieAndSeries } = useMedia();
+  const {mediaList, getMovieAndSeries } = useMedia();
   const [updateMovieModal, setUpdateMovieModal] = useState(false);
   const [addEpisodeModal, setAddEpisodeModal] = useState(false);
   const [updateEpisodeModal, setUpdateEpisodeModal] = useState(false);
@@ -327,7 +327,7 @@ const AdminMoviesPage = () => {
       <div className="admin_movie">
         <TitlePageAdmin title={"Movie"} />
         <Table
-          lassName="ant-table-content"
+          className="ant-table-content"
           columns={columns}
           dataSource={mediaList}
           scroll={{ x: "max-content", y: 400 }}
