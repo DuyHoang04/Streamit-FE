@@ -2,6 +2,10 @@
   .ant-table-container {
     color: white;
     .ant-table-header {
+      .ant-table-cell {
+        background-color: #222028;
+        color: lightgray;
+      }
     }
     .ant-table-body {
       table {
@@ -14,7 +18,7 @@
               width: 50px;
             }
             .ant-table-cell {
-              background-color: #0b0f29;
+              background-color: #222028;
               .action {
                 display: flex;
                 align-items: center;
@@ -45,13 +49,23 @@
             }
             &:hover {
               .ant-table-cell {
-                background-color: #0b0f29;
+                background-color: #222028;
               }
             }
           }
         }
       }
     }
+  }
+  &:where(.css-dev-only-do-not-override-1vtf12y).ant-table-wrapper
+    .ant-table-tbody
+    > tr
+    > th,
+  :where(.css-dev-only-do-not-override-1vtf12y).ant-table-wrapper
+    .ant-table-tbody
+    > tr
+    > td {
+    border-bottom: 0.5px solid gray;
   }
 }
 
