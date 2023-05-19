@@ -1,40 +1,45 @@
-import { put, takeLatest } from "redux-saga/effects";
-import * as types from "../utils/actionTypes/index";
-import { authApi } from "../api/index";
-import * as loginActions from '../store/reducer/loginReducer'
-import * as registerActions from '../store/reducer/registerReducer'
+import { put, takeEvery } from "redux-saga/effects";
+import { userApi } from "../api/index";
 import { toastSuccess, toastError } from "../utils";
-function* handleGetLogin({ payload }) {
-  const { navigate } = payload
+import { userTypes } from "../utils/actionTypes";
+import { userActions } from "../action";
+
+function* handelGetAllUser({}) {
   try {
-    const res = yield authApi.Login({ payload });
-    yield put(loginActions.getLoginSuccess({
-      accessToken: res.data.accessToken,
-      accountRole: res.data.isAdmin
-    }))
-    navigate("/")
+    const { data } = yield userApi.getAllUser({});
+    yield put(userActions.getAllUserSuccess(data));
   } catch (error) {
-    yield put(loginActions.getLoginFailure(error))
-    yield toastError("Sai tài khoản hoặc mật khẩu")
+    yield put(userActions.getAllUserFailure(error));
+    yield toastError("Something went wrong");
   }
 }
 
-function* handleRegister({ payload }) {
-  const { navigate } = payload
+function* handleUpdateUser({ payload }) {
   try {
-    const res = yield authApi.Register({ payload })
-    yield put(registerActions.getRegisterSuccess(res))
-    yield toastSuccess(res.message)
-    navigate("/login")
+    const { message } = yield userApi.updateUser(payload);
+    yield put(userActions.updateUserSuccess());
+    yield toastSuccess(message);
+    yield put(userActions.getAllUserRequest());
   } catch (error) {
-    yield put(registerActions.getRegisterFailure(error))
-    yield toastError("Trùng tài khoản")
+    yield put(userActions.updateUserFailure(error));
+    yield toastError("Something went wrong");
   }
-
+}
+function* handleDeleteUser({ payload }) {
+  try {
+    const { message } = yield userApi.deleteUser(payload);
+    yield put(userActions.deleteUserSuccess());
+    yield toastSuccess(message);
+    yield put(userActions.getAllUserRequest());
+  } catch (error) {
+    yield put(userActions.deleteUserFailure(error));
+    yield toastError("Something went wrong");
+  }
 }
 
-const Saga = [
-  takeLatest(types.authTypes.LOGIN_REQUEST, handleGetLogin),
-  takeLatest(types.authTypes.REGISTER_REQUEST, handleRegister),
+const userSaga = [
+  takeEvery(userTypes.GET_ALL_USER_REQUEST, handelGetAllUser),
+  takeEvery(userTypes.UPDATE_USER_REQUEST, handleUpdateUser),
+  takeEvery(userTypes.DELETE_USER_REQUEST, handleDeleteUser),
 ];
-export default Saga;
+export default userSaga;

@@ -1,7 +1,21 @@
-import { useSelector } from "react-redux"
+import { useSelector, useDispatch } from "react-redux";
+
+import { userActions } from "../action";
 
 const useUser = () => {
-    const accessToken = useSelector(state => state.userReducer.accessToken)
-    return { accessToken }
-}
-export default useUser
+  const dispatch = useDispatch();
+  const userList = useSelector((state) => state.users.userList);
+
+  const getAllUserRequest = () => {
+    dispatch(userActions.getAllUserRequest());
+  };
+  const updateUserRequest = (req) => {
+    dispatch(userActions.updateUserRequest(req));
+  };
+  const deleteUserRequest = (req) => {
+    dispatch(userActions.deleteUserRequest(req));
+  };
+
+  return { userList, getAllUserRequest, updateUserRequest, deleteUserRequest };
+};
+export default useUser;

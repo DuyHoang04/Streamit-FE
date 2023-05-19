@@ -1,23 +1,43 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { userTypes } from "../../utils/actionTypes";
 
 const initialState = {
   isFetching: false,
-  value: "",
+  userList: [],
+  error: null,
 };
 
-export const userReducer = createSlice({
-  name: "user",
-  initialState,
-  getLoginRequest(state, action) {
-    state.isFetching = true;
-  },
-  getLoginSuccess(state, action) {
-    (state.isFetching = false), (state.value = action.payload);
-  },
-  getLoginFailure: {},
-});
+const userReducer = (state = initialState, action) => {
+  switch (action.type) {
+    case userTypes.GET_ALL_USER_REQUEST:
+    case userTypes.UPDATE_USER_REQUEST:
+    case userTypes.DELETE_USER_REQUEST:
+      return {
+        ...state,
+        isFetching: true,
+      };
+    case userTypes.GET_ALL_USER_SUCCESS:
+      return {
+        ...state,
+        isFetching: false,
+        userList: action.payload,
+      };
+    case userTypes.UPDATE_USER_SUCCESS:
+    case userTypes.DELETE_USER_SUCCESS:
+      return {
+        ...state,
+        isFetching: false,
+      };
+    case userTypes.GET_ALL_USER_FAILURE:
+    case userTypes.UPDATE_USER_FAILURE:
+    case userTypes.DELETE_USER_FAILURE:
+      return {
+        ...state,
+        isFetching: false,
+        error: action.payload,
+      };
+    default:
+      return state;
+  }
+};
 
-// Action creators are generated for each case reducer function
-export const {} = userReducer.actions;
-
-export default userReducer.reducer;
+export default userReducer;

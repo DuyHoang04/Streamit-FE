@@ -1,0 +1,56 @@
+.admin_user {
+  .ant-table-container {
+    color: white;
+    .ant-table-header {
+    }
+    .ant-table-body {
+      table {
+        border-bottom: 0.5px solid #e0d5d5;
+        .ant-table-tbody {
+          tr {
+            font-size: 17px;
+            img {
+              height: 50px;
+              width: 50px;
+            }
+            .ant-table-cell {
+              background-color: #0b0f29;
+              .action {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                gap: 1rem;
+                .action__edit {
+                  color: #3c5263;
+                  background-color: #0b0f29;
+                  border: 1px solid gray;
+                  padding: 0.5rem 1.5rem;
+                  border-radius: 5px;
+                  cursor: pointer;
+                  .edit_icons {
+                    margin-left: 0.25rem;
+                    color: #22c55e;
+                  }
+                }
+                .action__delete {
+                  cursor: pointer;
+                  background-color: var(--primary-color);
+                  border-radius: 5px;
+                  padding: 0.1rem 0.5rem;
+                  .delete_icons {
+                    color: var(--white);
+                  }
+                }
+              }
+            }
+            &:hover {
+              .ant-table-cell {
+                background-color: #0b0f29;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
