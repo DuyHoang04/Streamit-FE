@@ -119,3 +119,15 @@ export const mediaActions = {
     mediaTypes.GET_MOVIE_AND_SERIES_FAILURE
   ),
 };
+
+export const userActions = {
+  getAllUserRequest: createAction(userTypes.GET_ALL_USER_REQUEST),
+  getAllUserSuccess: createAction(userTypes.GET_ALL_USER_SUCCESS),
+  getAllUserFailure: createAction(userTypes.GET_ALL_USER_FAILURE),
+  updateUserRequest: createAction(userTypes.UPDATE_USER_REQUEST),
+  updateUserSuccess: createAction(userTypes.UPDATE_USER_SUCCESS),
+  updateUserFailure: createAction(userTypes.UPDATE_USER_FAILURE),
+  deleteUserRequest: createAction(userTypes.DELETE_USER_REQUEST),
+  deleteUserSuccess: createAction(userTypes.DELETE_USER_SUCCESS),
+  deleteUserFailure: createAction(userTypes.DELETE_USER_FAILURE),
+};

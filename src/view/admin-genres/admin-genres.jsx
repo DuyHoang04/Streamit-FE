@@ -126,8 +126,10 @@ const AdminGenresPage = () => {
   };
   const handleUpdateGenres = () => {
     const dataGenres = {
-      name: nameRef.current.input.value,
-      description: descriptionRef.current.resizableTextArea.textArea.value,
+      name: nameRef.current.input.value || getGenresSelected().name,
+      description:
+        descriptionRef.current.resizableTextArea.textArea.value ||
+        getGenresSelected().description,
     };
     const req = {
       payload: dataGenres,
@@ -196,7 +198,7 @@ const AdminGenresPage = () => {
         onCancel={() => setUpdateGenresModal(false)}
         onOk={handleUpdateGenres}
         cancelButtonProps={{ style: { display: "none" } }}
-        className="custom-modal"
+        className="modal_update"
       >
         <InputCustom
           label="Name"

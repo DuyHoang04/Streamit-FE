@@ -1,13 +1,13 @@
 import { all } from "redux-saga/effects";
-import Saga from "./userSaga";
 import genresSaga from "./genresSaga";
 import movieSaga from "./movieSaga";
 import seriesSaga from "./seriesSaga";
 import mediaSaga from "./mediaSaga";
+import userSaga from "./userSaga";
 
 export default function* rootSaga() {
   yield all([
-    ...Saga,
+    ...userSaga,
     ...genresSaga,
     ...movieSaga,
     ...seriesSaga,

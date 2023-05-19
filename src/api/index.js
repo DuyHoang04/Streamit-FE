@@ -4,6 +4,7 @@ import genresSchema from "./genresSchema";
 import movieSchema from "./movieSchema";
 import seriesSchema from "./seriesSchema";
 import mediaSchema from "./mediaSchema";
+import userSchema from "./userSchema";
 
 export const authApi = {
   Login: createApi(authSchema.LOGIN),
@@ -33,6 +34,12 @@ export const seriesApi = {
   deleteSeries: createApi(seriesSchema.DELETE_SERIES),
   updateSeries: createApi(seriesSchema.UPDATE_SERIES),
   getAllSeries: createApi(seriesSchema.GET_ALL_SERIES),
+};
+
+export const userApi = {
+  getAllUser: createApi(userSchema.GET_ALL_USER),
+  deleteUser: createApi(userSchema.DELETE_USER),
+  updateUser: createApi(userSchema.UPDATE_USER),
 };
 
 export const mediaApi = {

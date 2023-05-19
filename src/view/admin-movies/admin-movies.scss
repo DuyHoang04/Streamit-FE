@@ -54,6 +54,7 @@
     }
   }
 }
+
 .modal_update {
   .add-movie-controller {
     margin-bottom: 0;
@@ -136,6 +137,7 @@
   .ant-modal-footer {
     margin-top: 20px;
     .ant-btn {
+      margin-inline-start: none;
       color: var(--white);
       background-color: var(--primary-color);
       width: 100%;
@@ -146,6 +148,12 @@
       font-weight: 600;
       font-size: 20px;
     }
+  }
+  &:where(.css-dev-only-do-not-override-1vtf12y).ant-modal
+    .ant-modal-footer
+    .ant-btn
+    + .ant-btn:not(.ant-dropdown-trigger) {
+    margin-inline-start: 0;
   }
 }
 

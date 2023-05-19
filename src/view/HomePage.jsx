@@ -4,13 +4,16 @@ import ButtonCustom from "../common/button/buttonCustom";
 
 export default function HomePage() {
   const [count, setCount] = useState(0);
-  useEffect(() => {}, []);
+  useEffect(() => {
+    if (count > 3) {
+      setCount(0);
+    }
+  }, [count]);
   return (
-    <div>
-      <p>You clicked {count} times</p>
-      <button onClick={() => setCount(count + 1)}>Count</button>
-      <InputCustom label="Test" large outline />
-      <ButtonCustom large>Hello</ButtonCustom>
-    </div>
+    <>
+      <p style={{ marginBottom: "10px" }}>You clicked {count} times</p>
+
+      <ButtonCustom onClick={() => setCount(count + 1)}>Count</ButtonCustom>
+    </>
   );
 }

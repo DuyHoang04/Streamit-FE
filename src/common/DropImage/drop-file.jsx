@@ -8,7 +8,6 @@ import React, {
 import Dropzone from "react-dropzone";
 import "./drop-file.scss";
 import { CloudUploadOutlined } from "@ant-design/icons";
-import { mediaTypes } from "../../utils/actionTypes";
 
 const DropFile = ({ url, label, title, setFile }) => {
   const [mediaUrl, setMediaUrl] = useState(null);
@@ -19,7 +18,7 @@ const DropFile = ({ url, label, title, setFile }) => {
     if (!url) {
       setMediaUrl("");
     }
-  }, [url]);
+  }, []);
 
   const handleDrop = useCallback(
     (acceptedFiles) => {
@@ -28,10 +27,12 @@ const DropFile = ({ url, label, title, setFile }) => {
       setMediaUrl(mediaUrl);
       setFile(acceptedFiles[0]);
 
-      if (file.type.includes("image")) {
-        setMediaType("image");
-      } else if (file.type.includes("video")) {
-        setMediaType("video");
+      if (file.type) {
+        if (file.type.includes("image")) {
+          setMediaType("image");
+        } else if (file.type.includes("video")) {
+          setMediaType("video");
+        }
       }
     },
     [setFile]
@@ -49,7 +50,7 @@ const DropFile = ({ url, label, title, setFile }) => {
         <Dropzone
           ref={dropzoneRef}
           onDrop={handleDrop}
-          accept="image/*,video/*"
+          accept={["image/*", "video/*"]}
         >
           {({ getRootProps, getInputProps }) => (
             <div {...getRootProps()}>
@@ -65,7 +66,10 @@ const DropFile = ({ url, label, title, setFile }) => {
             <img src={mediaUrl} alt="Uploaded image" />
           ) : (
             <video controls>
-              <source src={mediaUrl} type={mediaUrl.type} />
+              <source
+                src={mediaUrl}
+                type={mediaType === "video" ? "video/*" : ""}
+              />
             </video>
           )}
         </>
