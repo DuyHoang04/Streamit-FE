@@ -1,0 +1,52 @@
+body {
+    color: #d1d0cf;
+  }
+  .homePage_background {
+    background-color: #141414;
+  }
+  
+  #navbar {
+    background-color: #372c284a;
+    width: 100%;
+  }
+  
+  .navbar_logo {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  
+  .navbar_container {
+    margin: auto;
+    width: 85%;
+  }
+  
+  .navbar_menuItem {
+    list-style: none;
+    display: flex;
+    gap: 4rem;
+    color: #333;
+    font-size: 2rem;
+    align-items: center;
+  }
+  
+  .navbar_wrap {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    padding: 15px;
+  }
+  
+  .navbar_menuRight {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+  }
+  .navbar_item {
+    transition: color 0.5s;
+    color: #d1d0cf;
+  }
+  
+  .navbar_item:hover {
+    color: red;
+  }
