@@ -48,11 +48,21 @@ function* handleGetAllMovie() {
     toastError("Something went wrong");
   }
 }
+function* handleGetDetailMovie({ payload }) {
+  try {
+    const { data } = yield movieApi.getDetailMovie(payload);
+    yield put(movieActions.getDetailMovieSuccess(data));
+  } catch (error) {
+    yield put(movieActions.getDetailMovieFailure(error));
+    toastError("Something went wrong");
+  }
+}
 
 const movieSaga = [
   takeEvery(types.movieTypes.ADD_MOVIE_REQUEST, handleAddMovie),
   takeEvery(types.movieTypes.UPDATE_MOVIE_REQUEST, handleUpdateMovie),
   takeEvery(types.movieTypes.DELETE_MOVIE_REQUEST, handleDeleteMovie),
   takeEvery(types.movieTypes.GET_ALL_MOVIE_REQUEST, handleGetAllMovie),
+  takeEvery(types.movieTypes.GET_DETAIL_MOVIE_REQUEST, handleGetDetailMovie),
 ];
 export default movieSaga;

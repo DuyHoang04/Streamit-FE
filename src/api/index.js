@@ -25,6 +25,7 @@ export const movieApi = {
   updateMovie: createApi(movieSchema.UPDATE_MOVIE),
   deleteMovie: createApi(movieSchema.DELETE_MOVIE),
   getAllMovie: createApi(movieSchema.GET_ALL_MOVIE),
+  getDetailMovie: createApi(movieSchema.GET_DETAIL_MOVIE),
 };
 
 export const seriesApi = {
