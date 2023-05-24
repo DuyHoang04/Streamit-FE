@@ -10,6 +10,9 @@ const routes = {
   movies_genres: "/admin/movies_genres",
   add_movie: "/admin/add_movie",
   users: "/admin/users",
+
+  // USER
+  detail_movie: "/detail_movie/:movieId",
 };
 
 export default routes;

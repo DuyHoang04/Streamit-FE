@@ -28,6 +28,10 @@ const publicRoutes = [
     path: config.routes.errorpage,
     element: <pages.ErrorPage />,
   },
+  {
+    path: config.routes.detail_movie,
+    element: <pages.MovieDetailPage />,
+  },
 
   // ADMIN
   {

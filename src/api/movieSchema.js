@@ -17,6 +17,10 @@ const MOVIE_SCHEMA = {
     url: `${BASE_URL}/movies`,
     method: METHOD.GET,
   },
+  GET_DETAIL_MOVIE: {
+    url: `${BASE_URL}/movies/find/:movieId`,
+    method: METHOD.GET,
+  },
 };
 
 export default MOVIE_SCHEMA;
