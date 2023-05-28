@@ -57,6 +57,18 @@ function* handleGetDetailMovie({ payload }) {
     toastError("Something went wrong");
   }
 }
+function* handleCommentMovie({ payload }) {
+  try {
+    const movieId = payload.paths.movieId;
+    const { message } = yield movieApi.commentMovie(payload);
+    yield put(movieActions.commentMovieSuccess());
+    yield toastSuccess(message);
+    yield put(movieActions.getDetailMovieRequest({ paths: { movieId } }));
+  } catch (error) {
+    yield put(movieActions.getDetailMovieFailure(error));
+    toastError("Something went wrong");
+  }
+}
 
 const movieSaga = [
   takeEvery(types.movieTypes.ADD_MOVIE_REQUEST, handleAddMovie),
@@ -64,5 +76,6 @@ const movieSaga = [
   takeEvery(types.movieTypes.DELETE_MOVIE_REQUEST, handleDeleteMovie),
   takeEvery(types.movieTypes.GET_ALL_MOVIE_REQUEST, handleGetAllMovie),
   takeEvery(types.movieTypes.GET_DETAIL_MOVIE_REQUEST, handleGetDetailMovie),
+  takeEvery(types.movieTypes.COMMENT_MOVIE_REQUEST, handleCommentMovie),
 ];
 export default movieSaga;

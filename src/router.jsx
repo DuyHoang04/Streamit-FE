@@ -10,6 +10,8 @@ import * as pages from "./view/index";
 import { AppstoreOutlined } from "@ant-design/icons";
 import PageLayout from "./layout";
 import ProtectedComponent from "./layout/protected-components/protected-component";
+import Navbar from "./view/homePage/navbar/navbar";
+import LayoutNavBar from "./layout/layout-navbar/layout_navbar";
 
 const publicRoutes = [
   {
@@ -76,13 +78,16 @@ const Router = () => {
   return (
     <Routes>
       {publicRoutes.map((route, idx) => {
-        const Layout = route.needShowSideMenu ? PageLayout : Fragment;
+        const Layout = route.needShowSideMenu ? PageLayout : LayoutNavBar;
+
         return (
-          <Route
-            key={idx}
-            path={route.path}
-            element={<Layout>{route.element}</Layout>}
-          />
+          <>
+            <Route
+              key={idx}
+              path={route.path}
+              element={<Layout>{route.element}</Layout>}
+            />
+          </>
         );
       })}
     </Routes>

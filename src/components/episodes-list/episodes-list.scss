@@ -1,0 +1,60 @@
+.episodes_list {
+  margin-top: 100px;
+
+  .title {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    h1 {
+      min-width: 50%;
+      display: inline-block;
+      font-weight: 700;
+      color: lightgray;
+      line-height: 100px;
+      text-transform: uppercase;
+      min-width: 1000px;
+      margin: 20px 0 0;
+      font-size: 22px;
+    }
+    .buttonContainer {
+      display: flex;
+      align-items: center;
+      gap: 2rem;
+      button {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        background-color: transparent;
+        border: none;
+        outline: none;
+        text-transform: uppercase;
+        font-weight: 600;
+        color: rgb(168, 165, 165);
+        cursor: pointer;
+        transition: color 0.3s ease;
+        &:hover {
+          color: var(--primary-color);
+        }
+      }
+    }
+  }
+
+  .slider {
+    .slider-container {
+      display: flex;
+      overflow-x: hidden;
+      scroll-behavior: smooth;
+      .slider-track {
+        display: flex;
+        transition: transform 0.5s ease;
+        .cart-episode {
+          flex: 0 0 250px;
+          margin-right: 2.5rem;
+          .cardEpisodes {
+            width: 300px;
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,16 +1,52 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import "./detail-review.scss";
 import InputCustom from "../../common/input/InputCustom";
 import ButtonCustom from "../../common/button/buttonCustom";
+import { Rate, Pagination } from "antd";
+import { validateData } from "../../utils";
+import { toast } from "react-hot-toast";
+import { format } from "timeago.js";
 
-const DetailReview = ({ data }) => {
+const DetailReview = ({ data, handleAddComment }) => {
   const detailTabs = ["Description", "Reviews"];
   const [indexTab, setIndexTab] = useState(0);
   const [changeContent, setChangeContent] = useState(false);
+  const [currentPage, setCurrentPage] = useState(1);
+  const nameReviewRef = useRef();
+  const emailReviewRef = useRef();
+  const ratingReviewRef = useRef();
+  const commentRef = useRef();
+
+  // limit va total page review
+  const totalReview = data?.reviews?.length;
+  const limitReview = 5;
 
   const handleChange = (index, title) => {
     setIndexTab(index);
     title === "Description" ? setChangeContent(false) : setChangeContent(true);
+  };
+
+  const handleCommentMovie = () => {
+    const dataComment = {
+      name: nameReviewRef.current.input.value,
+      rating: ratingReviewRef.current.value,
+      comment: commentRef.current.resizableTextArea.textArea.value,
+    };
+    if (validateData(dataComment)) {
+      handleAddComment(dataComment);
+    } else {
+      toast.error("Ghi day du");
+    }
+  };
+
+  const handlePageChange = (page, pageSize) => {
+    setCurrentPage(page);
+  };
+
+  const getDataReview = () => {
+    const startIndex = (currentPage - 1) * limitReview;
+    const endIndex = startIndex + limitReview;
+    return data?.reviews?.slice(startIndex, endIndex);
   };
 
   return (
@@ -42,7 +78,7 @@ const DetailReview = ({ data }) => {
               </div>
               <div className="detailTabs_reviewCreate-rating">
                 <h1>Rating</h1>
-                <select name="rating" onChange={() => {}}>
+                <select name="rating" ref={ratingReviewRef}>
                   <option value="">Select...</option>
                   <option value="1">1 - Poor</option>
                   <option value="2">2 - Fair</option>
@@ -53,41 +89,52 @@ const DetailReview = ({ data }) => {
               </div>
               <div className="detailTabs_review-info">
                 <div className="detailTabs_reviewCreate-name">
-                  <InputCustom label="Name" large />
+                  <InputCustom label="Name" large ref={nameReviewRef} />
                 </div>
                 <div className="detailTabs_reviewCreate-email">
-                  <InputCustom label="Email" large />
+                  <InputCustom label="Email" large ref={emailReviewRef} />
                 </div>
               </div>
               <div className="detailTabs_reviewCreate-comment">
-                <InputCustom label="Comment" isTextarea large />
+                <InputCustom
+                  label="Comment"
+                  isTextarea
+                  large
+                  ref={commentRef}
+                />
               </div>
               <div className="detailTabs_reviewCreate-btn">
-                <ButtonCustom large>Submit</ButtonCustom>
+                <ButtonCustom large onClick={handleCommentMovie}>
+                  Submit
+                </ButtonCustom>
               </div>
             </div>
-            {data?.reviews.length > 0 ? (
-              <div className="detailTabs_reviewCmtContainer">
-                {data?.reviews?.map((item, index) => (
-                  <div key={index} className="detailTabs_reviewCmt">
-                    <div className="detailTabs_reviewCmt-name">
-                      {item?.username}
+            {getDataReview().length > 0 ? (
+              <div className="detailTabs_reviewCmt">
+                <div className="detailTabs_reviewCmtContainer">
+                  {getDataReview()?.map((item, index) => (
+                    <div key={index} className="detailTabs_reviewCmt">
+                      <div className="detailTabs_reviewCmt-name">
+                        {item?.name}
+                      </div>
+                      <div className="detailTabs_reviewCmt-rating">
+                        <Rate disabled value={item?.rating} />
+                      </div>
+                      <div className="detailTabs_reviewCmt-time">
+                        {format(item?.createdAt)}
+                      </div>
+                      <div className="detailTabs_reviewCmt-decs">
+                        <p>{item?.comment}</p>
+                      </div>
                     </div>
-                    <div className="detailTabs_reviewCmt-rating">
-                      <Rating
-                        name="half-rating-read"
-                        defaultValue={Number(item?.rating)}
-                        readOnly
-                      />
-                    </div>
-                    <div className="detailTabs_reviewCmt-time">
-                      {format(item?.createdAt)}
-                    </div>
-                    <div className="detailTabs_reviewCmt-decs">
-                      <p>{item?.comment}</p>
-                    </div>
-                  </div>
-                ))}
+                  ))}
+                </div>
+                <Pagination
+                  current={currentPage}
+                  pageSize={limitReview} // số lượng review trong 1 trang
+                  total={totalReview} // tổng số review
+                  onChange={handlePageChange}
+                />
               </div>
             ) : (
               <h1 className="empty">There are no comment yet.</h1>
