@@ -24,6 +24,9 @@ const useMovie = () => {
   const getDetailMovieRequest = (req) => {
     dispatch(movieActions.getDetailMovieRequest(req));
   };
+  const commentMovieRequest = (req) => {
+    dispatch(movieActions.commentMovieRequest(req));
+  };
 
   return {
     movieList,
@@ -33,6 +36,7 @@ const useMovie = () => {
     deleteMovieRequest,
     getAllMovieRequest,
     getDetailMovieRequest,
+    commentMovieRequest,
   };
 };
 

@@ -26,6 +26,7 @@ export const movieApi = {
   deleteMovie: createApi(movieSchema.DELETE_MOVIE),
   getAllMovie: createApi(movieSchema.GET_ALL_MOVIE),
   getDetailMovie: createApi(movieSchema.GET_DETAIL_MOVIE),
+  commentMovie: createApi(movieSchema.COMMENT_MOVIE),
 };
 
 export const seriesApi = {
@@ -35,6 +36,8 @@ export const seriesApi = {
   deleteSeries: createApi(seriesSchema.DELETE_SERIES),
   updateSeries: createApi(seriesSchema.UPDATE_SERIES),
   getAllSeries: createApi(seriesSchema.GET_ALL_SERIES),
+  getDetailSeries: createApi(seriesSchema.GET_DETAIL_SERIES),
+  commentSeries: createApi(seriesSchema.COMMENT_SERIES),
 };
 
 export const userApi = {

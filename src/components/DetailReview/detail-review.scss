@@ -51,48 +51,55 @@
     display: flex;
     align-items: flex-start;
     gap: 2rem;
-    .detailTabs_reviewCmtContainer,
-    .empty {
-      color: white;
+    .detailTabs_reviewCmt {
       width: 50%;
-      display: flex;
-      align-items: flex-start;
-      flex-direction: column-reverse;
-      gap: 1.5rem;
-      .detailTabs_reviewCmt {
+      .detailTabs_reviewCmtContainer,
+      .empty {
+        color: white;
         width: 100%;
         display: flex;
         align-items: flex-start;
-        flex-direction: column;
-        gap: 8px;
-        border-radius: 4px;
-        box-shadow: #7d7a7a 0px 2px 4px 0px;
-        color: #212529;
-        font-size: 17px;
-        line-height: 25.5px;
-        margin: 0px 0px 16px;
-        padding: 16px;
-        .detailTabs_reviewCmt-name {
-          color: #212529;
-          font-size: 17px;
-          font-weight: 700;
-          line-height: 25.5px;
-        }
-        .detailTabs_reviewCmt-decs {
+        flex-direction: column-reverse;
+        gap: 1.5rem;
+        .detailTabs_reviewCmt {
           width: 100%;
-          height: auto;
-          background-color: #cff4fc;
+          display: flex;
+          align-items: flex-start;
+          flex-direction: column;
+          gap: 8px;
           border-radius: 4px;
-          border: 1px solid #b6effb;
-          color: #055160;
+          box-shadow: #7d7a7a 0px 2px 4px 0px;
+          color: white;
           font-size: 17px;
           line-height: 25.5px;
-          margin: 16px 0px;
+          margin: 0px 0px 16px;
           padding: 16px;
-          white-space: wrap;
+          .detailTabs_reviewCmt-name {
+            color: white;
+            font-size: 17px;
+            font-weight: 700;
+            line-height: 25.5px;
+          }
+          .ant-rate {
+            color: var(--primary-color);
+          }
+          .detailTabs_reviewCmt-decs {
+            width: 100%;
+            height: auto;
+            background-color: #cff4fc;
+            border-radius: 4px;
+            border: 1px solid #b6effb;
+            color: #055160;
+            font-size: 17px;
+            line-height: 25.5px;
+            margin: 16px 0px;
+            padding: 16px;
+            white-space: wrap;
+          }
         }
       }
     }
+
     .detailTabs_reviewCreate {
       width: 50%;
       display: flex;
@@ -159,6 +166,9 @@
       flex-direction: column;
       .detailTabs_reviewCreate,
       .detailTabs_reviewCmtContainer {
+        width: 100%;
+      }
+      .detailTabs_reviewCmt {
         width: 100%;
       }
     }

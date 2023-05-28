@@ -71,6 +71,29 @@ function* handleGetAllSeriesMovie() {
   }
 }
 
+function* handleGetDetailSeriesMovie({ payload }) {
+  try {
+    const { data } = yield seriesApi.getDetailSeries(payload);
+    yield put(seriesActions.getDetailSeriesSuccess(data));
+  } catch (error) {
+    yield put(seriesActions.getDetailSeriesFailure(error));
+    toastError("Something went wrong");
+  }
+}
+
+function* handleCommentSeriesMovie({ payload }) {
+  try {
+    const seriesId = payload.paths.seriesId;
+    const { message } = yield seriesApi.commentSeries(payload);
+    yield put(seriesActions.commentSeriesSuccess());
+    toastSuccess(message);
+    yield put(seriesActions.getDetailSeriesRequest({ paths: { seriesId } }));
+  } catch (error) {
+    yield put(seriesActions.commentSeriesFailure(error));
+    toastError("Something went wrong");
+  }
+}
+
 const seriesSaga = [
   takeEvery(types.seriesTypes.ADD_SERIES_REQUEST, handleAddSeriesMovie),
   takeEvery(
@@ -84,5 +107,10 @@ const seriesSaga = [
   takeEvery(types.seriesTypes.DELETE_SERIES_REQUEST, handleDeleteSeriesMovie),
   takeEvery(types.seriesTypes.UPDATE_SERIES_REQUEST, handleUpdateSeriesMovie),
   takeEvery(types.seriesTypes.GET_ALL_SERIES_REQUEST, handleGetAllSeriesMovie),
+  takeEvery(
+    types.seriesTypes.GET_DETAIL_SERIES_REQUEST,
+    handleGetDetailSeriesMovie
+  ),
+  takeEvery(types.seriesTypes.COMMENT_SERIES_REQUEST, handleCommentSeriesMovie),
 ];
 export default seriesSaga;

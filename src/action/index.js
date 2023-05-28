@@ -60,6 +60,9 @@ export const movieActions = {
   deleteMovieRequest: createAction(movieTypes.DELETE_MOVIE_REQUEST),
   deleteMovieSuccess: createAction(movieTypes.DELETE_MOVIE_SUCCESS),
   deleteMovieFailure: createAction(movieTypes.DELETE_MOVIE_FAILURE),
+  commentMovieRequest: createAction(movieTypes.COMMENT_MOVIE_REQUEST),
+  commentMovieSuccess: createAction(movieTypes.COMMENT_MOVIE_SUCCESS),
+  commentMovieFailure: createAction(movieTypes.COMMENT_MOVIE_FAILURE),
 };
 
 export const seriesActions = {
@@ -106,6 +109,10 @@ export const seriesActions = {
   updateSeriesRequest: createAction(seriesTypes.UPDATE_SERIES_REQUEST),
   updateSeriesSuccess: createAction(seriesTypes.UPDATE_SERIES_SUCCESS),
   updateSeriesFailure: createAction(seriesTypes.UPDATE_SERIES_FAILURE),
+
+  commentSeriesRequest: createAction(seriesTypes.COMMENT_SERIES_REQUEST),
+  commentSeriesSuccess: createAction(seriesTypes.COMMENT_SERIES_SUCCESS),
+  commentSeriesFailure: createAction(seriesTypes.COMMENT_SERIES_FAILURE),
 };
 
 export const mediaActions = {

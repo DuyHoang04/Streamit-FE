@@ -21,6 +21,10 @@ const MOVIE_SCHEMA = {
     url: `${BASE_URL}/movies/find/:movieId`,
     method: METHOD.GET,
   },
+  COMMENT_MOVIE: {
+    url: `${BASE_URL}/movies/review/:movieId`,
+    method: METHOD.POST,
+  },
 };
 
 export default MOVIE_SCHEMA;
