@@ -9,11 +9,13 @@ const initialState = {
 const authReducer = (state = initialState, action) => {
   switch (action.type) {
     case authTypes.REGISTER_REQUEST:
+    case authTypes.LOGIN_REQUEST:
       return {
         ...state,
         isFetching: true,
       };
     case authTypes.REGISTER_SUCCESS:
+    case authTypes.LOGIN_SUCCESS:
       return {
         ...state,
         isFetching: false,
@@ -21,6 +23,7 @@ const authReducer = (state = initialState, action) => {
       };
 
     case authTypes.REGISTER_FAILURE:
+    case authTypes.LOGIN_FAILURE:
       return {
         ...state,
         isFetching: true,

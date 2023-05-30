@@ -1,8 +1,10 @@
 import { useDispatch } from "react-redux";
 import { authActions } from "../action";
+import Cookies from "js-cookie";
 
 const useAuth = () => {
   const dispatch = useDispatch();
+  const accessToken = Cookies.get("access_token") || "";
 
   const registerRequest = (req) => {
     dispatch(authActions.registerRequest(req));
@@ -14,6 +16,7 @@ const useAuth = () => {
   return {
     registerRequest,
     loginRequest,
+    accessToken,
   };
 };
 

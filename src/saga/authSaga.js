@@ -3,6 +3,7 @@ import * as types from "../utils/actionTypes/index";
 import { authApi, genresApi } from "../api/index";
 import { authActions, genresActions } from "../action/index";
 import { toastError, toastSuccess } from "../utils";
+import Cookies from "js-cookie";
 
 function* handleRegister({ payload }) {
   const { navigate, reqRegister } = payload;
@@ -20,8 +21,10 @@ function* handleRegister({ payload }) {
 function* handleLogin({ payload }) {
   const { navigate, reqLogin } = payload;
   try {
-    const { isAdmin } = yield authApi.Login(reqLogin);
-    yield put(authActions.loginSuccess(isAdmin));
+    const { data } = yield authApi.Login(reqLogin);
+    console.log(data.isAdmin);
+    yield put(authActions.loginSuccess(data.isAdmin));
+    yield Cookies.set("access_token", data.accessToken);
     navigate("/");
   } catch (error) {
     yield put(authActions.loginFailure(error));
