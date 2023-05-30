@@ -17,6 +17,7 @@ const seriesReducer = (state = initialState, action) => {
     case seriesTypes.GET_ALL_SERIES_REQUEST:
     case seriesTypes.GET_DETAIL_SERIES_REQUEST:
     case seriesTypes.COMMENT_SERIES_REQUEST:
+    case seriesTypes.LIKE_SERIES_REQUEST:
       return {
         ...state,
         isFetching: true,
@@ -27,6 +28,7 @@ const seriesReducer = (state = initialState, action) => {
     case seriesTypes.DELETE_SERIES_SUCCESS:
     case seriesTypes.UPDATE_SERIES_SUCCESS:
     case seriesTypes.COMMENT_SERIES_SUCCESS:
+    case seriesTypes.LIKE_SERIES_SUCCESS:
       return {
         ...state,
         isFetching: false,
@@ -52,6 +54,7 @@ const seriesReducer = (state = initialState, action) => {
     case seriesTypes.GET_ALL_SERIES_FAILURE:
     case seriesTypes.GET_DETAIL_SERIES_FAILURE:
     case seriesTypes.COMMENT_SERIES_FAILURE:
+    case seriesTypes.LIKE_SERIES_FAILURE:
       return {
         ...state,
         isFetching: true,

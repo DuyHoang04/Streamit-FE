@@ -63,6 +63,9 @@ export const movieActions = {
   commentMovieRequest: createAction(movieTypes.COMMENT_MOVIE_REQUEST),
   commentMovieSuccess: createAction(movieTypes.COMMENT_MOVIE_SUCCESS),
   commentMovieFailure: createAction(movieTypes.COMMENT_MOVIE_FAILURE),
+  likeMovieRequest: createAction(movieTypes.LIKE_MOVIE_REQUEST),
+  likeMovieSuccess: createAction(movieTypes.LIKE_MOVIE_SUCCESS),
+  likeMovieFailure: createAction(movieTypes.LIKE_MOVIE_FAILURE),
 };
 
 export const seriesActions = {
@@ -113,6 +116,10 @@ export const seriesActions = {
   commentSeriesRequest: createAction(seriesTypes.COMMENT_SERIES_REQUEST),
   commentSeriesSuccess: createAction(seriesTypes.COMMENT_SERIES_SUCCESS),
   commentSeriesFailure: createAction(seriesTypes.COMMENT_SERIES_FAILURE),
+
+  likeSeriesRequest: createAction(seriesTypes.LIKE_SERIES_REQUEST),
+  likeSeriesSuccess: createAction(seriesTypes.LIKE_SERIES_SUCCESS),
+  likeSeriesFailure: createAction(seriesTypes.LIKE_SERIES_FAILURE),
 };
 
 export const mediaActions = {
@@ -137,4 +144,13 @@ export const userActions = {
   deleteUserRequest: createAction(userTypes.DELETE_USER_REQUEST),
   deleteUserSuccess: createAction(userTypes.DELETE_USER_SUCCESS),
   deleteUserFailure: createAction(userTypes.DELETE_USER_FAILURE),
+  getLikedMovieUserRequest: createAction(
+    userTypes.GET_LIKED_MOVIE_TO_USER_REQUEST
+  ),
+  getLikedMovieUserSuccess: createAction(
+    userTypes.GET_LIKED_MOVIE_TO_USER_SUCCESS
+  ),
+  getLikedMovieUserFailure: createAction(
+    userTypes.GET_LIKED_MOVIE_TO_USER_FAILURE
+  ),
 };

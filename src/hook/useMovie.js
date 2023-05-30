@@ -27,6 +27,9 @@ const useMovie = () => {
   const commentMovieRequest = (req) => {
     dispatch(movieActions.commentMovieRequest(req));
   };
+  const likeMovieRequest = (req) => {
+    dispatch(movieActions.likeMovieRequest(req));
+  };
 
   return {
     movieList,
@@ -37,6 +40,7 @@ const useMovie = () => {
     getAllMovieRequest,
     getDetailMovieRequest,
     commentMovieRequest,
+    likeMovieRequest,
   };
 };
 

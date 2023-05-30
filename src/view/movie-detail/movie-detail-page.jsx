@@ -4,22 +4,35 @@ import useMovie from "../../hook/useMovie";
 import { BASE_URL } from "../../utils/apiConfig";
 import { Rate } from "antd";
 import {
-  PlayCircleOutlined,
+  CaretRightOutlined,
   HeartFilled,
   ShareAltOutlined,
 } from "@ant-design/icons";
+import { useLocation, useParams } from "react-router-dom";
+import queryString from "query-string";
 import DetailReview from "../../components/DetailReview/detail-review";
 import useSeries from "../../hook/useSeries";
 import EpisodesList from "../../components/episodes-list/episodes-list";
 
 const MovieDetailPage = () => {
-  const isSeries = false;
-  const { getDetailMovieRequest, movieInfo, commentMovieRequest } = useMovie();
-  const { getDetailSeriesRequest, seriesInfo, commentSeriesRequest } =
-    useSeries();
-  const movieId = "646863a033b7e1c380ed3c1c";
+  const queryParams = queryString.parse(useLocation().search);
+  const isSeries = queryParams?.isSeries === "true";
+  const { movieId } = useParams();
+  const {
+    getDetailMovieRequest,
+    movieInfo,
+    commentMovieRequest,
+    likeMovieRequest,
+  } = useMovie();
+  const {
+    getDetailSeriesRequest,
+    seriesInfo,
+    commentSeriesRequest,
+    likeSeriesRequest,
+  } = useSeries();
+
   const accessToken =
-    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0NmUxN2Y4MWM4NzYyMTQyZGRkYWMyNSIsImlzQWRtaW4iOmZhbHNlLCJpYXQiOjE2ODUyNTUzOTYsImV4cCI6MTY4NTg2MDE5Nn0.OR4LPNUmUTvh1X8rmU-jU4KBrzed7BuhS0cONLBzJC4";
+    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0NmUxN2Y4MWM4NzYyMTQyZGRkYWMyNSIsImlzQWRtaW4iOmZhbHNlLCJpYXQiOjE2ODU0MTE1NTUsImV4cCI6MTY4NjAxNjM1NX0.gq7FMHy0tTBSkRhw_xZy4FF8twObB41xO1jk5PW-kek";
 
   const dataMovie = isSeries ? seriesInfo : movieInfo;
 
@@ -34,7 +47,7 @@ const MovieDetailPage = () => {
       }
     };
     fetchData();
-  }, []);
+  }, [isSeries, movieId]);
 
   const handleAddComment = (dataComment) => {
     const request = {
@@ -48,6 +61,20 @@ const MovieDetailPage = () => {
       commentSeriesRequest(request);
     } else {
       commentMovieRequest(request);
+    }
+  };
+
+  const handleLikeMovie = () => {
+    const req = {
+      paths: isSeries ? { seriesId: movieId } : { movieId },
+      headers: {
+        authorization: `Bearer ${accessToken}`,
+      },
+    };
+    if (isSeries) {
+      likeSeriesRequest(req);
+    } else {
+      likeMovieRequest(req);
     }
   };
 
@@ -74,14 +101,13 @@ const MovieDetailPage = () => {
                 </div>
                 <div className="movie-description">{dataMovie.description}</div>
                 <div className="movie-play-video">
-                  <PlayCircleOutlined />
-                  WATCH NOW
+                  <CaretRightOutlined />
                 </div>
                 <div className="movie-list-more">
                   <div className="movie-list-item">
                     <ShareAltOutlined />
                   </div>
-                  <div className="movie-list-item">
+                  <div className="movie-list-item" onClick={handleLikeMovie}>
                     <HeartFilled />
                   </div>
                 </div>

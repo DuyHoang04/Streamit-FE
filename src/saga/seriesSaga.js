@@ -93,6 +93,16 @@ function* handleCommentSeriesMovie({ payload }) {
     toastError("Something went wrong");
   }
 }
+function* handleLikeMovieSeriesMovie({ payload }) {
+  try {
+    const { message } = yield seriesApi.likeSeries(payload);
+    yield put(seriesActions.likeSeriesSuccess());
+    toastSuccess(message);
+  } catch (error) {
+    yield put(seriesActions.likeSeriesFailure(error));
+    toastError("Something went wrong");
+  }
+}
 
 const seriesSaga = [
   takeEvery(types.seriesTypes.ADD_SERIES_REQUEST, handleAddSeriesMovie),
@@ -112,5 +122,6 @@ const seriesSaga = [
     handleGetDetailSeriesMovie
   ),
   takeEvery(types.seriesTypes.COMMENT_SERIES_REQUEST, handleCommentSeriesMovie),
+  takeEvery(types.seriesTypes.LIKE_SERIES_REQUEST, handleLikeMovieSeriesMovie),
 ];
 export default seriesSaga;
