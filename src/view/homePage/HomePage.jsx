@@ -9,9 +9,5 @@ export default function HomePage() {
       setCount(0);
     }
   }, [count]);
-  return (
-    <>
-      <Navbar />
-    </>
-  );
+  return <></>;
 }
