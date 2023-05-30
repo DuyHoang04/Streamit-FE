@@ -15,6 +15,7 @@ const movieReducer = (state = initialState, action) => {
     case movieTypes.DELETE_MOVIE_REQUEST:
     case movieTypes.GET_DETAIL_MOVIE_REQUEST:
     case movieTypes.COMMENT_MOVIE_REQUEST:
+    case movieTypes.LIKE_MOVIE_REQUEST:
       return {
         ...state,
         isFetching: true,
@@ -23,6 +24,7 @@ const movieReducer = (state = initialState, action) => {
     case movieTypes.UPDATE_MOVIE_SUCCESS:
     case movieTypes.DELETE_MOVIE_SUCCESS:
     case movieTypes.COMMENT_MOVIE_SUCCESS:
+    case movieTypes.LIKE_MOVIE_SUCCESS:
       return {
         ...state,
         isFetching: false,
@@ -45,6 +47,7 @@ const movieReducer = (state = initialState, action) => {
     case movieTypes.GET_ALL_MOVIE_REQUEST:
     case movieTypes.GET_DETAIL_MOVIE_FAILURE:
     case movieTypes.COMMENT_MOVIE_FAILURE:
+    case movieTypes.LIKE_MOVIE_FAILURE:
       return {
         ...state,
         isFetching: true,

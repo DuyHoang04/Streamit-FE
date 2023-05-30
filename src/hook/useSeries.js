@@ -31,6 +31,9 @@ const useSeries = () => {
   const commentSeriesRequest = (req) => {
     dispatch(seriesActions.commentSeriesRequest(req));
   };
+  const likeSeriesRequest = (req) => {
+    dispatch(seriesActions.likeSeriesRequest(req));
+  };
 
   return {
     seriesMovieList,
@@ -43,6 +46,7 @@ const useSeries = () => {
     getAllSeriesRequest,
     getDetailSeriesRequest,
     commentSeriesRequest,
+    likeSeriesRequest,
   };
 };
 

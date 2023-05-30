@@ -25,6 +25,10 @@ const MOVIE_SCHEMA = {
     url: `${BASE_URL}/movies/review/:movieId`,
     method: METHOD.POST,
   },
+  LIKE_MOVIE: {
+    url: `${BASE_URL}/movies/like/:movieId`,
+    method: METHOD.POST,
+  },
 };
 
 export default MOVIE_SCHEMA;

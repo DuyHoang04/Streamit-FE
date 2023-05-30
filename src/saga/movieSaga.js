@@ -70,6 +70,17 @@ function* handleCommentMovie({ payload }) {
   }
 }
 
+function* handleLikeMovie({ payload }) {
+  try {
+    const { message } = yield movieApi.likeMovie(payload);
+    yield put(movieActions.likeMovieSuccess());
+    yield toastSuccess(message);
+  } catch (error) {
+    yield put(movieActions.likeMovieFailure(error));
+    toastError("Movie already like");
+  }
+}
+
 const movieSaga = [
   takeEvery(types.movieTypes.ADD_MOVIE_REQUEST, handleAddMovie),
   takeEvery(types.movieTypes.UPDATE_MOVIE_REQUEST, handleUpdateMovie),
@@ -77,5 +88,6 @@ const movieSaga = [
   takeEvery(types.movieTypes.GET_ALL_MOVIE_REQUEST, handleGetAllMovie),
   takeEvery(types.movieTypes.GET_DETAIL_MOVIE_REQUEST, handleGetDetailMovie),
   takeEvery(types.movieTypes.COMMENT_MOVIE_REQUEST, handleCommentMovie),
+  takeEvery(types.movieTypes.LIKE_MOVIE_REQUEST, handleLikeMovie),
 ];
 export default movieSaga;
