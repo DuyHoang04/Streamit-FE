@@ -22,7 +22,6 @@ function* handleLogin({ payload }) {
   const { navigate, reqLogin } = payload;
   try {
     const { data } = yield authApi.Login(reqLogin);
-    console.log(data.isAdmin);
     yield put(authActions.loginSuccess(data.isAdmin));
     yield Cookies.set("access_token", data.accessToken);
     navigate("/");

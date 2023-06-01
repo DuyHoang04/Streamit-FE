@@ -38,6 +38,14 @@ const publicRoutes = [
     path: config.routes.like_movie,
     element: <pages.LikeMoviePage />,
   },
+  {
+    path: config.routes.movies,
+    element: <pages.MoviePage />,
+  },
+  {
+    path: config.routes.series,
+    element: <pages.SeriesPage />,
+  },
 
   // ADMIN
   {

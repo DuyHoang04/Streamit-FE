@@ -1,7 +1,6 @@
 import { toast } from "react-hot-toast";
 import * as actionTypes from "./actionTypes";
 import routes from "./routeconfig";
-import Cookies from "universal-cookie";
 
 export const config = {
   routes,

@@ -5,7 +5,6 @@ import { CaretRightOutlined, DeleteOutlined } from "@ant-design/icons";
 import { Link } from "react-router-dom";
 
 const CardMovie = ({ movie }) => {
-  console.log(movie);
   return (
     <div className="card_movie-container">
       <div className="background_movie">
