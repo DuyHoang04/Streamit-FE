@@ -1,5 +1,5 @@
 import React, { useRef } from "react";
-import "../login/loginStyle.css";
+import "../login/loginStyle.scss";
 import { Button, Checkbox, Form, Image } from "antd";
 import { useDispatch } from "react-redux";
 import { authActions } from "../../action/index";
@@ -50,7 +50,7 @@ const loginPage = () => {
               },
             ]}
           >
-            <InputCustom type="gmail" ref={emailRef} placeholder="gmail" />
+            <InputCustom type="gmail" ref={emailRef} placeholder="Gmail" />
           </Form.Item>
           <Form.Item
             name="password"
@@ -64,7 +64,7 @@ const loginPage = () => {
             <InputCustom
               ref={passwordRef}
               type="password"
-              placeholder="password"
+              placeholder="Password"
             />
           </Form.Item>
           <Form.Item className="login_footer">

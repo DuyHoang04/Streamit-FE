@@ -13,8 +13,10 @@ import queryString from "query-string";
 import DetailReview from "../../components/DetailReview/detail-review";
 import useSeries from "../../hook/useSeries";
 import EpisodesList from "../../components/episodes-list/episodes-list";
+import useAuth from "../../hook/useAuth";
 
 const MovieDetailPage = () => {
+  const { accessToken } = useAuth();
   const queryParams = queryString.parse(useLocation().search);
   const isSeries = queryParams?.isSeries === "true";
   const { movieId } = useParams();
@@ -30,9 +32,6 @@ const MovieDetailPage = () => {
     commentSeriesRequest,
     likeSeriesRequest,
   } = useSeries();
-
-  const accessToken =
-    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0NmUxN2Y4MWM4NzYyMTQyZGRkYWMyNSIsImlzQWRtaW4iOmZhbHNlLCJpYXQiOjE2ODU0MTE1NTUsImV4cCI6MTY4NjAxNjM1NX0.gq7FMHy0tTBSkRhw_xZy4FF8twObB41xO1jk5PW-kek";
 
   const dataMovie = isSeries ? seriesInfo : movieInfo;
 

@@ -9,6 +9,8 @@ import AdminAddMoviePage from "./admin-add-movie/admin-add-movie";
 import registerPage from "./registerPage/registerPage";
 import MovieDetailPage from "./movie-detail/movie-detail-page";
 import LikeMoviePage from "./like-movie/like-movie-page";
+import MoviePage from "./movie-page/movie-page";
+import SeriesPage from "./series-page/series-page";
 
 export {
   HomePage,
@@ -22,4 +24,6 @@ export {
   registerPage,
   MovieDetailPage,
   LikeMoviePage,
+  MoviePage,
+  SeriesPage,
 };

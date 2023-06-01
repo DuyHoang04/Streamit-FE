@@ -2,10 +2,12 @@ import React, { useRef, useState } from "react";
 import "./detail-review.scss";
 import InputCustom from "../../common/input/InputCustom";
 import ButtonCustom from "../../common/button/buttonCustom";
-import { Rate, Pagination } from "antd";
+import { Rate, Avatar, Pagination } from "antd";
+import { UserOutlined } from "@ant-design/icons";
 import { validateData } from "../../utils";
 import { toast } from "react-hot-toast";
 import { format } from "timeago.js";
+import { BASE_URL } from "../../utils/apiConfig";
 
 const DetailReview = ({ data, handleAddComment }) => {
   const detailTabs = ["Description", "Reviews"];
@@ -49,6 +51,8 @@ const DetailReview = ({ data, handleAddComment }) => {
     return data?.reviews?.slice(startIndex, endIndex);
   };
 
+  console.log(getDataReview());
+
   return (
     <>
       <div className="detailTabs">
@@ -61,7 +65,7 @@ const DetailReview = ({ data, handleAddComment }) => {
               } `}
               onClick={(e) => handleChange(index, item)}
             >
-              {item}
+              <h1> {item}</h1>
             </div>
           ))}
         </div>
@@ -114,8 +118,19 @@ const DetailReview = ({ data, handleAddComment }) => {
                 <div className="detailTabs_reviewCmtContainer">
                   {getDataReview()?.map((item, index) => (
                     <div key={index} className="detailTabs_reviewCmt">
-                      <div className="detailTabs_reviewCmt-name">
-                        {item?.name}
+                      <div className="detailTabs_reviewCmt-infoUser">
+                        <Avatar
+                          size={50}
+                          src={
+                            item?.userImage
+                              ? `${BASE_URL}/${item?.userImage}`
+                              : "https://png.pngitem.com/pimgs/s/649-6490124_katie-notopoulos-katienotopoulos-i-write-about-tech-round.png"
+                          }
+                          // icon={<UserOutlined />}
+                        />
+                        <div className="detailTabs_reviewCmt-name">
+                          {item?.name}
+                        </div>
                       </div>
                       <div className="detailTabs_reviewCmt-rating">
                         <Rate disabled value={item?.rating} />
@@ -129,12 +144,14 @@ const DetailReview = ({ data, handleAddComment }) => {
                     </div>
                   ))}
                 </div>
-                <Pagination
-                  current={currentPage}
-                  pageSize={limitReview} // số lượng review trong 1 trang
-                  total={totalReview} // tổng số review
-                  onChange={handlePageChange}
-                />
+                <div className="comment_pagination">
+                  <Pagination
+                    current={currentPage}
+                    pageSize={limitReview} // số lượng review trong 1 trang
+                    total={totalReview} // tổng số review
+                    onChange={handlePageChange}
+                  />
+                </div>
               </div>
             ) : (
               <h1 className="empty">There are no comment yet.</h1>

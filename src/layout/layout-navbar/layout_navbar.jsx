@@ -1,5 +1,6 @@
 import React from "react";
 import Navbar from "../../view/homePage/navbar/navbar";
+import Footer from "../../components/footer/Footer";
 
 const LayoutNavBar = ({ children }) => {
   return (
@@ -8,6 +9,9 @@ const LayoutNavBar = ({ children }) => {
         <Navbar />
       </div>
       <div className="page__content">{children}</div>
+      <div className="footer">
+        <Footer />
+      </div>
     </div>
   );
 };

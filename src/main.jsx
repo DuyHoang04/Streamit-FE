@@ -16,9 +16,11 @@ ReactDOM.createRoot(document.getElementById("root")).render(
     <Provider store={store}>
       <Router>
         <Toaster />
-        <GlobalStyles>
-          <App />
-        </GlobalStyles>
+        <ProtectedComponent>
+          <GlobalStyles>
+            <App />
+          </GlobalStyles>
+        </ProtectedComponent>
       </Router>
     </Provider>
   </React.StrictMode>
