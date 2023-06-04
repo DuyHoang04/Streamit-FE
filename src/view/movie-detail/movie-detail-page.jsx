@@ -14,6 +14,10 @@ import DetailReview from "../../components/DetailReview/detail-review";
 import useSeries from "../../hook/useSeries";
 import EpisodesList from "../../components/episodes-list/episodes-list";
 import useAuth from "../../hook/useAuth";
+import useMedia from "../../hook/useMedia";
+import { motion } from "framer-motion";
+import { toast } from "react-hot-toast";
+import { toastError } from "../../utils";
 
 const MovieDetailPage = () => {
   const { accessToken } = useAuth();
@@ -33,6 +37,8 @@ const MovieDetailPage = () => {
     likeSeriesRequest,
   } = useSeries();
 
+  const { likeMovieAndSeries } = useMedia();
+
   const dataMovie = isSeries ? seriesInfo : movieInfo;
 
   useEffect(() => {
@@ -49,31 +55,41 @@ const MovieDetailPage = () => {
   }, [isSeries, movieId]);
 
   const handleAddComment = (dataComment) => {
-    const request = {
-      payload: dataComment,
-      paths: isSeries ? { seriesId: movieId } : { movieId },
-      headers: {
-        authorization: `Bearer ${accessToken}`,
-      },
-    };
-    if (isSeries) {
-      commentSeriesRequest(request);
+    if (accessToken) {
+      const request = {
+        payload: dataComment,
+        paths: isSeries ? { seriesId: movieId } : { movieId },
+        headers: {
+          authorization: `Bearer ${accessToken}`,
+        },
+      };
+      if (isSeries) {
+        commentSeriesRequest(request);
+      } else {
+        commentMovieRequest(request);
+      }
     } else {
-      commentMovieRequest(request);
+      toastError("Please Login");
     }
   };
 
   const handleLikeMovie = () => {
-    const req = {
-      paths: isSeries ? { seriesId: movieId } : { movieId },
-      headers: {
-        authorization: `Bearer ${accessToken}`,
-      },
-    };
-    if (isSeries) {
-      likeSeriesRequest(req);
+    if (accessToken) {
+      const req = {
+        payload: {
+          movieId: dataMovie._id,
+          name: dataMovie.name,
+          genres: dataMovie.genres,
+          image: dataMovie.image,
+          isSeries: dataMovie?.isSeries || false,
+        },
+        headers: {
+          authorization: `Bearer ${accessToken}`,
+        },
+      };
+      likeMovieAndSeries(req);
     } else {
-      likeMovieRequest(req);
+      toastError("Please Login");
     }
   };
 
@@ -89,7 +105,14 @@ const MovieDetailPage = () => {
                 </div>
               </div>
               <div className="movie_content">
-                <div className="movie-title">{dataMovie.name}</div>
+                <motion.div
+                  className="movie-title"
+                  initial={{ x: -200 }}
+                  animate={{ x: 0 }}
+                  transition={{ duration: 0.5 }}
+                >
+                  {dataMovie.name}
+                </motion.div>
                 <div className="movie-rate">
                   <Rate disabled value={Math.floor(dataMovie.rating) || 5} />
                 </div>

@@ -16,6 +16,7 @@ const useUser = () => {
   const deleteUserRequest = (req) => {
     dispatch(userActions.deleteUserRequest(req));
   };
+
   const getLikedMovie = (req) => {
     dispatch(userActions.getLikedMovieUserRequest(req));
   };

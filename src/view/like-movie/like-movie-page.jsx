@@ -16,12 +16,21 @@ const LikeMoviePage = () => {
     };
     getLikedMovie(req);
   }, []);
+
   return (
     <div className="likeMovie_page">
       <div className="likeMovie_container">
-        {likeMovies.map((data) => (
-          <CardMovie movie={data} key={data.id} />
-        ))}
+        {likeMovies.length > 0 ? (
+          likeMovies.map((data) => (
+            <CardMovie
+              movie={data}
+              key={data.movieId}
+              accessToken={accessToken}
+            />
+          ))
+        ) : (
+          <h1>No movie</h1>
+        )}
       </div>
     </div>
   );

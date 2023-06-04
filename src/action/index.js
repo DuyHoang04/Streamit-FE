@@ -132,6 +132,24 @@ export const mediaActions = {
   getMovieAndSeriesFailure: createAction(
     mediaTypes.GET_MOVIE_AND_SERIES_FAILURE
   ),
+  likeMovieAndSeriesRequest: createAction(
+    mediaTypes.LIKE_MOVIE_AND_SERIES_REQUEST
+  ),
+  likeMovieAndSeriesSuccess: createAction(
+    mediaTypes.LIKE_MOVIE_AND_SERIES_SUCCESS
+  ),
+  likeMovieAndSeriesFailure: createAction(
+    mediaTypes.LIKE_MOVIE_AND_SERIES_FAILURE
+  ),
+  deleteLikeMovieAndSeriesRequest: createAction(
+    mediaTypes.DELETE_LIKE_MOVIE_AND_SERIES_REQUEST
+  ),
+  deleteLikeMovieAndSeriesSuccess: createAction(
+    mediaTypes.DELETE_LIKE_MOVIE_AND_SERIES_SUCCESS
+  ),
+  deleteLikeMovieAndSeriesFailure: createAction(
+    mediaTypes.DELETE_LIKE_MOVIE_AND_SERIES_FAILURE
+  ),
 };
 
 export const userActions = {

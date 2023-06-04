@@ -51,4 +51,6 @@ export const userApi = {
 
 export const mediaApi = {
   getMovieAndSeries: createApi(mediaSchema.GET_MOVIE_SERIES),
+  likeMovieAndSeries: createApi(mediaSchema.LIKE_MOVIE_AND_SERIES),
+  deleteLikeMovieAndSeries: createApi(mediaSchema.DELETE_LIKE_MOVIE_AND_SERIES),
 };
