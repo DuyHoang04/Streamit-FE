@@ -25,6 +25,9 @@ export const movieApi = {
   updateMovie: createApi(movieSchema.UPDATE_MOVIE),
   deleteMovie: createApi(movieSchema.DELETE_MOVIE),
   getAllMovie: createApi(movieSchema.GET_ALL_MOVIE),
+  getDetailMovie: createApi(movieSchema.GET_DETAIL_MOVIE),
+  commentMovie: createApi(movieSchema.COMMENT_MOVIE),
+  likeMovie: createApi(movieSchema.LIKE_MOVIE),
 };
 
 export const seriesApi = {
@@ -34,14 +37,20 @@ export const seriesApi = {
   deleteSeries: createApi(seriesSchema.DELETE_SERIES),
   updateSeries: createApi(seriesSchema.UPDATE_SERIES),
   getAllSeries: createApi(seriesSchema.GET_ALL_SERIES),
+  getDetailSeries: createApi(seriesSchema.GET_DETAIL_SERIES),
+  commentSeries: createApi(seriesSchema.COMMENT_SERIES),
+  likeSeries: createApi(seriesSchema.LIKE_SERIES),
 };
 
 export const userApi = {
   getAllUser: createApi(userSchema.GET_ALL_USER),
   deleteUser: createApi(userSchema.DELETE_USER),
   updateUser: createApi(userSchema.UPDATE_USER),
+  getLikedMovies: createApi(userSchema.GET_LIKED_MOVIE),
 };
 
 export const mediaApi = {
   getMovieAndSeries: createApi(mediaSchema.GET_MOVIE_SERIES),
+  likeMovieAndSeries: createApi(mediaSchema.LIKE_MOVIE_AND_SERIES),
+  deleteLikeMovieAndSeries: createApi(mediaSchema.DELETE_LIKE_MOVIE_AND_SERIES),
 };

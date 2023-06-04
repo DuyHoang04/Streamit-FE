@@ -13,6 +13,10 @@ const USER_SCHEMA = {
     url: `${BASE_URL}/users/delete/:userId`,
     method: METHOD.DELETE,
   },
+  GET_LIKED_MOVIE: {
+    url: `${BASE_URL}/users/find/like_movie`,
+    method: METHOD.GET,
+  },
 };
 
 export default USER_SCHEMA;

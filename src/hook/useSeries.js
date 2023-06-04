@@ -5,6 +5,7 @@ const useSeries = () => {
   const dispatch = useDispatch();
 
   const seriesMovieList = useSelector((state) => state.series.seriesList);
+  const seriesInfo = useSelector((state) => state.series.seriesInfo);
 
   const addSeriesMovieRequest = (req) => {
     dispatch(seriesActions.addSeriesRequest(req));
@@ -24,15 +25,28 @@ const useSeries = () => {
   const getAllSeriesRequest = () => {
     dispatch(seriesActions.getAllSeriesRequest());
   };
+  const getDetailSeriesRequest = (req) => {
+    dispatch(seriesActions.getDetailSeriesRequest(req));
+  };
+  const commentSeriesRequest = (req) => {
+    dispatch(seriesActions.commentSeriesRequest(req));
+  };
+  const likeSeriesRequest = (req) => {
+    dispatch(seriesActions.likeSeriesRequest(req));
+  };
 
   return {
     seriesMovieList,
+    seriesInfo,
     addSeriesMovieRequest,
     updateEpisodeRequest,
     deleteEpisodeRequest,
     deleteSeriesRequest,
     updateSeriesRequest,
     getAllSeriesRequest,
+    getDetailSeriesRequest,
+    commentSeriesRequest,
+    likeSeriesRequest,
   };
 };
 

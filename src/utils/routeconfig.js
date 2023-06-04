@@ -10,6 +10,14 @@ const routes = {
   movies_genres: "/admin/movies_genres",
   add_movie: "/admin/add_movie",
   users: "/admin/users",
+
+  // USER
+  detail_movie: "/detail_movie/:movieId",
+  like_movie: "/like_movie/:userId",
+  movies: "/movies",
+  tv_show: "/tv_show",
+  about: "/about",
+  contact: "/contact",
 };
 
 export default routes;

@@ -1,0 +1,11 @@
+.likeMovie_page {
+  padding-top: 4rem;
+  padding-inline: 10rem;
+  background-color: var(--background-color);
+  height: 100vh;
+  .likeMovie_container {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 3rem;
+  }
+}

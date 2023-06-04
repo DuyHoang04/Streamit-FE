@@ -60,6 +60,12 @@ export const movieActions = {
   deleteMovieRequest: createAction(movieTypes.DELETE_MOVIE_REQUEST),
   deleteMovieSuccess: createAction(movieTypes.DELETE_MOVIE_SUCCESS),
   deleteMovieFailure: createAction(movieTypes.DELETE_MOVIE_FAILURE),
+  commentMovieRequest: createAction(movieTypes.COMMENT_MOVIE_REQUEST),
+  commentMovieSuccess: createAction(movieTypes.COMMENT_MOVIE_SUCCESS),
+  commentMovieFailure: createAction(movieTypes.COMMENT_MOVIE_FAILURE),
+  likeMovieRequest: createAction(movieTypes.LIKE_MOVIE_REQUEST),
+  likeMovieSuccess: createAction(movieTypes.LIKE_MOVIE_SUCCESS),
+  likeMovieFailure: createAction(movieTypes.LIKE_MOVIE_FAILURE),
 };
 
 export const seriesActions = {
@@ -106,6 +112,14 @@ export const seriesActions = {
   updateSeriesRequest: createAction(seriesTypes.UPDATE_SERIES_REQUEST),
   updateSeriesSuccess: createAction(seriesTypes.UPDATE_SERIES_SUCCESS),
   updateSeriesFailure: createAction(seriesTypes.UPDATE_SERIES_FAILURE),
+
+  commentSeriesRequest: createAction(seriesTypes.COMMENT_SERIES_REQUEST),
+  commentSeriesSuccess: createAction(seriesTypes.COMMENT_SERIES_SUCCESS),
+  commentSeriesFailure: createAction(seriesTypes.COMMENT_SERIES_FAILURE),
+
+  likeSeriesRequest: createAction(seriesTypes.LIKE_SERIES_REQUEST),
+  likeSeriesSuccess: createAction(seriesTypes.LIKE_SERIES_SUCCESS),
+  likeSeriesFailure: createAction(seriesTypes.LIKE_SERIES_FAILURE),
 };
 
 export const mediaActions = {
@@ -117,6 +131,24 @@ export const mediaActions = {
   ),
   getMovieAndSeriesFailure: createAction(
     mediaTypes.GET_MOVIE_AND_SERIES_FAILURE
+  ),
+  likeMovieAndSeriesRequest: createAction(
+    mediaTypes.LIKE_MOVIE_AND_SERIES_REQUEST
+  ),
+  likeMovieAndSeriesSuccess: createAction(
+    mediaTypes.LIKE_MOVIE_AND_SERIES_SUCCESS
+  ),
+  likeMovieAndSeriesFailure: createAction(
+    mediaTypes.LIKE_MOVIE_AND_SERIES_FAILURE
+  ),
+  deleteLikeMovieAndSeriesRequest: createAction(
+    mediaTypes.DELETE_LIKE_MOVIE_AND_SERIES_REQUEST
+  ),
+  deleteLikeMovieAndSeriesSuccess: createAction(
+    mediaTypes.DELETE_LIKE_MOVIE_AND_SERIES_SUCCESS
+  ),
+  deleteLikeMovieAndSeriesFailure: createAction(
+    mediaTypes.DELETE_LIKE_MOVIE_AND_SERIES_FAILURE
   ),
 };
 
@@ -130,4 +162,13 @@ export const userActions = {
   deleteUserRequest: createAction(userTypes.DELETE_USER_REQUEST),
   deleteUserSuccess: createAction(userTypes.DELETE_USER_SUCCESS),
   deleteUserFailure: createAction(userTypes.DELETE_USER_FAILURE),
+  getLikedMovieUserRequest: createAction(
+    userTypes.GET_LIKED_MOVIE_TO_USER_REQUEST
+  ),
+  getLikedMovieUserSuccess: createAction(
+    userTypes.GET_LIKED_MOVIE_TO_USER_SUCCESS
+  ),
+  getLikedMovieUserFailure: createAction(
+    userTypes.GET_LIKED_MOVIE_TO_USER_FAILURE
+  ),
 };

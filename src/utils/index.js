@@ -27,3 +27,26 @@ export const toastSuccess = (message) => {
 export const toastError = (message) => {
   return toast.error(message);
 };
+
+export const getMovieByGenres = (movieList) => {
+  const uniqueGenres = {};
+
+  movieList.forEach((movie) => {
+    movie.genres.forEach((genre) => {
+      const genreName = genre.name;
+      if (!uniqueGenres[genreName]) {
+        uniqueGenres[genreName] = [];
+      }
+      uniqueGenres[genreName].push(movie);
+    });
+  });
+
+  const listMovieByGenres = Object.entries(uniqueGenres).map(
+    ([name, movies]) => ({
+      genres: name,
+      movies,
+    })
+  );
+
+  return listMovieByGenres;
+};

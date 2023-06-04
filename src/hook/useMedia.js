@@ -8,10 +8,18 @@ const useMedia = () => {
   const getMovieAndSeries = () => {
     dispatch(mediaActions.getMovieAndSeriesRequest());
   };
+  const likeMovieAndSeries = (req) => {
+    dispatch(mediaActions.likeMovieAndSeriesRequest(req));
+  };
+  const deleteLikeMovieAndSeries = (req) => {
+    dispatch(mediaActions.deleteLikeMovieAndSeriesRequest(req));
+  };
 
   return {
     mediaList,
     getMovieAndSeries,
+    likeMovieAndSeries,
+    deleteLikeMovieAndSeries,
   };
 };
 

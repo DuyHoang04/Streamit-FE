@@ -1,0 +1,175 @@
+.about {
+  background-color: var(--background-color);
+  .aboutSection {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    .aboutSection_content {
+      z-index: 10;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+
+      .aboutSection_content-title {
+        font-size: 2.5rem;
+        color: var(--primary-color);
+        margin-bottom: 2rem;
+      }
+      .aboutSection_content-decs {
+        font-size: 3rem;
+        color: #fff;
+        font-weight: 500;
+      }
+    }
+  }
+  .aboutTeam {
+    margin-top: 30px;
+    padding-inline: 4rem;
+    .aboutTeam_title {
+      .title {
+        position: relative;
+        z-index: 10;
+        min-width: 50%;
+        display: inline-block;
+        font-weight: 700;
+        color: white;
+        line-height: 100px;
+        text-transform: uppercase;
+        min-width: 1000px;
+        margin: 20px 0 0;
+        font-size: 22px;
+        &::before {
+          content: "TEAM";
+          position: absolute;
+          top: 50%;
+          transform: translateY(-50%);
+          left: -4px;
+          z-index: -1;
+          font-weight: 700;
+          font-size: 100px;
+          line-height: 1em;
+          color: gray;
+          letter-spacing: 0.08em;
+        }
+      }
+    }
+    .aboutTeam_content {
+      margin: 20px 0 0 20px;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      align-items: center;
+      .aboutTeam_content-info {
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+        img {
+          cursor: pointer;
+          transition: all 0.4s;
+          &:hover {
+            opacity: 0.7;
+          }
+        }
+        .aboutTeam_content-name {
+          margin-top: 10px;
+          color: #1d1d1d;
+          font-size: 18px;
+          font-weight: 600;
+          line-height: 21.6px;
+          text-align: center;
+        }
+        .aboutTeam_content-duty {
+          color: #999999;
+          font-size: 13px;
+          line-height: 22.1px;
+          margin: 0px 0px 10px;
+          text-align: center;
+        }
+      }
+    }
+  }
+  .aboutView {
+    padding: 20px 100px 50px 30px;
+    margin-top: 100px;
+    border-top: 2px solid lightgray;
+    display: flex;
+    align-items: flex-start;
+    gap: 4rem;
+    .aboutView_content {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      .aboutView_content-item {
+        .aboutView_content-title {
+          color: white;
+          font-size: 30px;
+          font-weight: 600;
+          line-height: 33px;
+          margin: 0px 0px 20px;
+        }
+        .aboutView_content-decs {
+          color: #9297a3;
+          font-size: 20px;
+          line-height: 21.6px;
+          padding: 5px 0px;
+          text-align: left;
+        }
+      }
+    }
+    .aboutView_join {
+      .aboutView_join-title {
+        color: #1d1d1d;
+        overflow-wrap: break-word;
+        font-size: 30px;
+        font-weight: 500;
+        line-height: 39px;
+        margin: 0px 0px 30px;
+      }
+      .aboutView_join-btn {
+        position: relative;
+        margin-top: 30px;
+        padding: 15px 30px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 60px;
+        font-size: 20px;
+        background-color: var(--primary-color);
+        color: white;
+        gap: 1rem;
+        border: none;
+        cursor: pointer;
+        svg {
+          font-size: 16px;
+        }
+        &::before {
+          content: "";
+          position: absolute;
+          top: 50%;
+          left: 50%;
+          transform: translate(-50%, -50%);
+          width: calc(100% + 12px);
+          height: calc(100% + 12px);
+          background-color: #00000012;
+          border-radius: 60px;
+        }
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .about {
+    .aboutTeam {
+      padding-inline: 1rem;
+      .aboutTeam_content {
+        grid-template-columns: repeat(1, 1fr);
+        gap: 4rem;
+      }
+    }
+    .aboutView {
+      flex-direction: column;
+    }
+  }
+}

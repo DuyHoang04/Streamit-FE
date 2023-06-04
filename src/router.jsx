@@ -10,6 +10,8 @@ import * as pages from "./view/index";
 import { AppstoreOutlined } from "@ant-design/icons";
 import PageLayout from "./layout";
 import ProtectedComponent from "./layout/protected-components/protected-component";
+import Navbar from "./view/homePage/navbar/navbar";
+import LayoutNavBar from "./layout/layout-navbar/layout_navbar";
 
 const publicRoutes = [
   {
@@ -27,6 +29,30 @@ const publicRoutes = [
   {
     path: config.routes.errorpage,
     element: <pages.ErrorPage />,
+  },
+  {
+    path: config.routes.detail_movie,
+    element: <pages.MovieDetailPage />,
+  },
+  {
+    path: config.routes.like_movie,
+    element: <pages.LikeMoviePage />,
+  },
+  {
+    path: config.routes.movies,
+    element: <pages.MoviePage />,
+  },
+  {
+    path: config.routes.tv_show,
+    element: <pages.SeriesPage />,
+  },
+  {
+    path: config.routes.about,
+    element: <pages.AboutPage />,
+  },
+  {
+    path: config.routes.contact,
+    element: <pages.ContactPage />,
   },
 
   // ADMIN
@@ -72,13 +98,16 @@ const Router = () => {
   return (
     <Routes>
       {publicRoutes.map((route, idx) => {
-        const Layout = route.needShowSideMenu ? PageLayout : Fragment;
+        const Layout = route.needShowSideMenu ? PageLayout : LayoutNavBar;
+
         return (
-          <Route
-            key={idx}
-            path={route.path}
-            element={<Layout>{route.element}</Layout>}
-          />
+          <>
+            <Route
+              key={idx}
+              path={route.path}
+              element={<Layout>{route.element}</Layout>}
+            />
+          </>
         );
       })}
     </Routes>

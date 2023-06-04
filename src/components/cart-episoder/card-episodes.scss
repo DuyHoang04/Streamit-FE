@@ -1,0 +1,35 @@
+.cardEpisodes {
+  background-color: #191919;
+  .episodes_image {
+    cursor: pointer;
+    position: relative;
+
+    .btn_play {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      button {
+        width: 35px;
+        height: 35px;
+        background-color: white;
+        border-radius: 50%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        svg {
+          color: var(--primary-color);
+          font-size: 2rem;
+        }
+      }
+    }
+  }
+  .episodes_name {
+    padding: 2rem;
+    color: white;
+    margin-top: 2rem;
+    h1 {
+      font-size: 1.75rem;
+    }
+  }
+}

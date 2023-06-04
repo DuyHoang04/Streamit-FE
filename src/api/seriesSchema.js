@@ -25,6 +25,19 @@ const SERIES_SCHEMA = {
     url: `${BASE_URL}/series`,
     method: METHOD.GET,
   },
+  GET_DETAIL_SERIES: {
+    url: `${BASE_URL}/series/find/:seriesId`,
+    method: METHOD.GET,
+  },
+
+  COMMENT_SERIES: {
+    url: `${BASE_URL}/series/review/:seriesId`,
+    method: METHOD.POST,
+  },
+  LIKE_SERIES: {
+    url: `${BASE_URL}/series/like/:seriesId`,
+    method: METHOD.POST,
+  },
 };
 
 export default SERIES_SCHEMA;
