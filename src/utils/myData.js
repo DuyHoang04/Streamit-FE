@@ -1,7 +1,7 @@
-import Member1 from "../assets/menber1.png";
-import Member2 from "../assets/menber2.png";
-import Member3 from "../assets/menber3.png";
-import Member4 from "../assets/menber4.png";
+import Member1 from "../assets/02.24ab5763.jpg";
+import Member2 from "../assets/03.5054d139.jpg";
+import Member3 from "../assets/04.0941f16f.jpg";
+import Member4 from "../assets/05.3a147055.jpg";
 
 export const aboutTeam = [
   {
