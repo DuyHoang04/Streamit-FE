@@ -15,7 +15,9 @@ const routes = {
   detail_movie: "/detail_movie/:movieId",
   like_movie: "/like_movie/:userId",
   movies: "/movies",
-  series: "/tv_show",
+  tv_show: "/tv_show",
+  about: "/about",
+  contact: "/contact",
 };
 
 export default routes;
