@@ -61,9 +61,9 @@ function* handleUpdateSeriesMovie({ payload }) {
     toastError("Something went wrong");
   }
 }
-function* handleGetAllSeriesMovie() {
+function* handleGetAllSeriesMovie({ payload }) {
   try {
-    const { data } = yield seriesApi.getAllSeries({});
+    const { data } = yield seriesApi.getAllSeries(payload);
     yield put(seriesActions.getAllSeriesSuccess(data));
   } catch (error) {
     yield put(seriesActions.getAllSeriesFailure(error));

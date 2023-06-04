@@ -4,7 +4,7 @@ import { BASE_URL } from "../../utils/apiConfig";
 import { CaretRightOutlined } from "@ant-design/icons";
 import { Link } from "react-router-dom";
 
-const CardMovies = ({ movie }) => {
+const CardMovie = ({ movie }) => {
   return (
     <div className="cardMovie">
       <div className="background_movie">
@@ -35,4 +35,4 @@ const CardMovies = ({ movie }) => {
   );
 };
 
-export default CardMovies;
+export default CardMovie;

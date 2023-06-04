@@ -39,10 +39,9 @@ function* handleDeleteMovie({ payload }) {
   }
 }
 
-function* handleGetAllMovie() {
+function* handleGetAllMovie({ payload }) {
   try {
-    const { data } = yield movieApi.getAllMovie({});
-    console.log(data);
+    const { data } = yield movieApi.getAllMovie(payload);
     yield put(movieActions.getAllMovieSuccess(data));
   } catch (error) {
     yield put(movieActions.getAllMovieFailure(error));

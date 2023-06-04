@@ -18,6 +18,7 @@ const routes = {
   tv_show: "/tv_show",
   about: "/about",
   contact: "/contact",
+  view_movie_by_genres: "/view_movie_by_genres/:genres_name",
 };
 
 export default routes;

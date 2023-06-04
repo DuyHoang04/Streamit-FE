@@ -11,8 +11,8 @@ const useMovie = () => {
   const addMovieRequest = (req) => {
     dispatch(movieActions.addMovieRequest(req));
   };
-  const getAllMovieRequest = () => {
-    dispatch(movieActions.getAllMovieRequest());
+  const getAllMovieRequest = (req) => {
+    dispatch(movieActions.getAllMovieRequest(req));
   };
 
   const updateMovieRequest = (req) => {

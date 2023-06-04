@@ -44,7 +44,7 @@ const publicRoutes = [
   },
   {
     path: config.routes.tv_show,
-    element: <pages.SeriesPage />,
+    element: <pages.TvShowPage />,
   },
   {
     path: config.routes.about,
@@ -53,6 +53,10 @@ const publicRoutes = [
   {
     path: config.routes.contact,
     element: <pages.ContactPage />,
+  },
+  {
+    path: config.routes.view_movie_by_genres,
+    element: <pages.ViewGenresPage />,
   },
 
   // ADMIN

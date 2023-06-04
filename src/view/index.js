@@ -10,9 +10,10 @@ import registerPage from "./registerPage/registerPage";
 import MovieDetailPage from "./movie-detail/movie-detail-page";
 import LikeMoviePage from "./like-movie/like-movie-page";
 import MoviePage from "./movie-page/movie-page";
-import SeriesPage from "./series-page/series-page";
 import AboutPage from "./about-page/about-page";
 import ContactPage from "./contact-page/contact-page";
+import TvShowPage from "./TVshows/Tv_show";
+import ViewGenresPage from "./view-genres-page/view-genres-page";
 
 export {
   HomePage,
@@ -27,7 +28,8 @@ export {
   MovieDetailPage,
   LikeMoviePage,
   MoviePage,
-  SeriesPage,
   AboutPage,
   ContactPage,
+  TvShowPage,
+  ViewGenresPage,
 };

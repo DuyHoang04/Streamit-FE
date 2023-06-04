@@ -42,6 +42,14 @@ const MovieDetailPage = () => {
   const dataMovie = isSeries ? seriesInfo : movieInfo;
 
   useEffect(() => {
+    window.scrollTo({
+      top: 0,
+      left: 0,
+      behavior: "smooth",
+    });
+  }, []);
+
+  useEffect(() => {
     const fetchData = async () => {
       if (isSeries) {
         getDetailSeriesRequest({ paths: { seriesId: movieId } });
@@ -115,10 +123,13 @@ const MovieDetailPage = () => {
                 </motion.div>
                 <div className="movie-rate">
                   <Rate disabled value={Math.floor(dataMovie.rating) || 5} />
+                  <span className="movie_numReview">
+                    ( {dataMovie.numReviews || 0} reviews )
+                  </span>
                 </div>
                 <div className="movie-genres">
                   {dataMovie?.genres?.map((item) => (
-                    <span key={item._id}>{item.name}</span>
+                    <span key={item._id}>{item.name}- </span>
                   ))}
                 </div>
                 <div className="movie-description">{dataMovie.description}</div>
