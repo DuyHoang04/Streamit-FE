@@ -1,6 +1,12 @@
-import { Carousel, Rate } from 'antd';
+import { Carousel, Rate, Button } from 'antd';
 import "./banner.scss"
+import { useRef } from 'react';
+import {
+    RightOutlined,
+    LeftOutlined
+} from '@ant-design/icons';
 const banner = () => {
+    const ref = useRef()
     const contentStyle = {
         width: "100%",
         height: '100vh',
@@ -46,34 +52,41 @@ const banner = () => {
     ]
     return (
         <div>
-            <Carousel autoplay className='banner_img'>
+            <Carousel  autoplay ref={ref} className='banner_img'>
                 {column.map((item, idx) => {
                     return (
                         <div key={idx}>
-                            {/* <img  style={contentStyle} src={item.imgMovie} alt="" /> */}
-                            <div style={{
+                            <div className='Bannercontainer' style={{
                                 backgroundImage: `url(${item.imgMovie})`,
                                 backgroundPosition: "50% 100%",
                                 backgroundSize: "cover",
                                 height: "100vh"
-                            }}></div>
-                            <div className='content'>
-                                <h1>{item.MovieName}</h1>
-                                <div className='content_rate'>
-                                    <Rate defaultValue={item.rate} />
-                                    <div className='content_age'>
-                                        {`${item.age}+`}
+                            }}>
+                                <div className='Bannercontent'>
+                                    <div className='content_ left'>
+                                        <h1 className='big_title'>{item.MovieName}</h1>
+                                        <div className='content_rate'>
+                                            <Rate disabled defaultValue={item.rate} />
+                                            <div className='content_age'>
+                                                {`${item.age}+`}
+                                            </div>
+                                            <p>{item.time}</p>
+                                        </div>
+                                        <div className='description'>
+                                            <p>{item.description}</p>
+                                        </div>
+                                        <p><span>Starring:</span> {item.starring}</p>
+                                        <p> <span>Genres:</span>  {item.genres}</p>
+                                        <p><span>Tag:</span> {item.tag}</p>
                                     </div>
-                                    <p>{item.time}</p>
-                                </div>
-                                <div className='description'>
-                                    <p>{item.description}</p>
-                                </div>
-                                <p>Starring: {item.starring}</p>
-                                <p>Genres: {item.genres}</p>
-                                <p>Tag: {item.tag}</p>
-                            </div>
+                                    <div className='content_right'></div>
 
+                                </div>
+                                <div className='button'>
+                                    <Button className='leftBannerButton' onClick={() => { ref.current.prev() }} icon={<LeftOutlined />}></Button>
+                                    <Button className='rightBannerButton' onClick={() => { ref.current.next() }} icon={<RightOutlined />}></Button>
+                                </div>
+                            </div>
                         </div>
                     )
                 })}
