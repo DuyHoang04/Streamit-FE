@@ -22,8 +22,8 @@ const useSeries = () => {
   const updateSeriesRequest = (req) => {
     dispatch(seriesActions.updateSeriesRequest(req));
   };
-  const getAllSeriesRequest = () => {
-    dispatch(seriesActions.getAllSeriesRequest());
+  const getAllSeriesRequest = (req) => {
+    dispatch(seriesActions.getAllSeriesRequest(req));
   };
   const getDetailSeriesRequest = (req) => {
     dispatch(seriesActions.getDetailSeriesRequest(req));

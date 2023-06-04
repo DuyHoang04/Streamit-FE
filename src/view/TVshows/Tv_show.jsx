@@ -1,17 +1,16 @@
 import React, { useEffect, useState } from "react";
-import useMovie from "../../hook/useMovie";
-import Loader from "../../common/loader/Loader";
+import useSeries from "../../hook/useSeries";
+import "./tv_show.scss";
 import { getMovieByGenres } from "../../utils";
-import { RightOutlined, LeftOutlined } from "@ant-design/icons";
-import CardMovie from "../../components/card_movie/card_movie";
-import "./movie-page.scss";
+import Loader from "../../common/loader/Loader";
 import Banner from "../../assets/banner.jpg";
+import CardMovie from "../../components/card_movie/card_movie";
+import { RightOutlined, LeftOutlined } from "@ant-design/icons";
 import { Link } from "react-router-dom";
 
-const MoviePage = () => {
-  const { getAllMovieRequest, movieList } = useMovie();
-  const newMovieList = getMovieByGenres(movieList);
-  const [isMobile, setIsMobile] = useState(window.innerWidth);
+const TvShowPage = () => {
+  const { getAllSeriesRequest, seriesMovieList } = useSeries();
+  const newSeriesMovieList = getMovieByGenres(seriesMovieList);
   const [currentPositions, setCurrentPositions] = useState({});
 
   useEffect(() => {
@@ -20,34 +19,22 @@ const MoviePage = () => {
       left: 0,
       behavior: "smooth",
     });
-  }, []);
-
-  useEffect(() => {
     const fetchData = async () => {
-      getAllMovieRequest({});
+      await getAllSeriesRequest({});
     };
     fetchData();
   }, []);
 
   useEffect(() => {
     // Kiểm tra xem movieList đã được tải về chưa
-    if (movieList.length > 0) {
-      const initialPositions = newMovieList.reduce((acc, item) => {
+    if (seriesMovieList.length > 0) {
+      const initialPositions = newSeriesMovieList.reduce((acc, item) => {
         return { ...acc, [item.genres]: 0 };
       }, {});
       setCurrentPositions(initialPositions);
     }
-  }, [movieList]);
+  }, [seriesMovieList]);
 
-  const handleNext = (genres, movieListLength) => {
-    const currentPosition = currentPositions[genres];
-    if (currentPosition < movieListLength - 4) {
-      setCurrentPositions((prevPositions) => ({
-        ...prevPositions,
-        [genres]: currentPosition + 1,
-      }));
-    }
-  };
   const handlePrev = (genres) => {
     const currentPosition = currentPositions[genres];
     if (currentPosition > 0) {
@@ -58,24 +45,36 @@ const MoviePage = () => {
     }
   };
 
+  const handleNext = (genres, movieListLength) => {
+    const currentPosition = currentPositions[genres];
+    if (currentPosition < movieListLength - 4) {
+      setCurrentPositions((prevPositions) => ({
+        ...prevPositions,
+        [genres]: currentPosition + 1,
+      }));
+    }
+  };
+
   return (
-    <div className="movies">
-      {newMovieList.length > 0 ? (
+    <div className="tvShow_page">
+      {newSeriesMovieList.length > 0 ? (
         <>
-          <div className="movieList_banner">
-            <img src={Banner} alt="Banner" />
-            <h1 className="title">Movie</h1>
+          <div className="tvShow_banner">
+            <img src={Banner} alt="" />
+            <h1 className="title">Tv-Show</h1>
           </div>
-          <div className="movieList_container">
-            {newMovieList.map((item, index) => (
-              <div className="movie_item" key={index}>
+          <div className="tvShow_list_container">
+            {newSeriesMovieList.map((item, index) => (
+              <div className="tvShow_item">
                 <div className="genres_title">
                   <h1>{item.genres}</h1>
-                  <Link to={`/view_movie_by_genres/${item.genres}`}>
+                  <Link
+                    to={`/view_movie_by_genres/${item.genres}?isSeries=true`}
+                  >
                     <h2 className="genres_view">View All</h2>
                   </Link>
                 </div>
-                <div className="cardMovie_container">
+                <div className="cardTvShow_container">
                   <div
                     className="btn_prev"
                     onClick={() => handlePrev(item.genres)}
@@ -93,8 +92,8 @@ const MoviePage = () => {
                     }}
                   >
                     {item.movies.map((movie) => (
-                      <div className="card_movie">
-                        <CardMovie movie={movie} key={movie._id} />
+                      <div className="card_tvShow" key={movie._id}>
+                        <CardMovie movie={movie} />
                       </div>
                     ))}
                   </div>
@@ -118,4 +117,4 @@ const MoviePage = () => {
   );
 };
 
-export default MoviePage;
+export default TvShowPage;
