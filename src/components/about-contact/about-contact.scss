@@ -3,8 +3,9 @@
   .homeContact_container {
     height: 100%;
     width: 500px;
-    background-color: #ffffffe6;
+    background-color: var(--background-color);
     display: flex;
+    color: white;
     justify-content: center;
     flex-direction: column;
     padding-inline: 20px;
@@ -31,13 +32,14 @@
         line-height: 20px;
         margin: 0px 0px 5px;
         text-transform: uppercase;
+        color: white;
       }
 
       textarea,
       input {
         height: 40px;
         width: 100%;
-        background-color: #e4e4e4;
+        background-color: var(--background-input);
         border-color: #e4e4e4;
         border-style: solid;
         border-width: 1px;
@@ -47,6 +49,7 @@
         line-height: 20px;
         margin: 0px 0px 20px;
         padding: 0px 20px;
+        color: white;
       }
     }
     .messInput {

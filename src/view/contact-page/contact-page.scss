@@ -1,5 +1,7 @@
 .contact {
   margin-bottom: 10rem;
+  background-color: var(--background-color);
+  padding-bottom: 5rem;
   .contact_content {
     padding-inline: 3rem;
     margin-top: 5rem;
@@ -16,7 +18,7 @@
           min-width: 50%;
           display: inline-block;
           font-weight: 700;
-          color: #1d1d1d;
+          color: white;
           line-height: 100px;
           text-transform: uppercase;
           min-width: 1000px;
@@ -32,7 +34,7 @@
             font-weight: 700;
             font-size: 100px;
             line-height: 1em;
-            color: #f4f4f4;
+            color: gray;
             letter-spacing: 0.08em;
           }
         }
@@ -40,7 +42,7 @@
       .contact_content-leftForm {
         height: 100%;
         width: 100%;
-        background-color: #ffffffe6;
+        background-color: var(--background-color);
         display: flex;
         justify-content: center;
         flex-direction: column;
@@ -54,13 +56,14 @@
             line-height: 20px;
             margin: 0px 0px 5px;
             text-transform: uppercase;
+            color: white;
           }
 
           textarea,
           input {
             height: 40px;
             width: 100%;
-            background-color: #e4e4e4;
+            background-color: var(--background-input);
             border-color: #e4e4e4;
             border-style: solid;
             border-width: 1px;
