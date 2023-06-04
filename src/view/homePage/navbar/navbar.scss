@@ -8,6 +8,8 @@ body {
   #navbar {
     background-color: #372c284a;
     width: 100%;
+    position: fixed;
+    z-index: 100000;
   }
   
   .navbar_logo {
