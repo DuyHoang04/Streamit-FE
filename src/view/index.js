@@ -11,6 +11,8 @@ import MovieDetailPage from "./movie-detail/movie-detail-page";
 import LikeMoviePage from "./like-movie/like-movie-page";
 import MoviePage from "./movie-page/movie-page";
 import SeriesPage from "./series-page/series-page";
+import AboutPage from "./about-page/about-page";
+import ContactPage from "./contact-page/contact-page";
 
 export {
   HomePage,
@@ -26,4 +28,6 @@ export {
   LikeMoviePage,
   MoviePage,
   SeriesPage,
+  AboutPage,
+  ContactPage,
 };

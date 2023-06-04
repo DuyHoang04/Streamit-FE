@@ -15,6 +15,14 @@ const MoviePage = () => {
   const [currentPositions, setCurrentPositions] = useState({});
 
   useEffect(() => {
+    window.scrollTo({
+      top: 0,
+      left: 0,
+      behavior: "smooth",
+    });
+  }, []);
+
+  useEffect(() => {
     const fetchData = async () => {
       getAllMovieRequest();
     };

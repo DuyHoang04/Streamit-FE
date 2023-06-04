@@ -43,8 +43,16 @@ const publicRoutes = [
     element: <pages.MoviePage />,
   },
   {
-    path: config.routes.series,
+    path: config.routes.tv_show,
     element: <pages.SeriesPage />,
+  },
+  {
+    path: config.routes.about,
+    element: <pages.AboutPage />,
+  },
+  {
+    path: config.routes.contact,
+    element: <pages.ContactPage />,
   },
 
   // ADMIN
