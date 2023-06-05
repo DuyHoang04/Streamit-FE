@@ -51,8 +51,6 @@ const DetailReview = ({ data, handleAddComment }) => {
     return data?.reviews?.slice(startIndex, endIndex);
   };
 
-  console.log(getDataReview());
-
   return (
     <>
       <div className="detailTabs">

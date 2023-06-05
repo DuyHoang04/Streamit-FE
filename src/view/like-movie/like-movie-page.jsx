@@ -3,6 +3,7 @@ import "./like-movie-page.scss";
 import useUser from "../../hook/useUser";
 // import CardMovie from "../../components/card-movie/cart-movie";
 import useAuth from "../../hook/useAuth";
+import CardMovie from "../../components/card_movie/card_movie";
 
 const LikeMoviePage = () => {
   const { accessToken } = useAuth();
@@ -21,15 +22,11 @@ const LikeMoviePage = () => {
     <div className="likeMovie_page">
       <div className="likeMovie_container">
         {likeMovies.length > 0 ? (
-          likeMovies.map((data) => ({
-            /* <CardMovie
-              movie={data}
-              key={data.movieId}
-              accessToken={accessToken}
-            /> */
-          }))
+          likeMovies.map((data) => (
+            <CardMovie movie={data} key={data._id} accessToken={accessToken} />
+          ))
         ) : (
-          <h1>No movie</h1>
+          <h1 style={{ color: "white" }}>No movie</h1>
         )}
       </div>
     </div>

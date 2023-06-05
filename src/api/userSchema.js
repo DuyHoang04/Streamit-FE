@@ -17,6 +17,10 @@ const USER_SCHEMA = {
     url: `${BASE_URL}/users/find/like_movie`,
     method: METHOD.GET,
   },
+  GET_DETAIL_USER: {
+    url: `${BASE_URL}/users/find`,
+    method: METHOD.GET,
+  },
 };
 
 export default USER_SCHEMA;

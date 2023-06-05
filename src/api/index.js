@@ -47,6 +47,7 @@ export const userApi = {
   deleteUser: createApi(userSchema.DELETE_USER),
   updateUser: createApi(userSchema.UPDATE_USER),
   getLikedMovies: createApi(userSchema.GET_LIKED_MOVIE),
+  getDetailUser: createApi(userSchema.GET_DETAIL_USER),
 };
 
 export const mediaApi = {

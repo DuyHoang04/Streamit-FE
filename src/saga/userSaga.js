@@ -45,11 +45,21 @@ function* handleGetLikedMovie({ payload }) {
     yield toastError("Something went wrong");
   }
 }
+function* handleGetDetailUser({ payload }) {
+  try {
+    const { data } = yield userApi.getDetailUser(payload);
+    yield put(userActions.getDetailUserSuccess(data));
+  } catch (error) {
+    yield put(userActions.getDetailUserFailure(error));
+    yield toastError("Something went wrong");
+  }
+}
 
 const userSaga = [
   takeEvery(userTypes.GET_ALL_USER_REQUEST, handelGetAllUser),
   takeEvery(userTypes.UPDATE_USER_REQUEST, handleUpdateUser),
   takeEvery(userTypes.DELETE_USER_REQUEST, handleDeleteUser),
   takeEvery(userTypes.GET_LIKED_MOVIE_TO_USER_REQUEST, handleGetLikedMovie),
+  takeEvery(userTypes.DETAIL_USER_REQUEST, handleGetDetailUser),
 ];
 export default userSaga;

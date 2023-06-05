@@ -4,6 +4,7 @@ const initialState = {
   isFetching: false,
   userList: [],
   likeMovies: [],
+  userInfo: {},
   error: null,
 };
 
@@ -13,6 +14,7 @@ const userReducer = (state = initialState, action) => {
     case userTypes.UPDATE_USER_REQUEST:
     case userTypes.DELETE_USER_REQUEST:
     case userTypes.GET_LIKED_MOVIE_TO_USER_REQUEST:
+    case userTypes.DETAIL_USER_REQUEST:
       return {
         ...state,
         isFetching: true,
@@ -29,6 +31,12 @@ const userReducer = (state = initialState, action) => {
         isFetching: false,
         likeMovies: action.payload,
       };
+    case userTypes.DETAIL_USER_SUCCESS:
+      return {
+        ...state,
+        isFetching: false,
+        userInfo: action.payload,
+      };
     case userTypes.UPDATE_USER_SUCCESS:
     case userTypes.DELETE_USER_SUCCESS:
       return {
@@ -39,6 +47,7 @@ const userReducer = (state = initialState, action) => {
     case userTypes.UPDATE_USER_FAILURE:
     case userTypes.DELETE_USER_FAILURE:
     case userTypes.GET_LIKED_MOVIE_TO_USER_FAILURE:
+    case userTypes.DETAIL_USER_FAILURE:
       return {
         ...state,
         isFetching: false,

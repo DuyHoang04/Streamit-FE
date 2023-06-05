@@ -88,7 +88,7 @@ const MovieDetailPage = () => {
           movieId: dataMovie._id,
           name: dataMovie.name,
           genres: dataMovie.genres,
-          image: dataMovie.image,
+          bannerImage: dataMovie.bannerImage,
           isSeries: dataMovie?.isSeries || false,
         },
         headers: {
