@@ -1,28 +1,24 @@
-body {
-    color: #d1d0cf;
-  }
-  .homePage_background {
-    background-color: #141414;
-  }
-  
+.homePage_background {
+  background-color: #141414;
+
   #navbar {
     background-color: #372c284a;
     width: 100%;
     position: fixed;
     z-index: 100000;
   }
-  
+
   .navbar_logo {
     display: flex;
     flex-direction: column;
     justify-content: center;
   }
-  
+
   .navbar_container {
     margin: auto;
     width: 85%;
   }
-  
+
   .navbar_menuItem {
     list-style: none;
     display: flex;
@@ -31,24 +27,57 @@ body {
     font-size: 2rem;
     align-items: center;
   }
-  
+
   .navbar_wrap {
     display: flex;
     width: 100%;
     justify-content: space-between;
     padding: 15px;
   }
-  
+
   .navbar_menuRight {
     display: flex;
     align-items: center;
     gap: 15px;
+    .favorites {
+      position: relative;
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      background-color: var(--background-color);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      cursor: pointer;
+      svg {
+        color: var(--primary-color);
+      }
+      .count {
+        position: absolute;
+        width: 12px;
+        height: 12px;
+        top: 0;
+        right: 0;
+        color: white;
+        font-size: 12px;
+        background-color: white;
+        color: #000;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border-radius: 50%;
+      }
+    }
+    .user_icon {
+      cursor: pointer;
+    }
   }
   .navbar_item {
     transition: color 0.5s;
     color: #d1d0cf;
   }
-  
+
   .navbar_item:hover {
     color: red;
   }
+}

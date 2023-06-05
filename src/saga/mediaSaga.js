@@ -3,6 +3,7 @@ import * as types from "../utils/actionTypes/index";
 import { mediaApi } from "../api/index";
 import { mediaActions, userActions } from "../action/index";
 import { toastError, toastSuccess } from "../utils";
+import useUser from "../hook/useUser";
 
 function* handleGetMovieAndSeries() {
   try {
@@ -14,9 +15,11 @@ function* handleGetMovieAndSeries() {
   }
 }
 function* handleLikeMovieAndSeries({ payload }) {
+  const { headers } = payload;
   try {
     const { message } = yield mediaApi.likeMovieAndSeries(payload);
     yield put(mediaActions.likeMovieAndSeriesSuccess());
+    yield put(userActions.getDetailUserRequest({ headers }));
     toastSuccess(message);
   } catch (error) {
     yield put(mediaActions.likeMovieAndSeriesFailure(error));
@@ -24,21 +27,16 @@ function* handleLikeMovieAndSeries({ payload }) {
   }
 }
 function* handleDeleteLikeMovieAndSeries({ payload }) {
-  const { req, accessToken } = payload;
+  const { headers } = payload;
   try {
-    const { message } = yield mediaApi.deleteLikeMovieAndSeries(req);
+    const { message } = yield mediaApi.deleteLikeMovieAndSeries(payload);
     yield put(mediaActions.deleteLikeMovieAndSeriesSuccess());
     toastSuccess(message);
-    yield put(
-      userActions.getLikedMovieUserRequest({
-        headers: {
-          authorization: `Bearer ${accessToken}`,
-        },
-      })
-    );
+    yield put(userActions.getLikedMovieUserRequest({ headers }));
+    yield put(userActions.getDetailUserRequest({ headers }));
   } catch (error) {
     yield put(mediaActions.deleteLikeMovieAndSeriesFailure(error));
-    toastError("Movie already like");
+    toastError("Something went wrong");
   }
 }
 

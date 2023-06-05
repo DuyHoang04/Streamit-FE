@@ -50,7 +50,6 @@ function* handleGetAllMovie({ payload }) {
 }
 function* handleGetDetailMovie({ payload }) {
   try {
-    console.log(payload);
     const { data } = yield movieApi.getDetailMovie(payload);
     yield put(movieActions.getDetailMovieSuccess(data));
   } catch (error) {

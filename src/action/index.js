@@ -171,4 +171,7 @@ export const userActions = {
   getLikedMovieUserFailure: createAction(
     userTypes.GET_LIKED_MOVIE_TO_USER_FAILURE
   ),
+  getDetailUserRequest: createAction(userTypes.DETAIL_USER_REQUEST),
+  getDetailUserSuccess: createAction(userTypes.DETAIL_USER_SUCCESS),
+  getDetailUserFailure: createAction(userTypes.DETAIL_USER_FAILURE),
 };

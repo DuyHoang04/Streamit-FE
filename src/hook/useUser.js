@@ -6,6 +6,7 @@ const useUser = () => {
   const dispatch = useDispatch();
   const userList = useSelector((state) => state.users.userList);
   const likeMovies = useSelector((state) => state.users.likeMovies);
+  const userInfo = useSelector((state) => state.users.userInfo);
 
   const getAllUserRequest = () => {
     dispatch(userActions.getAllUserRequest());
@@ -20,14 +21,19 @@ const useUser = () => {
   const getLikedMovie = (req) => {
     dispatch(userActions.getLikedMovieUserRequest(req));
   };
+  const getDetailUser = (req) => {
+    dispatch(userActions.getDetailUserRequest(req));
+  };
 
   return {
     userList,
+    likeMovies,
+    userInfo,
     getAllUserRequest,
     updateUserRequest,
     deleteUserRequest,
     getLikedMovie,
-    likeMovies,
+    getDetailUser,
   };
 };
 export default useUser;

@@ -19,11 +19,18 @@ function* handleRegister({ payload }) {
 }
 
 function* handleLogin({ payload }) {
+  console.log("vo");
   const { navigate, reqLogin } = payload;
   try {
+    // tạo expiration 7 ngày cho cookie
+    const expirationDate = new Date();
+    expirationDate.setDate(expirationDate.getDate() + 7);
+
     const { data } = yield authApi.Login(reqLogin);
     yield put(authActions.loginSuccess(data.isAdmin));
-    yield Cookies.set("access_token", data.accessToken);
+    yield Cookies.set("access_token", data.accessToken, {
+      expires: expirationDate,
+    });
     navigate("/");
   } catch (error) {
     yield put(authActions.loginFailure(error));
