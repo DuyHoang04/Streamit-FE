@@ -26,7 +26,7 @@ const AdminMoviesPage = () => {
     deleteSeriesRequest,
     updateSeriesRequest,
   } = useSeries();
-  const {mediaList, getMovieAndSeries } = useMedia();
+  const { mediaList, getMovieAndSeries } = useMedia();
   const [updateMovieModal, setUpdateMovieModal] = useState(false);
   const [addEpisodeModal, setAddEpisodeModal] = useState(false);
   const [updateEpisodeModal, setUpdateEpisodeModal] = useState(false);

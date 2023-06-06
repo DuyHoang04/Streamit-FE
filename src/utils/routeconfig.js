@@ -14,7 +14,7 @@ const routes = {
   // USER
   detail_movie: "/detail_movie/:movieId",
   like_movie: "/like_movie",
-  movies: "/movies",
+  movies_user: "/movies",
   tv_show: "/tv_show",
   about: "/about",
   contact: "/contact",

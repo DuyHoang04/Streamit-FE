@@ -1,19 +1,16 @@
 import { Avatar, Space } from "antd";
-import {
-  SearchOutlined,
-  BellOutlined,
-  UserOutlined,
-  HeartFilled,
-} from "@ant-design/icons";
+import { SearchOutlined, HeartFilled } from "@ant-design/icons";
 import { Tooltip } from "antd";
 import "./navbar.scss";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import useUser from "../../../hook/useUser";
 import useAuth from "../../../hook/useAuth";
 import { useEffect } from "react";
 import { BASE_URL } from "../../../utils/apiConfig";
 
 const Navbar = () => {
+  const navigate = useNavigate();
+  const { logOutRequest } = useAuth();
   const { getDetailUser, userInfo } = useUser();
   const { accessToken } = useAuth();
   const { likedMovies } = userInfo;
@@ -40,19 +37,38 @@ const Navbar = () => {
     { title: "Contact", link: "/contact" },
   ];
 
+  const handleLogOut = async () => {
+    if (accessToken) {
+      await logOutRequest({ navigate });
+    }
+  };
+
   const AvatarUser = () => {
     return (
       <Tooltip
         title={
           <div>
-            {userInfo.isAdmin && <div style={{ cursor: "pointer" }}>Admin</div>}
-            <Link to={`/profile_user/${userInfo._id}`}>
-              <div style={{ cursor: "pointer" }}>Profile</div>
-            </Link>
-            <div style={{ cursor: "pointer" }}>Log Out</div>
+            {accessToken ? (
+              <>
+                {userInfo.isAdmin && (
+                  <Link to="/admin/dashboard">
+                    <div style={{ cursor: "pointer" }}>Admin</div>
+                  </Link>
+                )}
+                <Link to={`/profile_user/${userInfo._id}`}>
+                  <div style={{ cursor: "pointer" }}>Profile</div>
+                </Link>
+                <div style={{ cursor: "pointer" }} onClick={handleLogOut}>
+                  Log Out
+                </div>
+              </>
+            ) : (
+              <Link to="/login">
+                <div>Login</div>
+              </Link>
+            )}
           </div>
         }
-        mouseEnterDelay={0.5} // Đặt thời gian trễ khi hover vào tooltip
       >
         <Avatar
           src={
@@ -81,7 +97,7 @@ const Navbar = () => {
             </Link>
             <div className="navbar_menuItem">
               {navItem.map((item, index) => (
-                <li>
+                <li key={index}>
                   <Link className="navbar_item" to={item.link}>
                     {item.title}
                   </Link>

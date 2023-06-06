@@ -39,7 +39,7 @@ const publicRoutes = [
     element: <pages.LikeMoviePage />,
   },
   {
-    path: config.routes.movies,
+    path: config.routes.movies_user,
     element: <pages.MoviePage />,
   },
   {
