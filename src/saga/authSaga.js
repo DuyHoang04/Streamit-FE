@@ -1,7 +1,7 @@
 import { put, takeEvery } from "redux-saga/effects";
 import * as types from "../utils/actionTypes/index";
 import { authApi, genresApi } from "../api/index";
-import { authActions, genresActions } from "../action/index";
+import { authActions, genresActions, userActions } from "../action/index";
 import { toastError, toastSuccess } from "../utils";
 import Cookies from "js-cookie";
 
@@ -38,9 +38,23 @@ function* handleLogin({ payload }) {
   }
 }
 
+function* handleLogOut({ payload }) {
+  const { navigate } = payload;
+  try {
+    const { message } = yield authApi.LogOut({});
+    yield put(authActions.logoutSuccess());
+    Cookies.remove("access_token");
+    toastSuccess(message);
+    navigate("/");
+  } catch (error) {
+    yield put(authActions.logoutFailure(error));
+    yield toastError("Sai tài khoản hoặc mật khẩu");
+  }
+}
+
 const authSaga = [
   takeEvery(types.authTypes.LOGIN_REQUEST, handleLogin),
   takeEvery(types.authTypes.REGISTER_REQUEST, handleRegister),
-  // takeEvery(types.authTypes.LOGOUT_REQUEST, handleLogOut),
+  takeEvery(types.authTypes.LOGOUT_REQUEST, handleLogOut),
 ];
 export default authSaga;

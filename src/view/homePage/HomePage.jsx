@@ -4,7 +4,8 @@ import Banner from "./banner/banner";
 export default function HomePage() {
   return (
     <>
-      <Navbar />
+      {/* <Navbar /> */}
       <Banner />
     </>
   );
+}

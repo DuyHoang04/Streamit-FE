@@ -13,11 +13,15 @@ const useAuth = () => {
   const loginRequest = (req) => {
     dispatch(authActions.loginRequest(req));
   };
+  const logOutRequest = (req) => {
+    dispatch(authActions.logoutRequest(req));
+  };
 
   return {
+    accessToken,
     registerRequest,
     loginRequest,
-    accessToken,
+    logOutRequest,
   };
 };
 

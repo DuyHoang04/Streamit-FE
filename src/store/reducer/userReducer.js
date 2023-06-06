@@ -1,4 +1,4 @@
-import { userTypes } from "../../utils/actionTypes";
+import { authTypes, userTypes } from "../../utils/actionTypes";
 
 const initialState = {
   isFetching: false,
@@ -37,6 +37,12 @@ const userReducer = (state = initialState, action) => {
         ...state,
         isFetching: false,
         userInfo: action.payload,
+      };
+    case authTypes.LOGOUT_SUCCESS:
+      return {
+        ...state,
+        isFetching: false,
+        userInfo: {},
       };
     case userTypes.UPDATE_USER_SUCCESS:
     case userTypes.DELETE_USER_SUCCESS:

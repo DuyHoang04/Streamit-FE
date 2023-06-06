@@ -1,6 +1,7 @@
 import React from "react";
 import Navbar from "../../view/homePage/navbar/navbar";
 import Footer from "../../components/footer/Footer";
+import "./layout_navbar.scss";
 
 const LayoutNavBar = ({ children }) => {
   return (
