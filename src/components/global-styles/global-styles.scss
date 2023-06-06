@@ -37,8 +37,11 @@ input,
 }
 
 a {
-  color: var(--text-color);
+  color: white;
   text-decoration: none;
+  &:hover {
+    color: var(--primary-color);
+  }
 }
 
 *,

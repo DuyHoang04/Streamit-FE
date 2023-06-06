@@ -58,6 +58,14 @@ const publicRoutes = [
     path: config.routes.view_movie_by_genres,
     element: <pages.ViewGenresPage />,
   },
+  {
+    path: config.routes.view_video,
+    element: <pages.ViewVideo />,
+  },
+  {
+    path: config.routes.profile_user,
+    element: <pages.ProfileUser />,
+  },
 
   // ADMIN
   {

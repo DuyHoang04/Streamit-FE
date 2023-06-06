@@ -3,6 +3,7 @@ import { userApi } from "../api/index";
 import { toastSuccess, toastError } from "../utils";
 import { userTypes } from "../utils/actionTypes";
 import { userActions } from "../action";
+import { toast } from "react-hot-toast";
 
 function* handelGetAllUser({}) {
   try {
@@ -15,11 +16,24 @@ function* handelGetAllUser({}) {
 }
 
 function* handleUpdateUser({ payload }) {
+  const { req, accessToken } = payload;
+
+  // nếu có access là đang cập nhật bên user
   try {
-    const { message } = yield userApi.updateUser(payload);
+    const { message } = yield userApi.updateUser(req);
     yield put(userActions.updateUserSuccess());
     yield toastSuccess(message);
-    yield put(userActions.getAllUserRequest());
+    if (!accessToken) {
+      yield put(userActions.getAllUserRequest());
+    } else {
+      yield put(
+        userActions.getDetailUserRequest({
+          headers: {
+            authorization: `Bearer ${accessToken}`,
+          },
+        })
+      );
+    }
   } catch (error) {
     yield put(userActions.updateUserFailure(error));
     yield toastError("Something went wrong");
@@ -54,6 +68,16 @@ function* handleGetDetailUser({ payload }) {
     yield toastError("Something went wrong");
   }
 }
+function* handleChangePassUser({ payload }) {
+  try {
+    const { message } = yield userApi.changePassUser(payload);
+    yield put(userActions.changePassUserSuccess());
+    toastSuccess(message);
+  } catch (error) {
+    yield put(userActions.changePassUserFailure(error));
+    yield toastError("Something went wrong");
+  }
+}
 
 const userSaga = [
   takeEvery(userTypes.GET_ALL_USER_REQUEST, handelGetAllUser),
@@ -61,5 +85,6 @@ const userSaga = [
   takeEvery(userTypes.DELETE_USER_REQUEST, handleDeleteUser),
   takeEvery(userTypes.GET_LIKED_MOVIE_TO_USER_REQUEST, handleGetLikedMovie),
   takeEvery(userTypes.DETAIL_USER_REQUEST, handleGetDetailUser),
+  takeEvery(userTypes.CHANGE_PASS_USER_REQUEST, handleChangePassUser),
 ];
 export default userSaga;
