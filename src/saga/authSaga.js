@@ -41,5 +41,6 @@ function* handleLogin({ payload }) {
 const authSaga = [
   takeEvery(types.authTypes.LOGIN_REQUEST, handleLogin),
   takeEvery(types.authTypes.REGISTER_REQUEST, handleRegister),
+  // takeEvery(types.authTypes.LOGOUT_REQUEST, handleLogOut),
 ];
 export default authSaga;

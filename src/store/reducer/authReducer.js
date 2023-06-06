@@ -3,23 +3,23 @@ import { authTypes } from "../../utils/actionTypes";
 const initialState = {
   isFetching: false,
   error: null,
-  isAdmin: false,
 };
 
 const authReducer = (state = initialState, action) => {
   switch (action.type) {
     case authTypes.REGISTER_REQUEST:
     case authTypes.LOGIN_REQUEST:
+    case authTypes.LOGOUT_REQUEST:
       return {
         ...state,
         isFetching: true,
       };
     case authTypes.REGISTER_SUCCESS:
     case authTypes.LOGIN_SUCCESS:
+    case authTypes.LOGOUT_REQUEST:
       return {
         ...state,
         isFetching: false,
-        isAdmin: action.payload,
       };
 
     case authTypes.REGISTER_FAILURE:

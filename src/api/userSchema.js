@@ -21,6 +21,10 @@ const USER_SCHEMA = {
     url: `${BASE_URL}/users/find`,
     method: METHOD.GET,
   },
+  CHANGE_PASS_USER: {
+    url: `${BASE_URL}/users/change_password`,
+    method: METHOD.PUT,
+  },
 };
 
 export default USER_SCHEMA;

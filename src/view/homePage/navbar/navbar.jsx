@@ -5,11 +5,14 @@ import {
   UserOutlined,
   HeartFilled,
 } from "@ant-design/icons";
+import { Tooltip } from "antd";
 import "./navbar.scss";
 import { Link } from "react-router-dom";
 import useUser from "../../../hook/useUser";
 import useAuth from "../../../hook/useAuth";
 import { useEffect } from "react";
+import { BASE_URL } from "../../../utils/apiConfig";
+
 const Navbar = () => {
   const { getDetailUser, userInfo } = useUser();
   const { accessToken } = useAuth();
@@ -37,18 +40,45 @@ const Navbar = () => {
     { title: "Contact", link: "/contact" },
   ];
 
+  const AvatarUser = () => {
+    return (
+      <Tooltip
+        title={
+          <div>
+            {userInfo.isAdmin && <div style={{ cursor: "pointer" }}>Admin</div>}
+            <Link to={`/profile_user/${userInfo._id}`}>
+              <div style={{ cursor: "pointer" }}>Profile</div>
+            </Link>
+            <div style={{ cursor: "pointer" }}>Log Out</div>
+          </div>
+        }
+        mouseEnterDelay={0.5} // Đặt thời gian trễ khi hover vào tooltip
+      >
+        <Avatar
+          src={
+            userInfo?.picturePath
+              ? `${BASE_URL}/${userInfo?.picturePath}`
+              : "https://png.pngitem.com/pimgs/s/649-6490124_katie-notopoulos-katienotopoulos-i-write-about-tech-round.png"
+          }
+        />
+      </Tooltip>
+    );
+  };
+
   return (
     <div className="homePage_background">
       <header id="navbar">
         <div className="navbar_container">
           <div className="navbar_wrap">
-            <div className="navbar_logo">
-              <img
-                src="../../src/assets/logo.png"
-                style={{ width: "150px" }}
-                alt=""
-              />
-            </div>
+            <Link to="/">
+              <div className="navbar_logo">
+                <img
+                  src="../../src/assets/logo.png"
+                  style={{ width: "150px" }}
+                  alt=""
+                />
+              </div>
+            </Link>
             <div className="navbar_menuItem">
               {navItem.map((item, index) => (
                 <li>
@@ -70,13 +100,7 @@ const Navbar = () => {
               </Link>
               <div className="user_icon">
                 <Space wrap size={16}>
-                  <Avatar
-                    src={
-                      userInfo?.picturePath
-                        ? `${BASE_URL}/${item?.userImage}`
-                        : "https://png.pngitem.com/pimgs/s/649-6490124_katie-notopoulos-katienotopoulos-i-write-about-tech-round.png"
-                    }
-                  />
+                  <AvatarUser />
                 </Space>
               </div>
             </div>

@@ -174,4 +174,7 @@ export const userActions = {
   getDetailUserRequest: createAction(userTypes.DETAIL_USER_REQUEST),
   getDetailUserSuccess: createAction(userTypes.DETAIL_USER_SUCCESS),
   getDetailUserFailure: createAction(userTypes.DETAIL_USER_FAILURE),
+  changePassUserRequest: createAction(userTypes.CHANGE_PASS_USER_REQUEST),
+  changePassUserSuccess: createAction(userTypes.CHANGE_PASS_USER_SUCCESS),
+  changePassUserFailure: createAction(userTypes.CHANGE_PASS_USER_FAILURE),
 };

@@ -1,15 +1,29 @@
 import React, { useEffect, useState } from "react";
-import InputCustom from "../../common/input/InputCustom";
-import ButtonCustom from "../../common/button/buttonCustom";
-import Navbar from "./navbar/navbar";
-import useAuth from "../../hook/useAuth";
+import { Button, Tooltip } from "antd";
 export default function HomePage() {
-  const { accessToken } = useAuth();
-  const [count, setCount] = useState(0);
-  useEffect(() => {
-    if (count > 3) {
-      setCount(0);
-    }
-  }, [count]);
-  return <></>;
+  const DoubleTooltipButton = () => {
+    return (
+      <Tooltip
+        title={
+          <div>
+            <Tooltip title="Tooltip 1">
+              <span>Tooltip 1</span>
+            </Tooltip>
+            <Tooltip title="Tooltip 2">
+              <span>Tooltip 2</span>
+            </Tooltip>
+          </div>
+        }
+        mouseEnterDelay={0.5} // Đặt thời gian trễ khi hover vào tooltip
+      >
+        <Button>Hover me</Button>
+      </Tooltip>
+    );
+  };
+
+  return (
+    <>
+      <DoubleTooltipButton />
+    </>
+  );
 }

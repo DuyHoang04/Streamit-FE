@@ -15,6 +15,7 @@ const userReducer = (state = initialState, action) => {
     case userTypes.DELETE_USER_REQUEST:
     case userTypes.GET_LIKED_MOVIE_TO_USER_REQUEST:
     case userTypes.DETAIL_USER_REQUEST:
+    case userTypes.CHANGE_PASS_USER_REQUEST:
       return {
         ...state,
         isFetching: true,
@@ -39,6 +40,7 @@ const userReducer = (state = initialState, action) => {
       };
     case userTypes.UPDATE_USER_SUCCESS:
     case userTypes.DELETE_USER_SUCCESS:
+    case userTypes.CHANGE_PASS_USER_SUCCESS:
       return {
         ...state,
         isFetching: false,
@@ -48,6 +50,7 @@ const userReducer = (state = initialState, action) => {
     case userTypes.DELETE_USER_FAILURE:
     case userTypes.GET_LIKED_MOVIE_TO_USER_FAILURE:
     case userTypes.DETAIL_USER_FAILURE:
+    case userTypes.CHANGE_PASS_USER_FAILURE:
       return {
         ...state,
         isFetching: false,

@@ -14,6 +14,8 @@ import AboutPage from "./about-page/about-page";
 import ContactPage from "./contact-page/contact-page";
 import TvShowPage from "./TVshows/Tv_show";
 import ViewGenresPage from "./view-genres-page/view-genres-page";
+import ViewVideo from "./view-video/view-video";
+import ProfileUser from "./profile-user/profile-user";
 
 export {
   HomePage,
@@ -32,4 +34,6 @@ export {
   ContactPage,
   TvShowPage,
   ViewGenresPage,
+  ViewVideo,
+  ProfileUser,
 };

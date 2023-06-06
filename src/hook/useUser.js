@@ -24,6 +24,9 @@ const useUser = () => {
   const getDetailUser = (req) => {
     dispatch(userActions.getDetailUserRequest(req));
   };
+  const changePassUser = (req) => {
+    dispatch(userActions.changePassUserRequest(req));
+  };
 
   return {
     userList,
@@ -34,6 +37,7 @@ const useUser = () => {
     deleteUserRequest,
     getLikedMovie,
     getDetailUser,
+    changePassUser,
   };
 };
 export default useUser;
