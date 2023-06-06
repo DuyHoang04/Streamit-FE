@@ -7,6 +7,7 @@ import useUser from "../../../hook/useUser";
 import useAuth from "../../../hook/useAuth";
 import { useEffect } from "react";
 import { BASE_URL } from "../../../utils/apiConfig";
+import { toastError } from "../../../utils";
 
 const Navbar = () => {
   const navigate = useNavigate();
@@ -58,9 +59,11 @@ const Navbar = () => {
                 <Link to={`/profile_user/${userInfo._id}`}>
                   <div style={{ cursor: "pointer" }}>Profile</div>
                 </Link>
-                <div style={{ cursor: "pointer" }} onClick={handleLogOut}>
-                  Log Out
-                </div>
+                <Link>
+                  <div style={{ cursor: "pointer" }} onClick={handleLogOut}>
+                    Log Out
+                  </div>
+                </Link>
               </>
             ) : (
               <Link to="/login">
@@ -79,6 +82,14 @@ const Navbar = () => {
         />
       </Tooltip>
     );
+  };
+
+  const navigateLikeMoviePage = () => {
+    if (accessToken) {
+      navigate("/like_movie");
+    } else {
+      toastError("Please Login");
+    }
   };
 
   return (
@@ -108,12 +119,11 @@ const Navbar = () => {
               <div>
                 <SearchOutlined style={{ fontSize: "2rem" }} />
               </div>
-              <Link to="/like_movie">
-                <div className="favorites">
-                  <HeartFilled style={{ fontSize: "2rem" }} />
-                  <span className="count">{likedMovies?.length || 0}</span>
-                </div>
-              </Link>
+
+              <div className="favorites" onClick={navigateLikeMoviePage}>
+                <HeartFilled style={{ fontSize: "2rem" }} />
+                <span className="count">{likedMovies?.length || 0}</span>
+              </div>
               <div className="user_icon">
                 <Space wrap size={16}>
                   <AvatarUser />

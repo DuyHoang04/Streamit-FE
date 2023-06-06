@@ -21,11 +21,21 @@ export const validateData = (data) => {
 };
 
 export const toastSuccess = (message) => {
-  return toast.success(message);
+  return toast.success(message, {
+    style: {
+      border: "1px solid #713200",
+      padding: "10px 40px",
+    },
+  });
 };
 
 export const toastError = (message) => {
-  return toast.error(message);
+  return toast.error(message, {
+    style: {
+      border: "1px solid #713200",
+      padding: "10px 40px",
+    },
+  });
 };
 
 export const getMovieByGenres = (movieList) => {

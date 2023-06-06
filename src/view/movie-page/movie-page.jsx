@@ -76,14 +76,16 @@ const MoviePage = () => {
                   </Link>
                 </div>
                 <div className="cardMovie_container">
-                  <div
-                    className="btn_prev"
-                    onClick={() => handlePrev(item.genres)}
-                  >
-                    <div className="icon">
-                      <LeftOutlined />
+                  {currentPositions[item.genres] > 0 && (
+                    <div
+                      className="btn_prev"
+                      onClick={() => handlePrev(item.genres)}
+                    >
+                      <div className="icon">
+                        <LeftOutlined />
+                      </div>
                     </div>
-                  </div>
+                  )}
                   <div
                     className="slider-track"
                     style={{
@@ -98,14 +100,18 @@ const MoviePage = () => {
                       </div>
                     ))}
                   </div>
-                  <div
-                    className="btn_next"
-                    onClick={() => handleNext(item.genres, item.movies.length)}
-                  >
-                    <div className="icon">
-                      <RightOutlined />
+                  {currentPositions[item.genres] < item.movies.length - 4 && (
+                    <div
+                      className="btn_next"
+                      onClick={() =>
+                        handleNext(item.genres, item.movies.length)
+                      }
+                    >
+                      <div className="icon">
+                        <RightOutlined />
+                      </div>
                     </div>
-                  </div>
+                  )}
                 </div>
               </div>
             ))}
