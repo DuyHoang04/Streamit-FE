@@ -76,11 +76,13 @@
     }
   }
   .navbar_item {
-    transition: color 0.5s;
     color: #d1d0cf;
-  }
-
-  .navbar_item:hover {
-    color: red;
+    transition: all 0.3s;
+    &.active {
+      color: var(--primary-color);
+    }
+    &:hover {
+      color: var(--primary-color);
+    }
   }
 }

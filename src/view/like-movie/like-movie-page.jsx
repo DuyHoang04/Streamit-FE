@@ -1,7 +1,6 @@
 import React, { useEffect } from "react";
 import "./like-movie-page.scss";
 import useUser from "../../hook/useUser";
-// import CardMovie from "../../components/card-movie/cart-movie";
 import useAuth from "../../hook/useAuth";
 import CardMovie from "../../components/card_movie/card_movie";
 

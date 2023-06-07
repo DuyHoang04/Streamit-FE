@@ -8,7 +8,7 @@ import {
   HeartFilled,
   ShareAltOutlined,
 } from "@ant-design/icons";
-import { useLocation, useParams } from "react-router-dom";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
 import queryString from "query-string";
 import DetailReview from "../../components/DetailReview/detail-review";
 import useSeries from "../../hook/useSeries";
@@ -16,10 +16,10 @@ import EpisodesList from "../../components/episodes-list/episodes-list";
 import useAuth from "../../hook/useAuth";
 import useMedia from "../../hook/useMedia";
 import { motion } from "framer-motion";
-import { toast } from "react-hot-toast";
 import { toastError } from "../../utils";
 
 const MovieDetailPage = () => {
+  const navigate = useNavigate();
   const { accessToken } = useAuth();
   const queryParams = queryString.parse(useLocation().search);
   const isSeries = queryParams?.isSeries === "true";
@@ -101,6 +101,14 @@ const MovieDetailPage = () => {
     }
   };
 
+  const navigateVideoPage = () => {
+    if (isSeries) {
+      navigate(`/view_video/${movieId}?isSeries=true&episodes=1`);
+    } else {
+      navigate(`/view_video/${movieId}`);
+    }
+  };
+
   return (
     <>
       {dataMovie ? (
@@ -133,7 +141,7 @@ const MovieDetailPage = () => {
                   ))}
                 </div>
                 <div className="movie-description">{dataMovie.description}</div>
-                <div className="movie-play-video">
+                <div className="movie-play-video" onClick={navigateVideoPage}>
                   <CaretRightOutlined />
                 </div>
                 <div className="movie-list-more">
@@ -148,7 +156,12 @@ const MovieDetailPage = () => {
             </div>
 
             {/* EpisodesList */}
-            {isSeries && <EpisodesList episodesData={dataMovie?.episodes} />}
+            {isSeries && (
+              <EpisodesList
+                episodesData={dataMovie?.episodes}
+                movieId={movieId}
+              />
+            )}
 
             <DetailReview
               data={dataMovie}

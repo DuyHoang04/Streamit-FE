@@ -2,7 +2,7 @@ import { Avatar, Space } from "antd";
 import { SearchOutlined, HeartFilled } from "@ant-design/icons";
 import { Tooltip } from "antd";
 import "./navbar.scss";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import useUser from "../../../hook/useUser";
 import useAuth from "../../../hook/useAuth";
 import { useEffect } from "react";
@@ -11,10 +11,21 @@ import { toastError } from "../../../utils";
 
 const Navbar = () => {
   const navigate = useNavigate();
+  const { pathname } = useLocation();
   const { logOutRequest } = useAuth();
   const { getDetailUser, userInfo } = useUser();
   const { accessToken } = useAuth();
   const { likedMovies } = userInfo;
+
+  const navItem = [
+    { title: "Home", link: "/" },
+    { title: "Movies", link: "/movies" },
+    { title: "TV Shows", link: "/tv_show" },
+    { title: "About", link: "/about" },
+    { title: "Contact", link: "/contact" },
+  ];
+
+  const active = navItem.findIndex((e) => e.link === pathname);
 
   useEffect(() => {
     if (accessToken) {
@@ -29,14 +40,6 @@ const Navbar = () => {
       fetchData();
     }
   }, [accessToken]);
-
-  const navItem = [
-    { title: "Home", link: "/" },
-    { title: "Movies", link: "/movies" },
-    { title: "TV Shows", link: "/tv_show" },
-    { title: "About", link: "/about" },
-    { title: "Contact", link: "/contact" },
-  ];
 
   const handleLogOut = async () => {
     if (accessToken) {
@@ -109,7 +112,12 @@ const Navbar = () => {
             <div className="navbar_menuItem">
               {navItem.map((item, index) => (
                 <li key={index}>
-                  <Link className="navbar_item" to={item.link}>
+                  <Link
+                    to={item.link}
+                    className={` navbar_item ${
+                      index === active ? "active" : ""
+                    }`}
+                  >
                     {item.title}
                   </Link>
                 </li>

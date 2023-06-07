@@ -3,7 +3,7 @@ import "./episodes-list.scss";
 import { LeftOutlined, RightOutlined } from "@ant-design/icons";
 import CardEpisodes from "../cart-episoder/card-episodes";
 
-const EpisodesList = ({ episodesData }) => {
+const EpisodesList = ({ episodesData, movieId }) => {
   const [isMobile, setIsMobile] = useState(window.innerWidth);
   const [currentPosition, setCurrentPosition] = useState(0);
 
@@ -47,7 +47,7 @@ const EpisodesList = ({ episodesData }) => {
           >
             {episodesData?.map((episode, index) => (
               <div className="cart-episode" key={index}>
-                <CardEpisodes data={episode} />
+                <CardEpisodes data={episode} movieId={movieId} />
               </div>
             ))}
           </div>
