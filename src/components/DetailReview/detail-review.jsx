@@ -3,7 +3,6 @@ import "./detail-review.scss";
 import InputCustom from "../../common/input/InputCustom";
 import ButtonCustom from "../../common/button/buttonCustom";
 import { Rate, Avatar, Pagination } from "antd";
-import { UserOutlined } from "@ant-design/icons";
 import { validateData } from "../../utils";
 import { toast } from "react-hot-toast";
 import { format } from "timeago.js";

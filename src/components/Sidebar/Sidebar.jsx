@@ -5,22 +5,13 @@ import { useMemo, useState } from "react";
 
 import { useLocation, useNavigate } from "react-router-dom";
 import { ExportOutlined } from "@ant-design/icons";
-import {
-  AppstoreOutlined,
-  ContainerOutlined,
-  DesktopOutlined,
-  MailOutlined,
-  MenuFoldOutlined,
-  MenuUnfoldOutlined,
-  PieChartOutlined,
-} from "@ant-design/icons";
 import { publicRoutes } from "../../router";
 import { getPriorityRole } from "../../utils";
 const Sidebar = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const { pathname } = location;
- 
+
   const isAdmin = true;
   const getDefaultMenuItems = useMemo(() => {
     let ROUTES_NEED_TO_SHOW = [
@@ -55,7 +46,7 @@ const Sidebar = () => {
 
   return (
     <div className="sidebar-container">
-    <img src="../../src/assets/logo.png" style={{ width: "200px" }} alt="" />
+      <img src="../../src/assets/logo.png" style={{ width: "200px" }} alt="" />
       <Menu
         defaultSelectedKeys={[defaultActiveMenu]}
         mode="inline"

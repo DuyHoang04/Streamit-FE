@@ -2,18 +2,30 @@ import { Avatar, Space } from "antd";
 import { SearchOutlined, HeartFilled } from "@ant-design/icons";
 import { Tooltip } from "antd";
 import "./navbar.scss";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import useUser from "../../../hook/useUser";
 import useAuth from "../../../hook/useAuth";
 import { useEffect } from "react";
 import { BASE_URL } from "../../../utils/apiConfig";
+import { toastError } from "../../../utils";
 
 const Navbar = () => {
   const navigate = useNavigate();
+  const { pathname } = useLocation();
   const { logOutRequest } = useAuth();
   const { getDetailUser, userInfo } = useUser();
   const { accessToken } = useAuth();
   const { likedMovies } = userInfo;
+
+  const navItem = [
+    { title: "Home", link: "/" },
+    { title: "Movies", link: "/movies" },
+    { title: "TV Shows", link: "/tv_show" },
+    { title: "About", link: "/about" },
+    { title: "Contact", link: "/contact" },
+  ];
+
+  const active = navItem.findIndex((e) => e.link === pathname);
 
   useEffect(() => {
     if (accessToken) {
@@ -28,14 +40,6 @@ const Navbar = () => {
       fetchData();
     }
   }, [accessToken]);
-
-  const navItem = [
-    { title: "Home", link: "/" },
-    { title: "Movies", link: "/movies" },
-    { title: "TV Shows", link: "/tv_show" },
-    { title: "About", link: "/about" },
-    { title: "Contact", link: "/contact" },
-  ];
 
   const handleLogOut = async () => {
     if (accessToken) {
@@ -58,9 +62,11 @@ const Navbar = () => {
                 <Link to={`/profile_user/${userInfo._id}`}>
                   <div style={{ cursor: "pointer" }}>Profile</div>
                 </Link>
-                <div style={{ cursor: "pointer" }} onClick={handleLogOut}>
-                  Log Out
-                </div>
+                <Link>
+                  <div style={{ cursor: "pointer" }} onClick={handleLogOut}>
+                    Log Out
+                  </div>
+                </Link>
               </>
             ) : (
               <Link to="/login">
@@ -81,6 +87,14 @@ const Navbar = () => {
     );
   };
 
+  const navigateLikeMoviePage = () => {
+    if (accessToken) {
+      navigate("/like_movie");
+    } else {
+      toastError("Please Login");
+    }
+  };
+
   return (
     <div className="homePage_background">
       <header id="navbar">
@@ -98,7 +112,12 @@ const Navbar = () => {
             <div className="navbar_menuItem">
               {navItem.map((item, index) => (
                 <li key={index}>
-                  <Link className="navbar_item" to={item.link}>
+                  <Link
+                    to={item.link}
+                    className={` navbar_item ${
+                      index === active ? "active" : ""
+                    }`}
+                  >
                     {item.title}
                   </Link>
                 </li>
@@ -108,12 +127,11 @@ const Navbar = () => {
               <div>
                 <SearchOutlined style={{ fontSize: "2rem" }} />
               </div>
-              <Link to="/like_movie">
-                <div className="favorites">
-                  <HeartFilled style={{ fontSize: "2rem" }} />
-                  <span className="count">{likedMovies?.length || 0}</span>
-                </div>
-              </Link>
+
+              <div className="favorites" onClick={navigateLikeMoviePage}>
+                <HeartFilled style={{ fontSize: "2rem" }} />
+                <span className="count">{likedMovies?.length || 0}</span>
+              </div>
               <div className="user_icon">
                 <Space wrap size={16}>
                   <AvatarUser />

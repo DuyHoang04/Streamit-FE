@@ -5,19 +5,23 @@ import { BASE_URL } from "../../utils/apiConfig";
 import { CaretRightOutlined } from "@ant-design/icons";
 import { Link } from "react-router-dom";
 
-const CardEpisodes = ({ data }) => {
+const CardEpisodes = ({ data, movieId }) => {
   const { seriesInfo } = useSeries();
   return (
     <div className="cardEpisodes">
       <div className="episodes_image">
         <img src={`${BASE_URL}/${seriesInfo.bannerImage}`} alt="" />
 
-        <div className="btn_play">
-          <button>
-            {" "}
-            <CaretRightOutlined />
-          </button>
-        </div>
+        <Link
+          to={`/view_video/${movieId}?isSeries=true&episodes=${data?.episodeNumber}`}
+        >
+          <div className="btn_play">
+            <button>
+              {" "}
+              <CaretRightOutlined />
+            </button>
+          </div>
+        </Link>
       </div>
       <div className="episodes_name">
         {" "}

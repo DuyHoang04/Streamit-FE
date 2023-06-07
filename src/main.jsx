@@ -15,7 +15,7 @@ ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
     <Provider store={store}>
       <Router>
-        <Toaster />
+        <Toaster position="bottom-center" />
         <ProtectedComponent>
           <GlobalStyles>
             <App />

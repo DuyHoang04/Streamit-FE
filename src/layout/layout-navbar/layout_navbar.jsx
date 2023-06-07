@@ -6,7 +6,7 @@ import "./layout_navbar.scss";
 const LayoutNavBar = ({ children }) => {
   return (
     <div className="default__layout_navbar-container">
-      <div className="navbar">
+      <div>
         <Navbar />
       </div>
       <div className="page__content">{children}</div>

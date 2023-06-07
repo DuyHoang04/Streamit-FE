@@ -4,6 +4,8 @@
   #navbar {
     background-color: #372c284a;
     width: 100%;
+    top: 0;
+    right: 0;
     position: fixed;
     z-index: 100000;
   }
@@ -41,25 +43,26 @@
     gap: 15px;
     .favorites {
       position: relative;
-      width: 30px;
-      height: 30px;
-      border-radius: 50%;
-      background-color: var(--background-color);
+      // width: 30px;
+      // height: 30px;
+      // border-radius: 50%;
+      // background-color: var(--background-color);
       display: flex;
       justify-content: center;
       align-items: center;
       cursor: pointer;
       svg {
         color: var(--primary-color);
+        font-size: 2.5rem;
       }
       .count {
         position: absolute;
-        width: 12px;
-        height: 12px;
-        top: 0;
-        right: 0;
+        width: 16px;
+        height: 16px;
+        top: -4px;
+        right: -4px;
         color: white;
-        font-size: 12px;
+        font-size: 14px;
         background-color: white;
         color: #000;
         display: flex;
@@ -73,11 +76,13 @@
     }
   }
   .navbar_item {
-    transition: color 0.5s;
     color: #d1d0cf;
-  }
-
-  .navbar_item:hover {
-    color: red;
+    transition: all 0.3s;
+    &.active {
+      color: var(--primary-color);
+    }
+    &:hover {
+      color: var(--primary-color);
+    }
   }
 }

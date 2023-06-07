@@ -19,8 +19,8 @@ const routes = {
   about: "/about",
   contact: "/contact",
   view_movie_by_genres: "/view_movie_by_genres/:genres_name",
-  view_video: "view_video/:movieId",
-  profile_user: "profile_user/:userId",
+  view_video: "/view_video/:movieId",
+  profile_user: "/profile_user/:userId",
 };
 
 export default routes;
