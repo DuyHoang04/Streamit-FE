@@ -21,6 +21,7 @@ const routes = {
   view_movie_by_genres: "/view_movie_by_genres/:genres_name",
   view_video: "/view_video/:movieId",
   profile_user: "/profile_user/:userId",
+  search_movie: "/search_movie/:movieName",
 };
 
 export default routes;

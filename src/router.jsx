@@ -66,6 +66,10 @@ const publicRoutes = [
     path: config.routes.profile_user,
     element: <pages.ProfileUser />,
   },
+  {
+    path: config.routes.search_movie,
+    element: <pages.SearchMoviePage />,
+  },
 
   // ADMIN
   {

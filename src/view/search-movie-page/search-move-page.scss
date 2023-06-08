@@ -1,0 +1,23 @@
+.search_movie_page {
+  padding: 10rem;
+  background-color: var(--background-color);
+  height: 100vh;
+  .search_movie_container {
+    .search_movie_title {
+      h1 {
+        color: #767676;
+        font-size: 30px;
+        font-weight: 500;
+        line-height: 33px;
+
+        margin: 20px 0px;
+        text-align: center;
+      }
+    }
+    .card_movie_container {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 3rem;
+    }
+  }
+}
