@@ -16,7 +16,7 @@ import TvShowPage from "./TVshows/Tv_show";
 import ViewGenresPage from "./view-genres-page/view-genres-page";
 import ViewVideo from "./view-video/view-video";
 import ProfileUser from "./profile-user/profile-user";
-
+import SearchMoviePage from "./search-movie-page/search-movie-page";
 export {
   HomePage,
   ErrorPage,
@@ -36,4 +36,5 @@ export {
   ViewGenresPage,
   ViewVideo,
   ProfileUser,
+  SearchMoviePage,
 };

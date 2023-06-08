@@ -5,9 +5,9 @@ import { mediaActions, userActions } from "../action/index";
 import { toastError, toastSuccess } from "../utils";
 import useUser from "../hook/useUser";
 
-function* handleGetMovieAndSeries() {
+function* handleGetMovieAndSeries({ payload }) {
   try {
-    const { data, message } = yield mediaApi.getMovieAndSeries({});
+    const { data, message } = yield mediaApi.getMovieAndSeries(payload);
     yield put(mediaActions.getMovieAndSeriesSuccess(data));
   } catch (error) {
     yield put(mediaActions.getMovieAndSeriesFailure(error));

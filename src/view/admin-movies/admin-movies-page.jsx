@@ -51,7 +51,7 @@ const AdminMoviesPage = () => {
 
   useEffect(() => {
     const fetchData = async () => {
-      await getMovieAndSeries();
+      await getMovieAndSeries({ queries: {} });
       await getAllGenresRequest();
     };
     fetchData();

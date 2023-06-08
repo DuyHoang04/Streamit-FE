@@ -21,7 +21,7 @@ const DashboardPage = () => {
   useEffect(() => {
     Promise.all([
       getAllGenresRequest(),
-      getMovieAndSeries(),
+      getMovieAndSeries({ queries: {} }),
       getAllUserRequest(),
     ]);
   }, []);
