@@ -47,6 +47,10 @@ const ViewVideo = () => {
       <Player autoPlay>
         <source src={videoMovie()} />
       </Player>
+
+      <h1>
+        {!isSeries ? dataMovie.name : `${dataMovie.name} Episode ${episodes}`}
+      </h1>
     </div>
   );
 };
