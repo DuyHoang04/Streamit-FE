@@ -41,6 +41,43 @@
     display: flex;
     align-items: center;
     gap: 15px;
+    .search_input {
+      height: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background-color: var(--background-input);
+      border-radius: 10px;
+      overflow: hidden;
+      cursor: pointer;
+      padding-left: 15px;
+      box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.075);
+      .input {
+        width: 100px;
+        height: 100%;
+        border: none;
+        outline: none;
+        font-size: 0.9em;
+        background-color: var(--background-input);
+        caret-color: var(--primary-color);
+        color: white;
+      }
+
+      .labelforsearch {
+        cursor: text;
+        padding: 0px 12px;
+        .searchIcon {
+          width: 17px;
+          cursor: pointer;
+          color: rgb(223, 223, 223);
+        }
+      }
+      .border {
+        height: 40%;
+        width: 1.3px;
+        background-color: rgb(223, 223, 223);
+      }
+    }
     .favorites {
       position: relative;
       // width: 30px;
