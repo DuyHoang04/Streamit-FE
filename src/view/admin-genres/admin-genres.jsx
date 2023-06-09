@@ -26,8 +26,8 @@ const AdminGenresPage = () => {
   const [updateGenresModal, setUpdateGenresModal] = useState(false);
   const [deleteGenresModal, setDeleteGenresModal] = useState(false);
   const [genresId, setGenresId] = useState("");
-  const nameRef = useRef();
-  const descriptionRef = useRef();
+  const [genresName, setGenresName] = useState("");
+  const [genresDescription, setGenresDescription] = useState("");
 
   useEffect(() => {
     const fetchData = async () => {
@@ -43,6 +43,11 @@ const AdminGenresPage = () => {
   const handleOpenUpdateGenresModal = (id) => {
     setGenresId(id);
     setUpdateGenresModal(true);
+  };
+
+  const resetDataState = () => {
+    setGenresName("");
+    setGenresDescription("");
   };
 
   const columns = [
@@ -100,15 +105,19 @@ const AdminGenresPage = () => {
 
   const handleAddGenres = () => {
     const dataGenres = {
-      name: nameRef.current.input.value,
-      description: descriptionRef.current.resizableTextArea.textArea.value,
+      name: genresName,
+      description: genresDescription,
     };
     if (validateData(dataGenres)) {
       const req = {
         payload: dataGenres,
       };
-      addGenresRequest(req);
-      setAddGenresModal(false);
+
+      Promise.all([
+        addGenresRequest(req),
+        setAddGenresModal(false),
+        resetDataState(),
+      ]);
     } else {
       toastError("ko dc bo trong");
     }
@@ -121,15 +130,12 @@ const AdminGenresPage = () => {
       },
     };
 
-    deleteGenresRequest(req);
-    setDeleteGenresModal(false);
+    Promise.all([deleteGenresRequest(req), setDeleteGenresModal(false)]);
   };
   const handleUpdateGenres = () => {
     const dataGenres = {
-      name: nameRef.current.input.value || getGenresSelected().name,
-      description:
-        descriptionRef.current.resizableTextArea.textArea.value ||
-        getGenresSelected().description,
+      name: genresName || getGenresSelected().name,
+      description: genresDescription || getGenresSelected().description,
     };
     const req = {
       payload: dataGenres,
@@ -138,8 +144,11 @@ const AdminGenresPage = () => {
       },
     };
 
-    updateGenresRequest(req);
-    setUpdateGenresModal(false);
+    Promise.all([
+      updateGenresRequest(req),
+      setUpdateGenresModal(false),
+      resetDataState(),
+    ]);
   };
 
   return (
@@ -170,12 +179,19 @@ const AdminGenresPage = () => {
         cancelButtonProps={{ style: { display: "none" } }}
         className="custom-modal"
       >
-        <InputCustom label="Name" ref={nameRef} />
+        <InputCustom
+          label="Name"
+          placeholder="Name"
+          value={genresName}
+          onChange={(e) => setGenresName(e.target.value)}
+        />
         <InputCustom
           label="Description"
-          ref={descriptionRef}
+          value={genresDescription}
+          placeholder="Description"
           type="text"
           isTextarea
+          onChange={(e) => setGenresDescription(e.target.value)}
         />
       </Modal>
       {/* DELETE */}
@@ -202,15 +218,17 @@ const AdminGenresPage = () => {
       >
         <InputCustom
           label="Name"
-          ref={nameRef}
+          value={genresName}
           placeholder={getGenresSelected()?.name}
+          onChange={(e) => setGenresName(e.target.value)}
         />
         <InputCustom
           label="Description"
-          ref={descriptionRef}
+          value={genresDescription}
           type="text"
           isTextarea
           placeholder={getGenresSelected()?.description}
+          onChange={(e) => setGenresDescription(e.target.value)}
         />
       </Modal>
     </>
