@@ -31,7 +31,7 @@ function* handleUpdateEpisodeSeriesMovie({ payload }) {
   try {
     const { message } = yield seriesApi.updateEpisodeSeries(payload);
     yield put(seriesActions.updateEpisodeSeriesSuccess());
-    yield put(mediaActions.getMovieAndSeriesRequest());
+    yield put(mediaActions.getMovieAndSeriesRequest({}));
     toastSuccess(message);
   } catch (error) {
     yield put(seriesActions.updateEpisodeSeriesFailure(error));
@@ -54,7 +54,7 @@ function* handleUpdateSeriesMovie({ payload }) {
   try {
     const { message } = yield seriesApi.updateSeries(payload);
     yield put(seriesActions.updateSeriesSuccess());
-    yield put(mediaActions.getMovieAndSeriesRequest());
+    yield put(mediaActions.getMovieAndSeriesRequest({}));
     toastSuccess(message);
   } catch (error) {
     yield put(seriesActions.updateSeriesFailure(error));

@@ -19,7 +19,7 @@ function* handleUpdateMovie({ payload }) {
   try {
     const { message } = yield movieApi.updateMovie(payload);
     yield put(movieActions.updateMovieSuccess());
-    yield put(mediaActions.getMovieAndSeriesRequest());
+    yield put(mediaActions.getMovieAndSeriesRequest({}));
     toastSuccess(message);
   } catch (error) {
     yield put(movieActions.updateMovieFailure(error));
