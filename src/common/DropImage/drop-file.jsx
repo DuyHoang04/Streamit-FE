@@ -18,7 +18,7 @@ const DropFile = ({ url, label, title, setFile }) => {
     if (!url) {
       setMediaUrl("");
     }
-  }, []);
+  }, [url]);
 
   const handleDrop = useCallback(
     (acceptedFiles) => {

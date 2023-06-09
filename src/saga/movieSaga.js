@@ -31,7 +31,7 @@ function* handleDeleteMovie({ payload }) {
   try {
     const { message } = yield movieApi.deleteMovie(payload);
     yield put(movieActions.deleteMovieSuccess());
-    yield put(mediaActions.getMovieAndSeriesRequest());
+    yield put(mediaActions.getMovieAndSeriesRequest({}));
     toastSuccess(message);
   } catch (error) {
     yield put(movieActions.deleteMovieFailure(error));

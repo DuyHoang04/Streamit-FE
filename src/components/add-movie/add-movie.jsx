@@ -17,11 +17,11 @@ const AddMovie = () => {
   const [image, setImage] = useState(null);
   const [video, setVideo] = useState(null);
   const [genres, setGenres] = useState([]);
-  const nameRef = useRef();
-  const hoursRef = useRef();
-  const languageRef = useRef();
-  const yearRef = useRef();
-  const descriptionRef = useRef();
+  const [name, setName] = useState("");
+  const [hours, setHours] = useState(null);
+  const [language, setLanguage] = useState("");
+  const [year, setYear] = useState("");
+  const [description, setDescription] = useState("");
 
   useEffect(() => {
     const fetchData = async () => {
@@ -31,13 +31,13 @@ const AddMovie = () => {
   }, []);
 
   const resetDataState = () => {
-    nameRef.current.input.value = "";
-    hoursRef.current.input.value = "";
-    languageRef.current.input.value = "";
-    yearRef.current.input.value = "";
-    setBannerImage(null);
-    setImage(null);
-    descriptionRef.current.resizableTextArea.textArea.value = "";
+    setName("");
+    setHours("");
+    setLanguage("");
+    setYear("");
+    setBannerImage("");
+    setImage("");
+    setDescription("");
     setVideo("");
   };
 
@@ -53,14 +53,14 @@ const AddMovie = () => {
   const handleAddMovie = async (e) => {
     e.preventDefault();
     const dataMovie = {
-      name: nameRef.current.input.value,
-      description: descriptionRef.current.resizableTextArea.textArea.value,
+      name,
+      description,
       bannerImage,
       image,
       genres,
-      language: languageRef.current.input.value,
-      year: yearRef.current.input.value,
-      time: hoursRef.current.input.value,
+      language,
+      year,
+      time: hours,
       video,
     };
     if (!validateData(dataMovie)) {
@@ -80,8 +80,8 @@ const AddMovie = () => {
       const req = {
         payload: formDataMovie,
       };
-      addMovieRequest(req);
-      // resetDataState();
+      await addMovieRequest(req);
+      resetDataState();
     }
   };
 
@@ -89,17 +89,29 @@ const AddMovie = () => {
     <>
       <div className="add-movie-controller">
         <div className="top">
-          <InputCustom ref={nameRef} label="Name" placeholder="Name" />
-          <InputCustom ref={hoursRef} label="Hours" placeholder="2hr" />
           <InputCustom
-            ref={languageRef}
-            label="Language Used"
-            placeholder="English"
+            value={name}
+            label="Name"
+            placeholder="Name"
+            onChange={(e) => setName(e.target.value)}
           />
           <InputCustom
-            ref={yearRef}
+            value={hours}
+            label="Hours"
+            placeholder="2hr"
+            onChange={(e) => setHours(e.target.value)}
+          />
+          <InputCustom
+            value={language}
+            label="Language Used"
+            placeholder="English"
+            onChange={(e) => setLanguage(e.target.value)}
+          />
+          <InputCustom
+            value={year}
             label="Year of Release"
             placeholder="2023"
+            onChange={(e) => setYear(e.target.value)}
           />
           <DropFile
             url={bannerImage}
@@ -116,16 +128,17 @@ const AddMovie = () => {
         </div>
         <div className="bottom">
           <InputCustom
-            ref={descriptionRef}
+            value={description}
             isTextarea
             label="Description"
             placeholder="Description"
+            onChange={(e) => setDescription(e.target.value)}
           />
           <InputSelect
             // value={genres}
             data={dataInputSelect}
             onChange={handleChangeGenres}
-            label="Category"
+            label="Genres"
           />
           <DropFile
             url={video}

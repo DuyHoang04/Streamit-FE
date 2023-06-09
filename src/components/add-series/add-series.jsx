@@ -16,13 +16,13 @@ const AddSeries = () => {
   const [bannerImage, setBannerImage] = useState(null);
   const [image, setImage] = useState(null);
   const [genres, setGenres] = useState([]);
-  const nameRef = useRef();
-  const hoursRef = useRef();
-  const languageRef = useRef();
-  const yearRef = useRef();
-  const descriptionRef = useRef();
-  const nameEpisodeRef = useRef();
-  const episodeNumberRef = useRef();
+  const [name, setName] = useState("");
+  const [hours, setHours] = useState(null);
+  const [language, setLanguage] = useState("");
+  const [year, setYear] = useState("");
+  const [description, setDescription] = useState("");
+  const [episodeName, setNameEpisode] = useState("");
+  const [episodeNumber, setEpisodeNumber] = useState(null);
   const [video, setVideo] = useState(null);
   const [addEpisodeModal, setAddEpisodeModal] = useState(false);
   const [episodes, setEpisodes] = useState([]);
@@ -34,14 +34,17 @@ const AddSeries = () => {
   }, []);
 
   const resetDataState = () => {
-    nameRef.current.input.value = "";
-    hoursRef.current.input.value = "";
-    languageRef.current.input.value = "";
-    yearRef.current.input.value = "";
-    // setBannerImage(null);
-    // setImage(null);
-    descriptionRef.current.resizableTextArea.textArea.value = "";
-    // setVideo("");
+    setName("");
+    setHours("");
+    setLanguage("");
+    setYear("");
+    setBannerImage("");
+    setImage("");
+    setDescription("");
+    setNameEpisode("");
+    setEpisodeNumber("");
+    setVideo("");
+    setEpisodes([]);
   };
 
   const handleChangeGenres = (selectedOptions) => {
@@ -55,8 +58,8 @@ const AddSeries = () => {
 
   const handleAddEpisode = () => {
     const dataEpisode = {
-      episodeName: nameEpisodeRef.current.input.value,
-      episodeNumber: episodeNumberRef.current.input.value,
+      episodeName,
+      episodeNumber,
       video,
     };
     setEpisodes([...episodes, dataEpisode]);
@@ -68,17 +71,17 @@ const AddSeries = () => {
     setEpisodes(newEpisode);
   };
 
-  const handleAddSeries = (e) => {
+  const handleAddSeries = async (e) => {
     e.preventDefault();
     const dataSeries = {
-      name: nameRef.current.input.value,
-      description: descriptionRef.current.resizableTextArea.textArea.value,
+      name,
+      description,
       bannerImage,
       image,
       genres,
-      language: languageRef.current.input.value,
-      year: yearRef.current.input.value,
-      time: hoursRef.current.input.value,
+      language,
+      year,
+      time: hours,
       episodes,
     };
     if (validateData(dataSeries)) {
@@ -106,27 +109,38 @@ const AddSeries = () => {
         payload: formData,
       };
 
-      addSeriesMovieRequest(req);
+      await addSeriesMovieRequest(req);
+      resetDataState();
     }
   };
-
-  console.log(episodes);
 
   return (
     <>
       <div className="add-movie-controller">
         <div className="top">
-          <InputCustom ref={nameRef} label="Name" placeholder="Name" />
-          <InputCustom ref={hoursRef} label="Hours" placeholder="2hr" />
           <InputCustom
-            ref={languageRef}
-            label="Language Used"
-            placeholder="English"
+            value={name}
+            label="Name"
+            placeholder="Name"
+            onChange={(e) => setName(e.target.value)}
           />
           <InputCustom
-            ref={yearRef}
+            value={hours}
+            label="Hours"
+            placeholder="2hr"
+            onChange={(e) => setHours(e.target.value)}
+          />
+          <InputCustom
+            value={language}
+            label="Language Used"
+            placeholder="English"
+            onChange={(e) => setLanguage(e.target.value)}
+          />
+          <InputCustom
+            value={year}
             label="Year of Release"
             placeholder="2023"
+            onChange={(e) => setYear(e.target.value)}
           />
           <DropFile
             url={bannerImage}
@@ -143,10 +157,11 @@ const AddSeries = () => {
         </div>
         <div className="bottom">
           <InputCustom
-            ref={descriptionRef}
+            value={description}
             isTextarea
             label="Description"
             placeholder="Description"
+            onChange={(e) => setDescription(e.target.value)}
           />
           <InputSelect
             // value={genres}
@@ -197,8 +212,17 @@ const AddSeries = () => {
         cancelButtonProps={{ style: { display: "none" } }}
         className="custom-modal"
       >
-        <InputCustom label="Name" ref={nameEpisodeRef} />
-        <InputCustom label="Episode" ref={episodeNumberRef} type="number" />
+        <InputCustom
+          label="Name"
+          value={episodeName}
+          onChange={(e) => setNameEpisode(e.target.value)}
+        />
+        <InputCustom
+          label="Episode"
+          value={episodeNumber}
+          type="number"
+          onChange={(e) => setEpisodeNumber(e.target.value)}
+        />
         <DropFile
           url={video}
           setFile={setVideo}
