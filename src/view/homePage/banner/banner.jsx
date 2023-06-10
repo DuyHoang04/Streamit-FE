@@ -2,7 +2,8 @@ import { Carousel, Rate, Button } from "antd";
 import "./banner.scss";
 import { useRef } from "react";
 import { RightOutlined, LeftOutlined } from "@ant-design/icons";
-const banner = () => {
+import { BASE_URL } from "../../../utils/apiConfig";
+const banner = ({ data }) => {
   const ref = useRef();
   const contentStyle = {
     width: "100%",
@@ -56,13 +57,16 @@ const banner = () => {
   return (
     <div>
       <Carousel autoplay ref={ref} className="banner_img">
-        {column.map((item, idx) => {
+        {data.map((item, idx) => {
           return (
             <div key={idx}>
               <div
                 className="Bannercontainer"
                 style={{
-                  backgroundImage: `url(${item.imgMovie})`,
+                  backgroundImage: `url(${BASE_URL}/${item.bannerImage.replace(
+                    /\\/g,
+                    "/"
+                  )})`,
                   backgroundPosition: "50% 100%",
                   backgroundSize: "cover",
                   height: "100vh",
@@ -70,24 +74,26 @@ const banner = () => {
               >
                 <div className="Bannercontent">
                   <div className="content_ left">
-                    <h1 className="big_title">{item.MovieName}</h1>
+                    <h1 className="big_title">{item.name}</h1>
                     <div className="content_rate">
-                      <Rate disabled defaultValue={item.rate} />
-                      <div className="content_age">{`${item.age}+`}</div>
-                      <p>{item.time}</p>
+                      <Rate disabled value={Math.floor(item.rating) || 5} />
+                      <div className="content_age">{`${18}+`}</div>
+                      <p>{item.time}hr</p>
                     </div>
                     <div className="description">
                       <p>{item.description}</p>
                     </div>
                     <p>
-                      <span>Starring:</span> {item.starring}
+                      <span>Starring:</span>{" "}
+                      {item?.isSeries ? "Tv Show" : "Movie"}
                     </p>
                     <p>
                       {" "}
-                      <span>Genres:</span> {item.genres}
+                      <span>Genres:</span> {item.genres[0].name}
                     </p>
                     <p>
-                      <span>Tag:</span> {item.tag}
+                      <span>Tag:</span>{" "}
+                      {item.genres.map((item) => item.name + " ")}
                     </p>
                   </div>
                   <div className="content_right"></div>

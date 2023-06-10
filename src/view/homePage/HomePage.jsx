@@ -3,9 +3,14 @@ import Navbar from "./navbar/navbar";
 import Banner from "./banner/banner";
 import Loader from "../../common/loader/Loader";
 import useMedia from "../../hook/useMedia";
+import { getMovieByGenres, getRandomElements } from "../../utils";
 
 export default function HomePage() {
   const { getMovieAndSeries, mediaList } = useMedia();
+  const newMovieList = getMovieByGenres(mediaList);
+  const dataBanner = getRandomElements(mediaList, 3);
+
+  console.log(dataBanner);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -16,7 +21,7 @@ export default function HomePage() {
 
   return (
     <>
-      {mediaList.length > 0 ? <Banner /> : <Loader />}
+      {mediaList.length > 0 ? <Banner data={dataBanner} /> : <Loader />}
       {/* <Navbar /> */}
     </>
   );

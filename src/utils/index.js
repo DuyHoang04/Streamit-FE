@@ -60,3 +60,24 @@ export const getMovieByGenres = (movieList) => {
 
   return listMovieByGenres;
 };
+
+export const getRandomElements = (arr, count) => {
+  // Tạo một bản sao của mảng để không làm thay đổi mảng gốc
+  const copyArray = [...arr];
+  const result = [];
+
+  // Kiểm tra nếu số phần tử yêu cầu (n) lớn hơn số phần tử trong mảng (arr)
+  // Thì chỉ lấy ngẫu nhiên các phần tử trong mảng (arr)
+  const length = Math.min(count, arr.length);
+
+  for (let i = 0; i < length; i++) {
+    // Tạo một số ngẫu nhiên trong khoảng từ 0 đến độ dài của mảng còn lại
+    const randomIndex = Math.floor(Math.random() * copyArray.length);
+
+    // Lấy phần tử ngẫu nhiên từ mảng và đẩy vào mảng kết quả
+    const randomElement = copyArray.splice(randomIndex, 1)[0];
+    result.push(randomElement);
+  }
+
+  return result;
+};
