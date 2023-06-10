@@ -65,7 +65,7 @@ const Navbar = () => {
                 </Link>
                 <Link>
                   <div style={{ cursor: "pointer" }} onClick={handleLogOut}>
-                    Log Out
+                    Sign Out
                   </div>
                 </Link>
               </>

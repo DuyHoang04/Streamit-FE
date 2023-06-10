@@ -9,6 +9,11 @@ const LikeMoviePage = () => {
   const { getLikedMovie, likeMovies } = useUser();
 
   useEffect(() => {
+    window.scrollTo({
+      top: 0,
+      left: 0,
+      behavior: "smooth",
+    });
     const req = {
       headers: {
         authorization: `Bearer ${accessToken}`,
@@ -21,8 +26,13 @@ const LikeMoviePage = () => {
     <div className="likeMovie_page">
       <div className="likeMovie_container">
         {likeMovies.length > 0 ? (
-          likeMovies.map((data) => (
-            <CardMovie movie={data} key={data._id} accessToken={accessToken} />
+          likeMovies.map((data, index) => (
+            <CardMovie
+              movie={data}
+              key={data._id}
+              accessToken={accessToken}
+              index={index}
+            />
           ))
         ) : (
           <h1 style={{ color: "white" }}>No movie</h1>

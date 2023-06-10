@@ -93,9 +93,9 @@ const TvShowPage = () => {
                       }px)`,
                     }}
                   >
-                    {item.movies.map((movie) => (
+                    {item.movies.map((movie, index) => (
                       <div className="card_tvShow" key={movie._id}>
-                        <CardMovie movie={movie} />
+                        <CardMovie movie={movie} index={index} />
                       </div>
                     ))}
                   </div>

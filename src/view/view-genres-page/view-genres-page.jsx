@@ -17,6 +17,11 @@ const ViewGenresPage = () => {
   const dataMovie = isSeries ? seriesMovieList : movieList;
 
   useEffect(() => {
+    window.scrollTo({
+      top: 0,
+      left: 0,
+      behavior: "smooth",
+    });
     const fetchData = async () => {
       const req = {
         queries: {
@@ -45,8 +50,8 @@ const ViewGenresPage = () => {
             <span>{dataMovie.length}</span> Result:
           </div>
           <div className="viewMovie_container">
-            {dataMovie.map((movie) => (
-              <CardMovie movie={movie} key={movie._id} />
+            {dataMovie.map((movie, index) => (
+              <CardMovie movie={movie} key={movie._id} index={index} />
             ))}
           </div>
         </>

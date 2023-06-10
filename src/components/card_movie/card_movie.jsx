@@ -5,9 +5,10 @@ import { CaretRightOutlined, DeleteOutlined } from "@ant-design/icons";
 import { Link } from "react-router-dom";
 import { useLocation } from "react-router-dom";
 import useMedia from "../../hook/useMedia";
+import { animate, motion } from "framer-motion";
 
 const LIKE_MOVIE_ROUTE = "like_movie";
-const CardMovie = ({ movie, accessToken }) => {
+const CardMovie = ({ movie, accessToken, index }) => {
   const { deleteLikeMovieAndSeries } = useMedia();
   const { pathname } = useLocation();
 
@@ -24,7 +25,13 @@ const CardMovie = ({ movie, accessToken }) => {
   };
 
   return (
-    <div className="cardMovie">
+    <motion.div
+      className="cardMovie"
+      initial={{ opacity: 0, y: -20 }}
+      animate={{ opacity: 1, y: 0 }}
+      exit={{ opacity: 0, y: 20 }}
+      transition={{ delay: 0.15 * index }}
+    >
       <div className="background_movie">
         <img
           className="cardMovie_image"
@@ -52,12 +59,10 @@ const CardMovie = ({ movie, accessToken }) => {
             <DeleteOutlined />
           </div>
         ) : (
-          <div className="time">
-            <h2>{movie.time} hr</h2>
-          </div>
+          <div className="time">{/* <h2>18 +</h2> */}</div>
         )}
       </div>
-    </div>
+    </motion.div>
   );
 };
 

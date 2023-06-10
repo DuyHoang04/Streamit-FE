@@ -123,9 +123,9 @@ const MovieDetailPage = () => {
               <div className="movie_content">
                 <motion.div
                   className="movie-title"
-                  initial={{ x: -200 }}
-                  animate={{ x: 0 }}
-                  transition={{ duration: 0.5 }}
+                  initial={{ x: -200, opacity: 0 }}
+                  animate={{ x: 0, opacity: 1 }}
+                  transition={{ duration: 0.5, delay: 0.5 }}
                 >
                   {dataMovie.name}
                 </motion.div>
@@ -140,7 +140,14 @@ const MovieDetailPage = () => {
                     <span key={item._id}>{item.name}- </span>
                   ))}
                 </div>
-                <div className="movie-description">{dataMovie.description}</div>
+                <motion.div
+                  className="movie-description"
+                  initial={{ y: 200, opacity: 0 }}
+                  animate={{ y: 0, opacity: 1 }}
+                  transition={{ duration: 0.5, delay: 0.5 }}
+                >
+                  {dataMovie.description}
+                </motion.div>
                 <div className="movie-play-video" onClick={navigateVideoPage}>
                   <CaretRightOutlined />
                 </div>

@@ -201,8 +201,8 @@ const AdminMoviesPage = () => {
       paths: { movieId },
     };
 
-    updateMovieRequest(req);
-    setUpdateMovieModal(false);
+    Promise.all([updateMovieRequest(req), setUpdateMovieModal(false)]);
+    resetDataState();
   };
 
   const openUpdateEpisodeModal = (id) => {
@@ -296,13 +296,13 @@ const AdminMoviesPage = () => {
     });
 
     const formData = new FormData();
-    formData.append("name", name);
-    formData.append("description", description);
-    formData.append("bannerImage", bannerImage);
-    formData.append("image", image);
-    formData.append("language", language);
-    formData.append("year", year);
-    formData.append("time", hours);
+    formData.append("name", name || getSelectMovie().name);
+    formData.append("description", description || getSelectMovie().description);
+    formData.append("bannerImage", bannerImage || getSelectMovie().bannerImage);
+    formData.append("image", image || getSelectMovie().image);
+    formData.append("language", language || getSelectMovie().language);
+    formData.append("year", year || getSelectMovie().year);
+    formData.append("time", hours || getSelectMovie().hours);
     if (Array.isArray(genres) && genres.length > 0) {
       formData.append("genres", JSON.stringify(genres));
     } else {
@@ -326,8 +326,11 @@ const AdminMoviesPage = () => {
       },
     };
 
-    updateSeriesRequest(req);
-    setUpdateMovieModal(false);
+    Promise.all([
+      updateSeriesRequest(req),
+      setUpdateMovieModal(false),
+      resetDataState(),
+    ]);
   };
 
   return (

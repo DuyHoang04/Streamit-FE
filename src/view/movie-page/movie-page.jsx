@@ -20,9 +20,6 @@ const MoviePage = () => {
       left: 0,
       behavior: "smooth",
     });
-  }, []);
-
-  useEffect(() => {
     const fetchData = async () => {
       getAllMovieRequest({});
     };
@@ -94,9 +91,13 @@ const MoviePage = () => {
                       }px)`,
                     }}
                   >
-                    {item.movies.map((movie) => (
+                    {item.movies.map((movie, index) => (
                       <div className="card_movie">
-                        <CardMovie movie={movie} key={movie._id} />
+                        <CardMovie
+                          movie={movie}
+                          key={movie._id}
+                          index={index}
+                        />
                       </div>
                     ))}
                   </div>

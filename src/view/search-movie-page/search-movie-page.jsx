@@ -10,6 +10,11 @@ const SearchMoviePage = () => {
   const { getMovieAndSeries, mediaList } = useMedia();
 
   useEffect(() => {
+    window.scrollTo({
+      top: 0,
+      left: 0,
+      behavior: "smooth",
+    });
     const req = {
       queries: {
         movieName,
@@ -32,8 +37,8 @@ const SearchMoviePage = () => {
               </h1>
             </div>
             <div className="card_movie_container">
-              {mediaList.map((movie) => (
-                <CardMovie movie={movie} key={movie._id} />
+              {mediaList.map((movie, index) => (
+                <CardMovie movie={movie} key={movie._id} index={index} />
               ))}
             </div>
           </>
