@@ -1,59 +1,26 @@
 import { Carousel, Rate, Button } from "antd";
 import "./banner.scss";
 import { useRef } from "react";
-import { RightOutlined, LeftOutlined } from "@ant-design/icons";
+import {
+  RightOutlined,
+  LeftOutlined,
+  CaretRightOutlined,
+} from "@ant-design/icons";
 import { BASE_URL } from "../../../utils/apiConfig";
+import { useNavigate } from "react-router-dom";
+
 const banner = ({ data }) => {
   const ref = useRef();
-  const contentStyle = {
-    width: "100%",
-    height: "100vh",
-    color: "#fff",
-    lineHeight: "160px",
-    textAlign: "center",
-    background: "#364d79",
+  const navigate = useNavigate();
+
+  const navigateVideoPage = (isSeries, movieId) => {
+    if (isSeries) {
+      navigate(`/view_video/${movieId}?isSeries=true&episodes=1`);
+    } else {
+      navigate(`/view_video/${movieId}`);
+    }
   };
-  const column = [
-    {
-      MovieName: "BUSHLAND",
-      imgMovie:
-        "https://templates.iqonic.design/streamit/frontend/react/build/static/media/slider1.0160d581.jpg",
-      rate: 4.5,
-      age: 18,
-      time: "1h30",
-      description:
-        "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.",
-      starring: "Karen Gilchrist, James Earl Jones",
-      genres: "Action",
-      tag: "Action, Adventure, Horror",
-    },
-    {
-      MovieName: "SAIL COASTER",
-      imgMovie:
-        "https://templates.iqonic.design/streamit/frontend/react/build/static/media/slider2.5b31073d.jpg",
-      rate: 4.7,
-      age: 18,
-      time: "1h30",
-      description:
-        "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.",
-      starring: "Karen Gilchrist, James Earl Jones",
-      genres: "Action",
-      tag: "Action, Adventure, Horror",
-    },
-    {
-      MovieName: "THE ARMY",
-      imgMovie:
-        "https://templates.iqonic.design/streamit/frontend/react/build/static/media/slider3.e8b90612.jpg",
-      rate: 4.7,
-      age: 18,
-      time: "1h30",
-      description:
-        "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.",
-      starring: "Karen Gilchrist, James Earl Jones",
-      genres: "Action",
-      tag: "Action, Adventure, Horror",
-    },
-  ];
+
   return (
     <div>
       <Carousel autoplay ref={ref} className="banner_img">
@@ -91,10 +58,21 @@ const banner = ({ data }) => {
                       {" "}
                       <span>Genres:</span> {item.genres[0].name}
                     </p>
-                    <p>
+                    <p className="tag">
                       <span>Tag:</span>{" "}
                       {item.genres.map((item) => item.name + " ")}
                     </p>
+                    <button
+                      className="btn-play"
+                      onClick={(e) =>
+                        navigateVideoPage(item?.isSeries, item._id)
+                      }
+                    >
+                      <span class="button__text">Watch Now</span>
+                      <span className="button__icon">
+                        <CaretRightOutlined />
+                      </span>
+                    </button>
                   </div>
                   <div className="content_right"></div>
                 </div>

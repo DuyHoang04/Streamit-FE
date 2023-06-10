@@ -77,3 +77,61 @@ p {
   font-family: "Roboto", sans-serif;
   font-size: 18px;
 }
+
+.tag {
+  margin-bottom: 4rem;
+}
+
+.btn-play {
+  position: relative;
+  width: 150px;
+  height: 44px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  border: 1px solid #b40e0e;
+  border-radius: 4px;
+  background-color: var(--primary-color);
+
+  transition: all 0.3s;
+  .button__text,
+  .button__icon {
+    transition: all 0.3s;
+  }
+  .button__text {
+    transform: translateX(10px);
+    color: #fff;
+    text-transform: uppercase;
+  }
+  .button__icon {
+    position: absolute;
+    transform: translateX(109px);
+    height: 100%;
+    width: 39px;
+    background-color: #b40e0e;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    svg {
+      width: 30px;
+      font-size: 2.5rem;
+      color: #fff;
+    }
+  }
+  &:hover {
+    background: #b40e0e;
+    .button__text {
+      color: transparent;
+    }
+    .button__icon {
+      width: 148px;
+      transform: translateX(0);
+    }
+  }
+  &:active {
+    border: 1px solid #2e8644;
+    .button__icon {
+      background-color: #2e8644;
+    }
+  }
+}

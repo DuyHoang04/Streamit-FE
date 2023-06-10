@@ -8,9 +8,7 @@ import { getMovieByGenres, getRandomElements } from "../../utils";
 export default function HomePage() {
   const { getMovieAndSeries, mediaList } = useMedia();
   const newMovieList = getMovieByGenres(mediaList);
-  const dataBanner = getRandomElements(mediaList, 3);
-
-  console.log(dataBanner);
+  const dataBanner = getRandomElements(mediaList, 5);
 
   useEffect(() => {
     const fetchData = async () => {
