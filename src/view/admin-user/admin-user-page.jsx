@@ -17,8 +17,8 @@ const AdminUserPage = () => {
   const [deleteUserModal, setDeleteUserModal] = useState(false);
   const [userId, setUserId] = useState(null);
   const [imageUrl, setImageUrl] = useState("");
-  const usernameRef = useRef();
-  const emailRef = useRef();
+  const [username, setUsername] = useState("");
+  const [email, setEmail] = useState("");
 
   useEffect(() => {
     const fetchData = async () => {
@@ -34,6 +34,11 @@ const AdminUserPage = () => {
   const openDeleteUserModal = (id) => {
     setUserId(id);
     setDeleteUserModal(true);
+  };
+
+  const resetDataState = () => {
+    setUsername("");
+    setEmail("");
   };
 
   const columns = [
@@ -106,8 +111,8 @@ const AdminUserPage = () => {
 
   const handleUpdateUser = () => {
     const dataUser = {
-      username: usernameRef.current.input.value,
-      email: emailRef.current.input.value,
+      username,
+      email,
       picturePath: imageUrl,
     };
 
@@ -117,15 +122,21 @@ const AdminUserPage = () => {
       dataUser.username || getUserSelected().username
     );
     formDataUser.append("email", dataUser.email || getUserSelected().email);
-    formDataUser.append("picturePath", dataUser.picturePath);
+    formDataUser.append(
+      "picturePath",
+      dataUser.picturePath || getUserSelected().picturePath
+    );
 
     const req = {
       payload: formDataUser,
       paths: { userId },
     };
 
-    updateUserRequest(req);
-    setUpdateUserModal(false);
+    Promise.all([
+      updateUserRequest({ req }),
+      setUpdateUserModal(false),
+      resetDataState(),
+    ]);
   };
 
   const handleDeleteUser = () => {
@@ -166,14 +177,16 @@ const AdminUserPage = () => {
         />
         <InputCustom
           label="Name"
-          ref={usernameRef}
+          value={username}
           placeholder={getUserSelected()?.username}
+          onChange={(e) => setUsername(e.target.value)}
         />
         <InputCustom
           label="Email"
-          ref={emailRef}
+          value={email}
           type="text"
           placeholder={getUserSelected()?.email}
+          onChange={(e) => setEmail(e.target.value)}
         />
       </Modal>
       <Modal

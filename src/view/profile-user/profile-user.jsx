@@ -17,15 +17,19 @@ const ProfileUser = () => {
   const [updateUserModal, setUpdateUserModal] = useState(false);
   const [changePassUserModal, setChangePassUserModal] = useState(false);
   const [imageUrl, setImageUrl] = useState("");
-  const usernameRef = useRef();
-  const emailRef = useRef();
-  const oldPassRef = useRef();
-  const newPassRef = useRef();
+  const [username, setUsername] = useState("");
+  const [email, setEmail] = useState("");
+  const [oldPass, setOldPass] = useState("");
+  const [newPass, setNewPass] = useState("");
+
+  const resetDataState = () => {
+    setUsername(""), setEmail(""), setOldPass(""), setNewPass("");
+  };
 
   const handleUpdateUser = async () => {
     const dataUser = {
-      username: usernameRef.current.input.value,
-      email: emailRef.current.input.value,
+      username,
+      email,
       picturePath: imageUrl,
     };
 
@@ -39,14 +43,17 @@ const ProfileUser = () => {
       paths: { userId: userInfo._id },
     };
 
-    await updateUserRequest({ req, accessToken });
-    setUpdateUserModal(false);
+    Promise.all([
+      updateUserRequest({ req, accessToken }),
+      setUpdateUserModal(false),
+      resetDataState(),
+    ]);
   };
 
   const handleChangePassword = async () => {
     const dataChange = {
-      oldPassword: oldPassRef.current.input.value,
-      newPassword: newPassRef.current.input.value,
+      oldPassword: oldPass,
+      newPassword: newPass,
     };
 
     if (validateData(dataChange)) {
@@ -56,8 +63,12 @@ const ProfileUser = () => {
           authorization: `Bearer ${accessToken}`,
         },
       };
-      await changePassUser(req);
-      setChangePassUserModal(false);
+
+      Promise.all([
+        changePassUser(req),
+        setChangePassUserModal(false),
+        resetDataState(),
+      ]);
     } else {
       toastError("Ghi day du");
     }
@@ -115,14 +126,16 @@ const ProfileUser = () => {
             />
             <InputCustom
               label="Name"
-              ref={usernameRef}
+              value={username}
               placeholder={userInfo?.username}
+              onChange={(e) => setUsername(e.target.value)}
             />
             <InputCustom
               label="Email"
-              ref={emailRef}
+              value={email}
               type="text"
               placeholder={userInfo?.email}
+              onChange={(e) => setEmail(e.target.value)}
             />
           </Modal>
 
@@ -137,8 +150,20 @@ const ProfileUser = () => {
             className="modal_update"
           >
             {" "}
-            <InputCustom label="Old Password" ref={oldPassRef} type="text" />
-            <InputCustom label="New Password" ref={newPassRef} type="text" />
+            <InputCustom
+              label="Old Password"
+              placeholder="Old Password"
+              value={oldPass}
+              type="password"
+              onChange={(e) => setOldPass(e.target.value)}
+            />
+            <InputCustom
+              label="New Password"
+              placeholder="New Password"
+              value={newPass}
+              type="password"
+              onChange={(e) => setNewPass(e.target.value)}
+            />
           </Modal>
         </div>
       ) : (
