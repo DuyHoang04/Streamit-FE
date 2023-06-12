@@ -3,7 +3,7 @@ import { seriesTypes } from "../../utils/actionTypes";
 const initialState = {
   isFetching: false,
   seriesList: [],
-  seriesInfo: {},
+  seriesInfo: null,
   error: null,
 };
 

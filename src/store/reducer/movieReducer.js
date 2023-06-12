@@ -4,7 +4,7 @@ const initialState = {
   isFetching: false,
   movieList: [],
   error: null,
-  movieInfo: {},
+  movieInfo: null,
 };
 
 const movieReducer = (state = initialState, action) => {

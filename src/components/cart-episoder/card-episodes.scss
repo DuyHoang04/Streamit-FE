@@ -3,6 +3,10 @@
   .episodes_image {
     cursor: pointer;
     position: relative;
+    overflow: hidden;
+    img {
+      transition: all 0.5s;
+    }
 
     .btn_play {
       position: absolute;
@@ -21,6 +25,12 @@
           color: var(--primary-color);
           font-size: 2rem;
         }
+      }
+    }
+    &:hover {
+      img {
+        transform: scale(1.2);
+        filter: blur(4px);
       }
     }
   }
