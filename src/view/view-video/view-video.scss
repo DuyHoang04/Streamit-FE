@@ -96,3 +96,40 @@
     }
   }
 }
+
+@media screen and (max-width: 768px) {
+  .view_video {
+    padding-inline: 1rem;
+    padding-bottom: 5rem;
+    .video_movie {
+      // flex-direction: column;
+      display: block;
+      height: auto;
+      .video-react-controls-enabled {
+        width: 100% !important;
+      }
+      .more_episode_container,
+      .more_movie_container {
+        max-width: 100%;
+        margin-top: 20px;
+        .more_movie {
+          .movie_item {
+            .cardMovie {
+              width: 100%;
+              height: 250px;
+            }
+          }
+        }
+        .more_episode {
+          .episode_item {
+            grid-template-columns: repeat(6, 1fr);
+            gap: 1rem;
+          }
+        }
+      }
+    }
+    .info_movie {
+      display: none;
+    }
+  }
+}

@@ -33,6 +33,7 @@ const ViewVideo = () => {
     const fetchData = async () => {
       if (isSeries) {
         await getDetailSeriesRequest({ paths: { seriesId: movieId } });
+        setKeyMovie(episodes);
       } else {
         await getAllMovieRequest({});
         await getDetailMovieRequest({
@@ -41,7 +42,6 @@ const ViewVideo = () => {
       }
     };
     fetchData();
-    setKeyMovie(episodes);
   }, [isSeries, movieId, episodes]);
 
   const videoMovie = () => {

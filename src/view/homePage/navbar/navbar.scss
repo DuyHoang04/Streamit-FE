@@ -1,13 +1,11 @@
 .homePage_background {
-  background-color: #141414;
-
+  width: 100%;
+  top: 0;
+  right: 0;
+  position: fixed;
+  z-index: 100000;
+  background-color: #372c284a;
   #navbar {
-    background-color: #372c284a;
-    width: 100%;
-    top: 0;
-    right: 0;
-    position: fixed;
-    z-index: 100000;
   }
 
   .navbar_logo {
@@ -28,6 +26,9 @@
     color: #333;
     font-size: 2rem;
     align-items: center;
+    .profile {
+      display: none;
+    }
   }
 
   .navbar_wrap {
@@ -111,6 +112,9 @@
     .user_icon {
       cursor: pointer;
     }
+    .open_or_close_icon {
+      display: none;
+    }
   }
   .navbar_item {
     color: #d1d0cf;
@@ -120,6 +124,89 @@
     }
     &:hover {
       color: var(--primary-color);
+    }
+  }
+}
+@media screen and (max-width: 768px) {
+  .homePage_background {
+    background-color: var(--background-color);
+
+    #navbar {
+      position: relative;
+      .navbar_container {
+        width: 100%;
+        .navbar_wrap {
+          .navbar_logo {
+          }
+          .navbar_menuItem {
+            position: absolute;
+            width: 100vw;
+            height: 100vh;
+            top: 6.65rem;
+            left: 0;
+            bottom: 0;
+            flex-direction: column;
+            align-items: flex-start;
+            z-index: 100;
+            background-color: #191919;
+            padding-top: 8rem;
+            padding-left: 2rem;
+            display: none;
+            .profile {
+              display: block;
+              color: white;
+              cursor: pointer;
+              transition: all 0.5s;
+              &:hover {
+                color: var(--primary-color);
+              }
+            }
+            &.open_nav {
+              display: flex;
+            }
+          }
+          .navbar_menuRight {
+            .search_input {
+              display: none;
+              padding-left: 2rem;
+              position: absolute;
+              top: 150%;
+              left: 50%;
+              z-index: 1000;
+              transform: translate(-50%, -50%);
+              width: 92%;
+              justify-content: space-between;
+              height: 50px;
+
+              .input {
+                width: 100%;
+              }
+              &.open_nav {
+                display: flex;
+              }
+            }
+            .border {
+              display: none;
+            }
+            .user_icon {
+              display: none;
+            }
+            .favorites {
+            }
+            .open_or_close_icon {
+              background-color: var(--background-input);
+              padding: 0.5rem;
+              color: white;
+              border-radius: 4px;
+              cursor: pointer;
+
+              svg {
+                font-size: 2.5rem;
+              }
+            }
+          }
+        }
+      }
     }
   }
 }

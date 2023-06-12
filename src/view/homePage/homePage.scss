@@ -1,22 +1,6 @@
-.tvShow_page {
+.home_page {
   background-color: var(--background-color);
-  .tvShow_banner {
-    position: relative;
-    img {
-      height: 400px;
-      width: 100%;
-      object-fit: cover;
-    }
-    .title {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      color: white;
-      font-size: 5rem;
-    }
-  }
-  .tvShow_list_container {
+  .movieList_container {
     padding-inline: 10rem;
     display: flex;
     flex-direction: column;
@@ -25,10 +9,9 @@
     margin-top: 50px;
     gap: 4rem;
     width: 100%;
-    .tvShow_item {
+    .movie_item {
       margin-bottom: 20px;
       width: 100%;
-
       .genres_title {
         display: flex;
         align-items: center;
@@ -45,19 +28,23 @@
           color: var(--primary-color);
           cursor: pointer;
           font-size: 15px;
+          transition: all 0.5s ease-in;
+          &:hover {
+            transform: scale(0.9);
+          }
         }
       }
-      .cardTvShow_container {
+
+      .cardMovie_container {
         width: 100%;
         position: relative;
         display: flex;
         overflow-x: hidden;
         scroll-behavior: smooth;
-        height: 220px;
         .slider-track {
           display: flex;
           transition: transform 0.5s ease;
-          .card_tvShow {
+          .card_movie {
             flex: 0 0 250px;
             margin-right: 2.5rem;
           }
@@ -87,31 +74,13 @@
         }
         .btn_prev {
           left: 0;
-          top: 25%;
+          top: 30%;
         }
         .btn_next {
           right: 0;
-          top: 25%;
+          top: 30%;
         }
       }
-    }
-  }
-}
-
-@media screen and (max-width: 768px) {
-  .tvShow_page {
-    padding-top: 6.7rem;
-
-    .tvShow_banner {
-      img {
-        height: 200px;
-      }
-      .title {
-        font-size: 3rem;
-      }
-    }
-    .tvShow_list_container {
-      padding-inline: 1rem;
     }
   }
 }

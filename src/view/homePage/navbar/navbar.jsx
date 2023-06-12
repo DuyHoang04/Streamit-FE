@@ -1,5 +1,10 @@
 import { Avatar, Space } from "antd";
-import { SearchOutlined, HeartFilled } from "@ant-design/icons";
+import {
+  SearchOutlined,
+  HeartFilled,
+  UnorderedListOutlined,
+  CloseOutlined,
+} from "@ant-design/icons";
 import { Tooltip } from "antd";
 import "./navbar.scss";
 import { Link, useLocation, useNavigate } from "react-router-dom";
@@ -8,6 +13,7 @@ import useAuth from "../../../hook/useAuth";
 import { useEffect, useRef } from "react";
 import { BASE_URL } from "../../../utils/apiConfig";
 import { toastError } from "../../../utils";
+import { useState } from "react";
 
 const Navbar = () => {
   const navigate = useNavigate();
@@ -17,6 +23,7 @@ const Navbar = () => {
   const { accessToken } = useAuth();
   const { likedMovies } = userInfo;
   const textMovieRef = useRef("");
+  const [isOpenNav, setIsOpenNav] = useState(false);
 
   const navItem = [
     { title: "Home", link: "/" },
@@ -41,6 +48,10 @@ const Navbar = () => {
       fetchData();
     }
   }, [accessToken]);
+
+  useEffect(() => {
+    setIsOpenNav(false); // Tắt navbar khi pathname thay đổi
+  }, [pathname]);
 
   const handleLogOut = async () => {
     if (accessToken) {
@@ -119,7 +130,7 @@ const Navbar = () => {
                 />
               </div>
             </Link>
-            <div className="navbar_menuItem">
+            <ul className={`navbar_menuItem ${isOpenNav ? "open_nav" : ""}`}>
               {navItem.map((item, index) => (
                 <li key={index}>
                   <Link
@@ -132,9 +143,21 @@ const Navbar = () => {
                   </Link>
                 </li>
               ))}
-            </div>
+              <Link to={`/profile_user/${userInfo._id}`}>
+                <li className="profile">
+                  <Avatar
+                    src={
+                      userInfo?.picturePath
+                        ? `${BASE_URL}/${userInfo?.picturePath}`
+                        : "https://png.pngitem.com/pimgs/s/649-6490124_katie-notopoulos-katienotopoulos-i-write-about-tech-round.png"
+                    }
+                  />{" "}
+                  Profile
+                </li>
+              </Link>
+            </ul>
             <div className="navbar_menuRight">
-              <div className="search_input">
+              <div className={`search_input ${isOpenNav ? "open_nav" : ""}`}>
                 <input
                   ref={textMovieRef}
                   type="text"
@@ -160,6 +183,12 @@ const Navbar = () => {
                 <Space wrap size={16}>
                   <AvatarUser />
                 </Space>
+              </div>
+              <div
+                className="open_or_close_icon"
+                onClick={(e) => setIsOpenNav(!isOpenNav)}
+              >
+                {!isOpenNav ? <UnorderedListOutlined /> : <CloseOutlined />}
               </div>
             </div>
           </div>

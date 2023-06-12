@@ -1,6 +1,5 @@
 .movies {
   background-color: var(--background-color);
-
   .movieList_banner {
     position: relative;
     img {
@@ -99,6 +98,23 @@
           top: 30%;
         }
       }
+    }
+  }
+}
+@media screen and (max-width: 768px) {
+  .movies {
+    padding-top: 6.7rem;
+
+    .movieList_banner {
+      img {
+        height: 200px;
+      }
+      .title {
+        font-size: 3rem;
+      }
+    }
+    .movieList_container {
+      padding-inline: 1rem;
     }
   }
 }
