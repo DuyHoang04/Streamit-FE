@@ -1,6 +1,7 @@
 import { toast } from "react-hot-toast";
 import * as actionTypes from "./actionTypes";
 import routes from "./routeconfig";
+import Cookies from "js-cookie";
 
 export const config = {
   routes,
@@ -80,4 +81,22 @@ export const getRandomElements = (arr, count) => {
   }
 
   return result;
+};
+
+export const generateAccessToken = (accessToken) => {
+  const expirationDate = new Date();
+  expirationDate.setDate(expirationDate.getDate() + 7);
+
+  Cookies.set("access_token", accessToken, {
+    expires: expirationDate,
+  });
+};
+
+export const generateRefreshToken = (refreshToken) => {
+  const expirationDate = new Date();
+  expirationDate.setDate(expirationDate.getDate() + 365);
+
+  Cookies.set("refresh_token", refreshToken, {
+    expires: expirationDate,
+  });
 };

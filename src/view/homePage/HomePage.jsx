@@ -61,7 +61,7 @@ export default function HomePage() {
               <div className="movie_item" key={index}>
                 <div className="genres_title">
                   <h1>{item.genres}</h1>
-                  <Link to={`/view_movie_by_genres/${item.genres}`}>
+                  <Link to={`/view_movie_by_genres/${item.genres}?all=true`}>
                     <h2 className="genres_view">View All</h2>
                   </Link>
                 </div>
@@ -85,7 +85,7 @@ export default function HomePage() {
                     }}
                   >
                     {item.movies.map((movie, index) => (
-                      <div className="card_movie">
+                      <div className="card_movie" key={index}>
                         <CardMovie
                           movie={movie}
                           key={movie._id}

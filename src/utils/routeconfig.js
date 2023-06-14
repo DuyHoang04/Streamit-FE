@@ -22,6 +22,8 @@ const routes = {
   view_video: "/view_video/:movieId",
   profile_user: "/profile_user/:userId",
   search_movie: "/search_movie/:movieName",
+  forgot_password: "/forgot_password",
+  reset_password: "/reset_password",
 };
 
 export default routes;

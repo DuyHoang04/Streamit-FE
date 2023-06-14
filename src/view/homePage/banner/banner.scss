@@ -135,3 +135,20 @@ p {
     }
   }
 }
+
+@media screen and (max-width: 768px) {
+  .Bannercontainer {
+    position: relative;
+    .Bannercontent {
+      padding: 20px 0 0 0 !important;
+
+      .content_left {
+        .big_title {
+          font-size: 5rem;
+        }
+      }
+    }
+    .button {
+    }
+  }
+}

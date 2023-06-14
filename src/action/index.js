@@ -18,6 +18,15 @@ export const authActions = {
   registerRequest: createAction(authTypes.REGISTER_REQUEST),
   registerSuccess: createAction(authTypes.REGISTER_SUCCESS),
   registerFailure: createAction(authTypes.REGISTER_FAILURE),
+  refreshTokenRequest: createAction(authTypes.REFRESH_TOKEN_REQUEST),
+  refreshTokenSuccess: createAction(authTypes.REFRESH_TOKEN_SUCCESS),
+  refreshTokenFailure: createAction(authTypes.REFRESH_TOKEN_FAILURE),
+  forgotPasswordRequest: createAction(authTypes.FORGOT_PASSWORD_REQUEST),
+  forgotPasswordSuccess: createAction(authTypes.FORGOT_PASSWORD_SUCCESS),
+  forgotPasswordFailure: createAction(authTypes.FORGOT_PASSWORD_FAILURE),
+  resetPasswordRequest: createAction(authTypes.RESET_PASSWORD_REQUEST),
+  resetPasswordSuccess: createAction(authTypes.RESET_PASSWORD_SUCCESS),
+  resetPasswordFailure: createAction(authTypes.RESET_PASSWORD_FAILURE),
 };
 
 export const itemActions = {

@@ -6,6 +6,7 @@ import { privateRoutes } from "../../router";
 import useAuth from "../../hook/useAuth";
 import Loader from "../../common/loader/Loader";
 import useUser from "../../hook/useUser";
+import jwt_decode from "jwt-decode";
 
 const PUBLIC_ROUTES = ["/login"];
 const ADMIN_ROUTES = [
@@ -17,7 +18,7 @@ const ADMIN_ROUTES = [
   "/admin/users",
 ];
 const ProtectedComponent = ({ children }) => {
-  const { accessToken } = useAuth();
+  const { accessToken, refreshToken, refreshTokenRequest } = useAuth();
   const { userInfo } = useUser();
   const navigate = useNavigate();
   const { pathname } = useLocation();
@@ -35,6 +36,11 @@ const ProtectedComponent = ({ children }) => {
       } else {
         setIsRender(true);
       }
+    } else if (!accessToken && refreshToken) {
+      refreshTokenRequest({ payload: { refreshToken } });
+      setIsRender(true);
+    } else {
+      setIsRender(true);
     }
   }, [pathname, accessToken]);
 

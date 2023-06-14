@@ -70,6 +70,14 @@ const publicRoutes = [
     path: config.routes.search_movie,
     element: <pages.SearchMoviePage />,
   },
+  {
+    path: config.routes.forgot_password,
+    element: <pages.ForgotPasswordPage />,
+  },
+  {
+    path: config.routes.reset_password,
+    element: <pages.ResetPasswordPage />,
+  },
 
   // ADMIN
   {
@@ -117,13 +125,11 @@ const Router = () => {
         const Layout = route.needShowSideMenu ? PageLayout : LayoutNavBar;
 
         return (
-          <>
-            <Route
-              key={idx}
-              path={route.path}
-              element={<Layout>{route.element}</Layout>}
-            />
-          </>
+          <Route
+            key={idx}
+            path={route.path}
+            element={<Layout>{route.element}</Layout>}
+          />
         );
       })}
     </Routes>

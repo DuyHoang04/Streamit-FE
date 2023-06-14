@@ -166,8 +166,8 @@ const Navbar = () => {
                   placeholder="Search"
                   onKeyPress={(e) => handleSearchMovie(e)}
                 />
-                <div class="border"></div>
-                <label for="input" className="labelforsearch">
+                <div className="border"></div>
+                <label className="labelforsearch">
                   <SearchOutlined
                     style={{ fontSize: "2rem" }}
                     className="searchIcon "

@@ -6,7 +6,9 @@ export default function createApi({ url, method }) {
     paths = {},
     queries = {},
     headers = {},
+    withCredentials = false,
   }) => {
+    console.log(withCredentials);
     const config = {
       url: Object.keys(paths).reduce(
         (prev, curr) => prev.replace(`:${curr}`, paths[curr]),
@@ -16,6 +18,7 @@ export default function createApi({ url, method }) {
       params: queries,
       data: payload,
       headers: headers,
+      withCredentials: withCredentials,
     };
 
     return Axios(config)

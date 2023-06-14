@@ -40,7 +40,7 @@ const banner = ({ data }) => {
                 }}
               >
                 <div className="Bannercontent">
-                  <div className="content_ left">
+                  <div className="content_left">
                     <h1 className="big_title">{item.name}</h1>
                     <div className="content_rate">
                       <Rate disabled value={Math.floor(item.rating) || 5} />
@@ -68,7 +68,7 @@ const banner = ({ data }) => {
                         navigateVideoPage(item?.isSeries, item._id)
                       }
                     >
-                      <span class="button__text">Watch Now</span>
+                      <span className="button__text">Watch Now</span>
                       <span className="button__icon">
                         <CaretRightOutlined />
                       </span>

@@ -32,3 +32,25 @@
     gap: 3rem;
   }
 }
+
+@media screen and (max-width: 768px) {
+  .view-genres-page {
+    padding-top: 6.7rem;
+    .view_banner {
+      img {
+        height: 200px;
+      }
+      .title {
+        font-size: 3rem;
+      }
+    }
+    .viewMovie_container {
+      padding-inline: 1rem;
+      display: flex;
+      flex-direction: column;
+      .cardMovie {
+        width: 100%;
+      }
+    }
+  }
+}

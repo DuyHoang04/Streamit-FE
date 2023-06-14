@@ -17,6 +17,14 @@ const AUTH_SCHEMA = {
     url: `${BASE_URL}/auth/refreshToken`,
     method: METHOD.POST,
   },
+  FORGOT_PASSWORD: {
+    url: `${BASE_URL}/auth/forgot-password`,
+    method: METHOD.POST,
+  },
+  RESET_PASSWORD: {
+    url: `${BASE_URL}/auth/reset-password`,
+    method: METHOD.POST,
+  },
 };
 
 export default AUTH_SCHEMA;

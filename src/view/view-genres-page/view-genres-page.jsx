@@ -7,14 +7,22 @@ import Loader from "../../common/loader/Loader";
 import Banner from "../../assets/banner.jpg";
 import CardMovie from "../../components/card_movie/card_movie";
 import useSeries from "../../hook/useSeries";
+import useMedia from "../../hook/useMedia";
 
 const ViewGenresPage = () => {
   const { genres_name } = useParams();
   const queryParams = queryString.parse(useLocation().search);
   const isSeries = queryParams?.isSeries === "true";
+  const allMovie = queryParams.all === "true";
   const { getAllMovieRequest, movieList } = useMovie();
   const { getAllSeriesRequest, seriesMovieList } = useSeries();
-  const dataMovie = isSeries ? seriesMovieList : movieList;
+  const { getMovieAndSeries, mediaList } = useMedia();
+
+  const dataMovie = isSeries
+    ? seriesMovieList
+    : allMovie
+    ? mediaList
+    : movieList;
 
   useEffect(() => {
     window.scrollTo({
@@ -31,7 +39,11 @@ const ViewGenresPage = () => {
       if (isSeries) {
         await getAllSeriesRequest(req);
       } else {
-        await getAllMovieRequest(req);
+        if (allMovie) {
+          await getMovieAndSeries(req);
+        } else {
+          await getAllMovieRequest(req);
+        }
       }
     };
     fetchData();

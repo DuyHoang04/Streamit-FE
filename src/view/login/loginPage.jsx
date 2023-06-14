@@ -4,7 +4,7 @@ import { Button, Checkbox, Form, Image } from "antd";
 import { useDispatch } from "react-redux";
 import { authActions } from "../../action/index";
 import InputCustom from "../../common/input/InputCustom";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { toastError, validateData } from "../../utils";
 import useAuth from "../../hook/useAuth";
 
@@ -69,13 +69,13 @@ const loginPage = () => {
           </Form.Item>
           <Form.Item className="login_footer">
             <Checkbox style={{ color: "white" }}>Remember me</Checkbox>
-            <a
+            <Link
               className="login-form-forgot"
-              href="register"
               style={{ color: "white" }}
+              to="/forgot_password"
             >
               Forgot password
-            </a>
+            </Link>
             <Button
               onClick={handleLogin}
               type="primary"

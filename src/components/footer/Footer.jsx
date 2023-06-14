@@ -16,7 +16,7 @@ const Footer = () => {
         <InstagramOutlined />
         <TwitterOutlined />
       </div>
-      <div class="row">
+      <div className="row">
         <ul>
           <li>
             <a href="#">Contact us</a>
@@ -35,7 +35,7 @@ const Footer = () => {
           </li>
         </ul>
       </div>
-      <div class="row">THANK YOU FOR WATCHING</div>
+      <div className="row">THANK YOU FOR WATCHING</div>
     </footer>
   );
 };

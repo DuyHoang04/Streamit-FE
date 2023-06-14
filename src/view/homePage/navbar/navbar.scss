@@ -194,6 +194,7 @@
             .favorites {
             }
             .open_or_close_icon {
+              display: block;
               background-color: var(--background-input);
               padding: 0.5rem;
               color: white;

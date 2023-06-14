@@ -11,6 +11,8 @@ export const authApi = {
   Register: createApi(authSchema.REGISTER),
   LogOut: createApi(authSchema.LOGOUT),
   RefreshToken: createApi(authSchema.REFRESH_TOKEN),
+  forgotPassword: createApi(authSchema.FORGOT_PASSWORD),
+  resetPassword: createApi(authSchema.RESET_PASSWORD),
 };
 
 export const genresApi = {
